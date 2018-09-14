@@ -122,6 +122,32 @@
     display: none;
   }
 }
+.topbar_avatar_cart {
+  height: 100%;
+  display: flex;
+  cursor: pointer;
+  position: relative;
+  border-radius: 0;
+  border: none;
+  transition: all 0.3s;
+  box-shadow: none;
+  // padding: 0 15px;
+  background-color: transparent;
+
+  &:hover, &:focus, &:active, &:focus:active {
+    @include themify($themes) {
+      background-color: themed('colorHover');
+    }
+  }
+
+  &:focus {
+    outline: none;
+  }
+
+  &:before {
+    display: none;
+  }
+}
 
 .topbar_avatar-img, .topbar_avatar-name, .topbar_icon {
   margin: auto 0;
@@ -144,6 +170,7 @@
     color: themed('colorText');
   }
 }
+
 
 .topbar_icon {
   margin-left: 8px;
@@ -251,6 +278,10 @@
 .topbar_profile {
   margin-bottom: 0;
   margin-left: 20px;
+  position: relative;
+}
+.topbar_cart{
+  margin-bottom:0;
   position: relative;
 }
 

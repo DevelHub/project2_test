@@ -3,6 +3,7 @@ import {Link} from 'react-router-dom';
 import PropTypes from 'prop-types';
 import TopbarSidebarButton from './TopbarSidebarButton';
 import TopbarProfile from './TopbarProfile';
+import TopbarCart from './TopbarCart';
 
 export default class Topbar extends PureComponent {
   static propTypes = {
@@ -22,6 +23,7 @@ export default class Topbar extends PureComponent {
           />
           <Link className='topbar_logo' to='/'/>
           <div className='topbar_right'>
+            <TopbarCart/>
             <TopbarProfile/>
           </div>
         </div>
