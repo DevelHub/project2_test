@@ -6,6 +6,7 @@ import Sidebar from './Sidebar';
 class SidebarContent extends Component {
 
   hideSidebar = () => {
+    alert("clicked");
     this.props.onClick();
   };
 
