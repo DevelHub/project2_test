@@ -57,11 +57,11 @@ class LogInForm extends PureComponent {
             <button className={`form_form-group-button${this.state.showPassword ? ' active' : ''}`}
                     onClick={(e) => this.showPassword(e)}><EyeIcon/></button>
           </div>
-          <div className='account_forgot-password'>
+          {/* <div className='account_forgot-password'>
             <a href=''>Forgot a password?</a>
-          </div>
+          </div> */}
         </div>
-        <div className='form_form-group'>
+        {/* <div className='form_form-group'>
           <div className='form_form-group-field'>
             <Field
               name='remember_me'
@@ -69,8 +69,8 @@ class LogInForm extends PureComponent {
               label='Remember me'
             />
           </div>
-        </div>
-        <Link className='btn btn-primary account_btn account_btn--small' to='/pages/one'>Sign In</Link>
+        </div> */}
+        <Link className='btn btn-primary account_btn account_btn--small' to='/pages/home'>Sign In</Link>
         <Link className='btn btn-outline-primary account_btn account_btn--small' to='/log_in'>Create Account</Link>
       </form>
     )
