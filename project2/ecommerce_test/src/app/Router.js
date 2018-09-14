@@ -6,6 +6,9 @@ import MainWrapper from './MainWrapper';
 import LogIn from '../containers/log_in';
 import {HomePage} from '../containers/home/home-page';
 import {ItemsPage} from '../containers/items/items-page';
+import {CompanyPage} from '../containers/company/company-page';
+import {CustomerPage} from '../containers/customer/customer-page';
+import {ProfilePage} from '../containers/profile/profile-page';
 
 const Router = () => (
   <MainWrapper>
@@ -34,6 +37,9 @@ const Pages = () => (
   <Switch>
     <Route path="/pages/home" component={HomePage}/>
     <Route path="/pages/clothes" component={ItemsPage}/>
+    <Route path="/pages/company" component={CompanyPage}/>
+    <Route path="/pages/customer" component={CustomerPage}/>
+    <Route path="/pages/profile" component={ProfilePage}/>
     <Route component={HomePage}/>
   </Switch>
 );
