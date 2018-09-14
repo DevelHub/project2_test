@@ -4,16 +4,15 @@ import Layout from '../containers/_layout';
 import MainWrapper from './MainWrapper';
 
 import LogIn from '../containers/log_in';
-import ExamplePageOne from '../containers/example';
-import ExamplePageTwo from '../containers/example_two';
+import {HomePage} from '../containers/home/home-page';
+import {ItemsPage} from '../containers/items/items-page';
 
 const Router = () => (
   <MainWrapper>
     <main>
       <Switch>
-        <Route exact path='/' component={LogIn}/>
         <Route exact path='/log_in' component={LogIn}/>
-        <Route path='/' component={wrappedRoutes}/>
+        <Route component={wrappedRoutes}/>
       </Switch>
     </main>
   </MainWrapper>
@@ -23,15 +22,19 @@ const wrappedRoutes = () => (
   <div>
     <Layout/>
     <div className='container_wrap'>
-      <Route path='/pages' component={Pages}/>
+      <Switch>
+        <Route path='/pages' component={Pages}/>
+        <Route component={Pages}/>
+      </Switch>
     </div>
   </div>
 );
 
 const Pages = () => (
   <Switch>
-    <Route path='/pages/item-list' component={ExamplePageOne}/>
-    <Route path='/pages/company/add-item' component={ExamplePageTwo}/>
+    <Route path="/pages/home" component={HomePage}/>
+    <Route path="/pages/clothes" component={ItemsPage}/>
+    <Route component={HomePage}/>
   </Switch>
 );
 
