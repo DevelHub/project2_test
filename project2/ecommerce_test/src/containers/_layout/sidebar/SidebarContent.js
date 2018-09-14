@@ -15,13 +15,29 @@ class SidebarContent extends Component {
       
         <ul className='sidebar_block'>
           <SidebarCategory title='Clothes' icon='diamond'>
-            <SidebarLink title='Categories' route='/pages/categories' onClick={this.hideSidebar}/>
-              <SidebarCategory title="Categories" icon='diamond'>
-                <SidebarLink Title='Hat' route='/pages/' onClick={this.hideSidebar}/>
-              </SidebarCategory>
+              <SidebarCategory title="Categories">
+                <SidebarLink title='Hat' route='/pages/' onClick={this.hideSidebar}/>
+                <SidebarLink title='T-Shirts' route='/pages/' onClick={this.hideSidebar}/>
+                <SidebarLink title='Polo Shirts' route='/pages/' onClick={this.hideSidebar}/>
+                <SidebarLink title='SweatShirts' route='/pages/' onClick={this.hideSidebar}/>
+                <SidebarLink title='SweatPants' route='/pages/' onClick={this.hideSidebar}/>
+                <SidebarLink title='Dress' route='/pages/' onClick={this.hideSidebar}/>
+                <SidebarLink title='Jeans' route='/pages/' onClick={this.hideSidebar}/>
+                <SidebarLink title='Pants' route='/pages/' onClick={this.hideSidebar}/>
+                <SidebarLink title='Activewear' route='/pages/' onClick={this.hideSidebar}/>
+              </SidebarCategory> 
+          </SidebarCategory>
+        </ul>
 
-            <SidebarLink title='Brands' route='/pages/brands' onClick={this.hideSidebar}/>
-          </SidebarCategory>/
+        <ul className='sidebar_block'>
+          <SidebarCategory title="Brands" icon="diamond">
+                <SidebarLink title='UNI-CLO' route='/pages/' onClick={this.hideSidebar}/>
+                <SidebarLink title='OLD-NAVY' route='/pages/' onClick={this.hideSidebar}/>
+                <SidebarLink title='H&M' route='/pages/' onClick={this.hideSidebar}/>
+                <SidebarLink title='FOREVER21' route='/pages/' onClick={this.hideSidebar}/>
+                <SidebarLink title='ZARA' route='/pages/' onClick={this.hideSidebar}/>
+                <SidebarLink title='BANANA REPUBLIC' route='/pages/' onClick={this.hideSidebar}/>
+            </SidebarCategory>
         </ul>
 
         <ul className='sidebar_block'>
@@ -29,7 +45,6 @@ class SidebarContent extends Component {
               <SidebarLink title='Wish Lists' route='/pages/categories' onClick={this.hideSidebar}/>
               <SidebarLink title='Current Cart' route='/pages/brands' onClick={this.hideSidebar}/>
           </SidebarCategory>
-          
         </ul>
 
 

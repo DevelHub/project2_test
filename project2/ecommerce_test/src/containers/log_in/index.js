@@ -18,9 +18,9 @@ export default class LogIn extends PureComponent {
             </div>
 
 
-            {/* login form */}
+           
             <LogInForm onSubmit/>
-            <div className='account_or'>
+            {/* <div className='account_or'>
               <p>Or Easily Using</p>
             </div>
             <div className='account_social'>
@@ -28,7 +28,7 @@ export default class LogIn extends PureComponent {
                     to='/pages/one'><FacebookIcon/></Link>
               <Link className='account_social-btn account_social-btn--google'
                     to='/pages/one'><GooglePlusIcon/></Link>
-            </div>
+            </div> */}
           </div>
         </div>
       </div>
