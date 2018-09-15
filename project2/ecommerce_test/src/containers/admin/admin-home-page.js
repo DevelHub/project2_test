@@ -1,9 +1,11 @@
 import * as React from 'react';
 import { Col, Container, Row } from 'reactstrap';
+import {TotalItems} from './components/TotalItems';
+import { TotalSubscribers } from './components/TotalSubscribers';
+// import { TotalItemsTable } from './components/TotalItemsTable';
 
 
-
-export class HomePage extends React.PureComponent {
+export class AdminHomePage extends React.PureComponent {
     render() {
         const { t } = this.props;
 
@@ -11,19 +13,21 @@ export class HomePage extends React.PureComponent {
             <Container className='dashboard'>
                 <Row>
                     <Col md={12}>
-                        <h3>Welcome to Home Page</h3>
+                        <h3>Welcome to Admin Page</h3>
                     </Col>
                 </Row>
 
                 <Row>
-                    {/* <TotalSubscribers />
-                    <TotalItems /> */}
+                    <TotalSubscribers />
+                    <TotalItems />
 
                 </Row>
 
                 <Row>
                     {/* <TotalItemsTable/> */}
                 </Row>
+
+
 
             </Container>
         )
