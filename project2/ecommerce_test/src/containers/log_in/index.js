@@ -1,8 +1,8 @@
 import React, {PureComponent} from 'react';
 import LogInForm from './components/LogInForm';
-import {Link} from 'react-router-dom';
-import FacebookIcon from 'mdi-react/FacebookIcon';
-import GooglePlusIcon from 'mdi-react/GooglePlusIcon';
+// import {Link} from 'react-router-dom';
+// import FacebookIcon from 'mdi-react/FacebookIcon';
+// import GooglePlusIcon from 'mdi-react/GooglePlusIcon';
 
 export default class LogIn extends PureComponent {
   
