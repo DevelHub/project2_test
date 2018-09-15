@@ -1,4 +1,5 @@
 import React, {Component} from 'react';
+//React Hot Loader is a plugin that allows React components to be live reloaded without the loss of state. 
 import {hot} from 'react-hot-loader';
 import 'bootstrap/dist/css/bootstrap.css'
 import '../scss/app.scss';
