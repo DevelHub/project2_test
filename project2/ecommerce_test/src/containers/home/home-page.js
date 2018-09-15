@@ -1,9 +1,10 @@
 import * as React from 'react';
 import { Col, Container, Row } from 'reactstrap';
-import {TotalItems} from './compoents/TotalItems';
-import {TotalUsers} from './components/TotalUsers';
-import {TotalCompany} from './components/TotalCompany';
-import {TotalItemsTable} from './components/TotalItemsTable';
+// import { TotalItems } from './compoents/TotalItems';
+import { TotalSubscribers } from './components/TotalSubscribers';
+// import { TotalCompany } from './components/TotalCompany';
+// import { TotalItemsTable } from './components/TotalItemsTable';
+
 
 export class HomePage extends React.PureComponent {
     render() {
@@ -18,19 +19,19 @@ export class HomePage extends React.PureComponent {
                 </Row>
 
                 <Row>
+                    <TotalSubscribers />
+                    {/* <TotalItems /> */}
 
-                    <TotalItems/>
-                    <TotalUsers/>
-                    <TotalCompany/>
+                    {/* <TotalCompany/> */}
                 </Row>
 
                 <Row>
-                    <TotalItemsTable/>
+                    {/* <TotalItemsTable/> */}
                 </Row>
-                
+
 
 
             </Container>
-                )
+        )
     }
 }
