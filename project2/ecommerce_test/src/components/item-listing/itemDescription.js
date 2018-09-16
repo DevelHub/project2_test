@@ -16,7 +16,7 @@ export class ItemDescription extends React.Component
     {
         return (
             <div className="description">
-                <p>{this.props.children}</p>
+                <p>{this.props.text}</p>
             </div>
         );
     }

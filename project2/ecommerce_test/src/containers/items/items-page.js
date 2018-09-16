@@ -5,7 +5,7 @@ import './items-style.css';
 import store from '../../app/store';
 import {connect} from 'react-redux';
 import {App} from '../../app/App';
-import {ItemListing, ItemTitle, ItemSubtitle, ItemImage, ItemDescription} from '../../components/item-listing/';
+import {ItemListing, ItemTitle, ItemSubtitle, ItemImage, ItemDescription} from '../../components/item-listing/index';
 
 // interface Item
 // {
@@ -33,9 +33,9 @@ export class ItemsPage extends React.Component
         console.log(items);
         return(
             <ItemListing>
-                <ItemTitle>A Really Cool Hat</ItemTitle>
-                <ItemSubtitle>The Mad Hatter</ItemSubtitle>
-                <ItemDescription>A really well made hat. Its good. Buy it. Really, you should</ItemDescription>
+                <ItemTitle text="A Really Cool Hat"/>
+                <ItemSubtitle text="The Mad Hatter"/>
+                <ItemDescription text="A really well made hat. Its good. Buy it. Really, you should"/>
             </ItemListing>
         )
     }
