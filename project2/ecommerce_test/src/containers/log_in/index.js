@@ -1,5 +1,5 @@
 import React, {PureComponent} from 'react';
-import LogInForm from './components/LogInForm';
+import {LoginPage} from './components/LogInPage';
 // import {Link} from 'react-router-dom';
 // import FacebookIcon from 'mdi-react/FacebookIcon';
 // import GooglePlusIcon from 'mdi-react/GooglePlusIcon';
@@ -19,7 +19,7 @@ export default class LogIn extends PureComponent {
 
 
            
-            <LogInForm onSubmit/>
+            <LoginPage onSubmit/>
             {/* <div className='account_or'>
               <p>Or Easily Using</p>
             </div>
