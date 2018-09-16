@@ -16,7 +16,7 @@ export class ItemSubtitle extends React.Component
     {
         return (
             <div className="subtitle">
-                <p>{this.props.text}</p>
+                <p>{this.props.children}</p>
             </div>
         )
     }

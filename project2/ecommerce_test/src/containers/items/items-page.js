@@ -33,9 +33,9 @@ export class ItemsPage extends React.Component
         console.log(items);
         return(
             <ItemListing>
-                <ItemTitle text="A Really Cool Hat"/>
-                <ItemSubtitle text="The Mad Hatter"/>
-                <ItemDescription text="A really well made hat. Its good. Buy it. Really, you should"/>
+                <ItemTitle>A Really Cool Hat</ItemTitle>
+                <ItemSubtitle>The Mad Hatter</ItemSubtitle>
+                <ItemDescription>A really well made hat. Its good. Buy it. Really, you should</ItemDescription>
             </ItemListing>
         )
     }

@@ -16,7 +16,7 @@ export class ItemTitle extends React.Component
     {
         return (
             <div className="title">
-                <p>{this.props.text}</p>
+                <p>{this.props.children}</p>
             </div>
         )
     }
