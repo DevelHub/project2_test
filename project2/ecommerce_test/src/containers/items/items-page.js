@@ -5,7 +5,8 @@ import './items-style.css';
 import store from '../../app/store';
 import {connect} from 'react-redux';
 import {App} from '../../app/App';
-import {ItemListing, ItemTitle, ItemSubtitle, ItemImage, ItemDescription} from '../../components/item-listing/index';
+import {ItemRow, ItemListing, ItemTitle, ItemSubtitle, ItemImage, ItemDescription} from '../../components/item-listing/index';
+import {setCurrentProduct} from '../../redux/actions/productActions';
 
 // interface Item
 // {
@@ -21,22 +22,86 @@ export class ItemsPage extends React.Component
     constructor(props)
     {
         super(props);
+        this.listingClicked = this.listingClicked.bind(this);
+    }
+
+    listingClicked(product)
+    {
+        store.dispatch(setCurrentProduct(product));
+        this.props.history.push("/pages/clothes/product");
     }
 
     render()
     {
-        let cards = [];
-        const items = this.props;
-        console.log("store state from items page:");
-        console.log(store.getState());
-        console.log("items:");
-        console.log(items);
+        //made dummy data below for testing. delete once mapStateToProps is working
+        let dummyData = [];
+        const item = {
+            title: "A Really Cool Hat",
+            subtitle: "The Mad Hatters",
+            image: "https://placeholdit.imgix.net/~text?txtsize=33&txt=256%C3%97180&w=256&h=180",
+            description: "A really well made hat. Its good. Buy it. Really, you should"
+        }
+        for(let i = 0; i < 7; i++)
+        {
+            dummyData.push(item);
+        }
+
+        // this should be used when mapStateToProps is working. gets the current list of items by category from the redux store.
+        // const data = this.props.productList;
+        const data = dummyData;
+
+        //everything else below this for the render method is complete!
+        let rows = [];
+        for(let i = 0; i < data.length; i++)
+        {
+            let listings = [];
+            for(let r = 0; r < 3; r++)
+            {
+                if(i < data.length)
+                {
+                    listings.push(<ItemListing item={data[i++]} onClicked={this.listingClicked}/>)
+                }
+            }
+            i--;
+            rows.push(<ItemRow>{listings}</ItemRow>);
+        }
+        
         return(
-            <ItemListing>
-                <ItemTitle>A Really Cool Hat</ItemTitle>
-                <ItemSubtitle>The Mad Hatter</ItemSubtitle>
-                <ItemDescription>A really well made hat. Its good. Buy it. Really, you should</ItemDescription>
-            </ItemListing>
+            <div>
+                {rows}
+                {/* <Row>
+                    <Col sm="4">
+                        <Card>
+                            <CardBody>
+                            <CardTitle>Trendy T-Shirt</CardTitle>
+                            <CardSubtitle>TheClothesCompany</CardSubtitle>
+                            <CardImg src="https://placeholdit.imgix.net/~text?txtsize=33&txt=256%C3%97180&w=256&h=180" alt="Card image cap"/>
+                            <CardText>This is an excellent description of this amazing t-shirt made by the one and only TheClothesCompany</CardText>
+                            </CardBody>
+                        </Card>
+                    </Col>
+                    <Col sm="4">
+                        <Card>
+                            <CardBody>
+                            <CardTitle>Trendy T-Shirt</CardTitle>
+                            <CardSubtitle>TheClothesCompany</CardSubtitle>
+                            <CardImg src="https://placeholdit.imgix.net/~text?txtsize=33&txt=256%C3%97180&w=256&h=180" alt="Card image cap"/>
+                            <CardText>This is an excellent description of this amazing t-shirt made by the one and only TheClothesCompany</CardText>
+                            </CardBody>
+                        </Card>
+                    </Col>
+                    <Col sm="4">
+                        <Card>
+                            <CardBody>
+                            <CardTitle>Trendy T-Shirt</CardTitle>
+                            <CardSubtitle>TheClothesCompany</CardSubtitle>
+                            <CardImg src="https://placeholdit.imgix.net/~text?txtsize=33&txt=256%C3%97180&w=256&h=180" alt="Card image cap"/>
+                            <CardText>This is an excellent description of this amazing t-shirt made by the one and only TheClothesCompany</CardText>
+                            </CardBody>
+                        </Card>
+                    </Col>
+                </Row> */}
+            </div>
         )
     }
 }
@@ -45,7 +110,7 @@ const mapStateToProps = (state) => {
     console.log("state from mapstatetoprops");
     console.log(state);
     alert("map state to props was called");
-    return {items: state};
+    return {productList: state};
 }
   
 export default connect(mapStateToProps, null) (ItemsPage);

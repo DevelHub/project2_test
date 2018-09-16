@@ -2,25 +2,25 @@ import React, { Component } from 'react';
 import SidebarLink from './SidebarLink';
 import SidebarCategory from './SidebarCategory';
 import store from '../../../app/store';
-import {setItems} from '../../../redux/actions/itemsByTypeActions';
+import {setProductList} from '../../../redux/actions/productActions';
 
 
 class SidebarContent extends Component {
 
   hideSidebar = (e) => {
     this.props.onClick();
-    this.setItemsByType(e.target.innerText);
+    this.setProductList(e.target.innerText);
   };
 
-  setItemsByType = (type) => {
+  setProductList = (type) => {
     if(type === "Hat")
     {
-      const items = {
+      const products = {
         name: "The most amazing hat!",
         company: "Mad Hatters",
         description: "A perfectly designed hat made from the finest mercurous nitrate induced hatters"
       }
-      store.dispatch(setItems(items));
+      store.dispatch(setProductList(products));
      }
   }
 

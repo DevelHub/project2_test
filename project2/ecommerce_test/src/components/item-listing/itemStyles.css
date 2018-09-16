@@ -1,0 +1,42 @@
+
+.itemRow{
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr;
+    margin-bottom: 2em;
+}
+
+.itemListing{
+    width: 90%;
+    display: inline;
+    background-color: white;
+    padding: 2em;
+    margin: auto;
+    border-radius: 5px;
+    cursor: pointer;
+    box-shadow: 3px 3px 5px #606060;
+}
+
+.itemTitle{
+    width: 100%;
+    text-align: center;
+}
+
+.itemSubtitle{
+    width: 100%;
+    margin-bottom: 1em;
+}
+
+.itemImage{
+    width: 100%;
+    height: auto;
+    margin-bottom: 1em;
+}
+
+.image{
+    border-radius: 5px;
+}
+
+.itemDescription{
+    width: 100%;
+
+}
