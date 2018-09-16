@@ -5,6 +5,7 @@ import './items-style.css';
 import store from '../../app/store';
 import {connect} from 'react-redux';
 import {App} from '../../app/App';
+import {ItemListing, ItemTitle, ItemSubtitle, ItemImage, ItemDescription} from '../../components/item-listing/';
 
 // interface Item
 // {
@@ -31,136 +32,11 @@ export class ItemsPage extends React.Component
         console.log("items:");
         console.log(items);
         return(
-            <div className="testDiv">
-                <Row>
-                    <Col sm="4">
-                        <Card>
-                            <CardBody>
-                            <CardTitle>Trendy T-Shirt</CardTitle>
-                            <CardSubtitle>TheClothesCompany</CardSubtitle>
-                            <CardImg src="https://placeholdit.imgix.net/~text?txtsize=33&txt=256%C3%97180&w=256&h=180" alt="Card image cap"/>
-                            <CardText>This is an excellent description of this amazing t-shirt made by the one and only TheClothesCompany</CardText>
-                            </CardBody>
-                        </Card>
-                    </Col>
-                    <Col sm="4">
-                        <Card>
-                            <CardBody>
-                            <CardTitle>Trendy T-Shirt</CardTitle>
-                            <CardSubtitle>TheClothesCompany</CardSubtitle>
-                            <CardImg src="https://placeholdit.imgix.net/~text?txtsize=33&txt=256%C3%97180&w=256&h=180" alt="Card image cap"/>
-                            <CardText>This is an excellent description of this amazing t-shirt made by the one and only TheClothesCompany</CardText>
-                            </CardBody>
-                        </Card>
-                    </Col>
-                    <Col sm="4">
-                        <Card>
-                            <CardBody>
-                            <CardTitle>Trendy T-Shirt</CardTitle>
-                            <CardSubtitle>TheClothesCompany</CardSubtitle>
-                            <CardImg src="https://placeholdit.imgix.net/~text?txtsize=33&txt=256%C3%97180&w=256&h=180" alt="Card image cap"/>
-                            <CardText>This is an excellent description of this amazing t-shirt made by the one and only TheClothesCompany</CardText>
-                            </CardBody>
-                        </Card>
-                    </Col>
-                </Row>
-                <Row>
-                    <Col sm="4">
-                        <Card>
-                            <CardBody>
-                            <CardTitle>Trendy T-Shirt</CardTitle>
-                            <CardSubtitle>TheClothesCompany</CardSubtitle>
-                            <CardImg src="https://placeholdit.imgix.net/~text?txtsize=33&txt=256%C3%97180&w=256&h=180" alt="Card image cap"/>
-                            <CardText>This is an excellent description of this amazing t-shirt made by the one and only TheClothesCompany</CardText>
-                            </CardBody>
-                        </Card>
-                    </Col>
-                    <Col sm="4">
-                        <Card>
-                            <CardBody>
-                            <CardTitle>Trendy T-Shirt</CardTitle>
-                            <CardSubtitle>TheClothesCompany</CardSubtitle>
-                            <CardImg src="https://placeholdit.imgix.net/~text?txtsize=33&txt=256%C3%97180&w=256&h=180" alt="Card image cap"/>
-                            <CardText>This is an excellent description of this amazing t-shirt made by the one and only TheClothesCompany</CardText>
-                            </CardBody>
-                        </Card>
-                    </Col>
-                    <Col sm="4">
-                        <Card>
-                            <CardBody>
-                            <CardTitle>Trendy T-Shirt</CardTitle>
-                            <CardSubtitle>TheClothesCompany</CardSubtitle>
-                            <CardImg src="https://placeholdit.imgix.net/~text?txtsize=33&txt=256%C3%97180&w=256&h=180" alt="Card image cap"/>
-                            <CardText>This is an excellent description of this amazing t-shirt made by the one and only TheClothesCompany</CardText>
-                            </CardBody>
-                        </Card>
-                    </Col>
-                </Row>
-                <Row>
-                    <Col sm="4">
-                        <Card>
-                            <CardBody>
-                            <CardTitle>Trendy T-Shirt</CardTitle>
-                            <CardSubtitle>TheClothesCompany</CardSubtitle>
-                            <CardImg src="https://placeholdit.imgix.net/~text?txtsize=33&txt=256%C3%97180&w=256&h=180" alt="Card image cap"/>
-                            <CardText>This is an excellent description of this amazing t-shirt made by the one and only TheClothesCompany</CardText>
-                            </CardBody>
-                        </Card>
-                    </Col>
-                    <Col sm="4">
-                        <Card>
-                            <CardBody>
-                            <CardTitle>Trendy T-Shirt</CardTitle>
-                            <CardSubtitle>TheClothesCompany</CardSubtitle>
-                            <CardImg src="https://placeholdit.imgix.net/~text?txtsize=33&txt=256%C3%97180&w=256&h=180" alt="Card image cap"/>
-                            <CardText>This is an excellent description of this amazing t-shirt made by the one and only TheClothesCompany</CardText>
-                            </CardBody>
-                        </Card>
-                    </Col>
-                    <Col sm="4">
-                        <Card>
-                            <CardBody>
-                            <CardTitle>Trendy T-Shirt</CardTitle>
-                            <CardSubtitle>TheClothesCompany</CardSubtitle>
-                            <CardImg src="https://placeholdit.imgix.net/~text?txtsize=33&txt=256%C3%97180&w=256&h=180" alt="Card image cap"/>
-                            <CardText>This is an excellent description of this amazing t-shirt made by the one and only TheClothesCompany</CardText>
-                            </CardBody>
-                        </Card>
-                    </Col>
-                </Row>
-                <Row>
-                    <Col sm="4">
-                        <Card>
-                            <CardBody>
-                            <CardTitle>Trendy T-Shirt</CardTitle>
-                            <CardSubtitle>TheClothesCompany</CardSubtitle>
-                            <CardImg src="https://placeholdit.imgix.net/~text?txtsize=33&txt=256%C3%97180&w=256&h=180" alt="Card image cap"/>
-                            <CardText>This is an excellent description of this amazing t-shirt made by the one and only TheClothesCompany</CardText>
-                            </CardBody>
-                        </Card>
-                    </Col>
-                    <Col sm="4">
-                        <Card>
-                            <CardBody>
-                            <CardTitle>Trendy T-Shirt</CardTitle>
-                            <CardSubtitle>TheClothesCompany</CardSubtitle>
-                            <CardImg src="https://placeholdit.imgix.net/~text?txtsize=33&txt=256%C3%97180&w=256&h=180" alt="Card image cap"/>
-                            <CardText>This is an excellent description of this amazing t-shirt made by the one and only TheClothesCompany</CardText>
-                            </CardBody>
-                        </Card>
-                    </Col>
-                    <Col sm="4">
-                        <Card>
-                            <CardBody>
-                            <CardTitle>Trendy T-Shirt</CardTitle>
-                            <CardSubtitle>TheClothesCompany</CardSubtitle>
-                            <CardImg src="https://placeholdit.imgix.net/~text?txtsize=33&txt=256%C3%97180&w=256&h=180" alt="Card image cap"/>
-                            <CardText>This is an excellent description of this amazing t-shirt made by the one and only TheClothesCompany</CardText>
-                            </CardBody>
-                        </Card>
-                    </Col>
-                </Row>
-            </div>
+            <ItemListing>
+                <ItemTitle>A Really Cool Hat</ItemTitle>
+                <ItemSubtitle>The Mad Hatter</ItemSubtitle>
+                <ItemDescription>A really well made hat. Its good. Buy it. Really, you should</ItemDescription>
+            </ItemListing>
         )
     }
 }

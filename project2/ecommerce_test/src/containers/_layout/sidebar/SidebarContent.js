@@ -1,13 +1,28 @@
 import React, { Component } from 'react';
 import SidebarLink from './SidebarLink';
 import SidebarCategory from './SidebarCategory';
+import store from '../../../app/store';
+import {setItems} from '../../../redux/actions/itemsByTypeActions';
 
 
 class SidebarContent extends Component {
 
-  hideSidebar = () => {
+  hideSidebar = (e) => {
     this.props.onClick();
+    this.setItemsByType(e.target.innerText);
   };
+
+  setItemsByType = (type) => {
+    if(type === "Hat")
+    {
+      const items = {
+        name: "The most amazing hat!",
+        company: "Mad Hatters",
+        description: "A perfectly designed hat made from the finest mercurous nitrate induced hatters"
+      }
+      store.dispatch(setItems(items));
+     }
+  }
 
   render() {
     return (
@@ -19,7 +34,7 @@ class SidebarContent extends Component {
         <ul className='sidebar_block'>
           <SidebarCategory title='Clothes' icon='store'>
             <SidebarCategory title="Categories">
-              <SidebarLink title='Hat' route='/pages/clothes/' />
+              <SidebarLink title='Hat' route='/pages/clothes/' onClick={this.hideSidebar}/>
               <SidebarLink title='T-Shirts' route='/pages/clothes/' onClick={this.hideSidebar} />
               <SidebarLink title='Polo Shirts' route='/pages/clothes/' onClick={this.hideSidebar} />
               <SidebarLink title='SweatShirts' route='/pages/clothes/' onClick={this.hideSidebar} />
