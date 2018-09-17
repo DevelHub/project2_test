@@ -1,5 +1,6 @@
 import * as React from 'react';
 import PropTypes from 'prop-types';
+import './itemStyles.css';
 
 export class ItemSubtitle extends React.Component
 {
@@ -15,7 +16,7 @@ export class ItemSubtitle extends React.Component
     render()
     {
         return (
-            <div className="subtitle">
+            <div className="itemSubtitle">
                 <p>{this.props.children}</p>
             </div>
         )

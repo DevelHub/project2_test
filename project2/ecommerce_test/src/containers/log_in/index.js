@@ -1,8 +1,7 @@
 import React, {PureComponent} from 'react';
 import {LoginPage} from './components/LogInPage';
 // import {Link} from 'react-router-dom';
-// import FacebookIcon from 'mdi-react/FacebookIcon';
-// import GooglePlusIcon from 'mdi-react/GooglePlusIcon';
+
 
 export default class LogIn extends PureComponent {
   
@@ -17,18 +16,10 @@ export default class LogIn extends PureComponent {
               <h4 className='account_subhead subhead'>Buy Clothes With Your Unique Choices</h4>
             </div>
 
-
            
             <LoginPage onSubmit/>
-            {/* <div className='account_or'>
-              <p>Or Easily Using</p>
-            </div>
-            <div className='account_social'>
-              <Link className='account_social-btn account_social-btn--facebook'
-                    to='/pages/one'><FacebookIcon/></Link>
-              <Link className='account_social-btn account_social-btn--google'
-                    to='/pages/one'><GooglePlusIcon/></Link>
-            </div> */}
+
+
           </div>
         </div>
       </div>

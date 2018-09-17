@@ -10,6 +10,7 @@ import {CompanyPage} from '../containers/company/company-page';
 import {CustomerPage} from '../containers/customer/customer-page';
 import {ProfilePage} from '../containers/profile/profile-page';
 import { AdminHomePage } from '../containers/admin/admin-home-page';
+import {ItemViewPage} from '../containers/items/item-view-page';
 
 const Router = () => (
   <MainWrapper>
@@ -38,6 +39,7 @@ const Pages = () => (
   <Switch>
     <Route path="/pages/home" component = {HomePage}/>
     <Route path="/pages/admin" component={AdminHomePage}/>
+    <Route path="/pages/clothes/product" component={ItemViewPage}/>
     <Route path="/pages/clothes" component={ItemsPage}/>
     <Route path="/pages/company" component={CompanyPage}/>
     <Route path="/pages/customer" component={CustomerPage}/>

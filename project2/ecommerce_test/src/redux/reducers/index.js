@@ -1,15 +1,12 @@
 import themeReducer from './themeReducer';
 import sidebarReducer from './sidebarReducer';
-<<<<<<< HEAD
 // import {users} from './userReducer';
-=======
-import itemsByTypeReducer from './itemsByTypeReducer';
->>>>>>> cddabdb14fecfd6e954c1dba2535d95e150db673
-
+// import itemsByTypeReducer from './itemsByTypeReducer';
+import productReducer from './productReducer';
 
 export
 {
   themeReducer,
   sidebarReducer,
-  itemsByTypeReducer
+  productReducer
 }

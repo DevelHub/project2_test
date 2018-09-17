@@ -1,5 +1,6 @@
 import * as React from 'react';
 import PropTypes from 'prop-types';
+import './itemStyles.css';
 
 export class ItemTitle extends React.Component
 {
@@ -15,8 +16,8 @@ export class ItemTitle extends React.Component
     render()
     {
         return (
-            <div className="title">
-                <p>{this.props.children}</p>
+            <div className="itemTitle">
+                <p><h4>{this.props.children}</h4></p>
             </div>
         )
     }

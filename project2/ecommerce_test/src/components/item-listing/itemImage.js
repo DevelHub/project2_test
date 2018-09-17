@@ -1,5 +1,6 @@
 import * as React from 'react';
 import PropTypes from 'prop-types';
+import './itemStyles.css';
 
 export class ItemImage extends React.Component
 {
@@ -15,7 +16,9 @@ export class ItemImage extends React.Component
     render()
     {
         return (
-            "placeholder"
+            <div className="itemImage">
+                <img className="image" src={this.props.src}/>
+            </div>
         )
     }
 }

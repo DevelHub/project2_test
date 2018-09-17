@@ -1,0 +1,63 @@
+
+.jumbotron {
+    padding: 5rem 2.5rem;
+    margin-bottom: 5rem;
+    background-color: #e9ecef;
+    border-radius: 0px; }
+    @media (min-width: 576px) {
+      .jumbotron {
+        padding: 10rem 5rem; } }
+  
+  .jumbotron-fluid {
+    padding-right: 0;
+    padding-left: 0;
+    border-radius: 0; }
+    /** 
+Jumbotrons / Sliders / Cards
+**/
+.jumbotron-narrow {
+    padding: 2.5rem; }
+  
+  .jumbotron-very-narrow {
+    padding: 1.25rem; }
+  
+  .jumbotron-wrap {
+    color: #f8f9fa;
+    background-color: #3b6c8f;
+    background: linear-gradient(to bottom, #000 0%, #1a1a1a 100%);
+    box-shadow: 0 5px 10px white;
+    margin-bottom: 1rem; }
+  
+  .jumbotron-wrap-image {
+    background-image:  url(../home/img/shopping2.jpg), linear-gradient(to bottom, #3f87a6, #ebf8e1, #f69d3c);
+    background-position: top left;
+    background-repeat: no-repeat;
+    opacity: 0.9;
+    background-size: cover; }
+  
+  .jumbotron-wrap.no-margin-bottom {
+    margin-bottom: 0; }
+  
+  .jumbotron-wrap .jumbotron {
+    background: transparent;
+    margin-bottom: 0; }
+  
+  .jumbotron-wrap h1, .jumbotron-wrap .h1 {
+    color: #f8f9fa;
+    font-size: 2em;
+    text-shadow: 2px 2px 1px black; }
+  
+  .colored-bg-container h1, .colored-bg-container .h1 {
+    text-shadow: 2px 2px 1px #0e1a22; }
+  
+  .jumbotron .lead {
+    font-size: 1.2rem; }
+  
+  .jumbotron-wrap h2, .jumbotron-wrap .h2 {
+    text-transform: uppercase;
+    font-weight: 400;
+    color: #fff; }
+  
+  .card-container {
+    padding: 2rem 0; }
+
