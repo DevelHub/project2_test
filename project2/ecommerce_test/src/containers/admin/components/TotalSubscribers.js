@@ -3,15 +3,16 @@ import { Card, CardBody, Col } from 'reactstrap';
 import { BarChart, XAxis, YAxis, Bar, Cell, ResponsiveContainer, CartesianGrid, Tooltip, Legend } from 'recharts';
 
 
-// newUser is test data
+// number of User is test data
 const data = [
-    { name: 'UNI-CLO', newUser: 50 },
-    { name: 'OLD-NAVY', newUser: 60 },
-    { name: 'H&M', newUser: 40 },
-    { name: 'FOREVER21', newUser: 60 },
-    { name: 'ZARA', newUser: 20 },
-    { name: 'BANANA-REPUBLIC', newUser: 100 }
+    { name: 'UNI-CLO', numOfSubscriber: 50 },
+    { name: 'OLD-NAVY', numOfSubscriber: 60 },
+    { name: 'H&M', numOfSubscriber: 40 },
+    { name: 'FOREVER21', numOfSubscriber: 60 },
+    { name: 'ZARA', numOfSubscriber: 20 },
+    { name: 'BANANA-REPUBLIC', numOfSubscriber: 100 }
 ]
+
 
 
 export class TotalSubscribers extends PureComponent {
@@ -48,10 +49,10 @@ export class TotalSubscribers extends PureComponent {
                         </div>
                         <div className='dashboard_total'>
                             <p className='dashboard_total-stat'>
-                                {/* {(activeItem.newUser)} */}
+                                {/* {(activeItem.numOfSubscriber)} */}
                                 {(activeItem.name)}
                                 {("   Subscribers = ")}
-                                {(activeItem.newUser)}
+                                {(activeItem.numOfSubscriber)}
                             </p>
                             <ResponsiveContainer height={150} className='dashboard_chart-container'>
                                 <BarChart data={data}>
@@ -59,7 +60,7 @@ export class TotalSubscribers extends PureComponent {
                                     <YAxis />
                                     <CartesianGrid strokeDasharray="3 3" />
 
-                                    <Bar dataKey='newUser' onClick={this.handleClick}>
+                                    <Bar dataKey='numOfSubscriber' onClick={this.handleClick}>
                                         {
                                             // change color when the mouse cursor clicks the bar
                                             data.map((entry, index) => (
@@ -69,6 +70,7 @@ export class TotalSubscribers extends PureComponent {
                                             ))
                                         }
                                     </Bar>
+
                                 </BarChart>
                             </ResponsiveContainer>
                         </div>
