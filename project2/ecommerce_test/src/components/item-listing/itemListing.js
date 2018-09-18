@@ -15,7 +15,7 @@ export class ItemListing extends React.Component
         return (
             <div className="itemListing" onClick={() => this.props.onClicked(this.props.item)}>
                 <ItemTitle>{this.props.item.title}</ItemTitle>
-                <ItemSubtitle>{this.props.item.title}</ItemSubtitle>
+                <ItemSubtitle>{this.props.item.subtitle}</ItemSubtitle>
                 <ItemImage src={this.props.item.image}/>
                 <ItemDescription>{this.props.item.description}</ItemDescription>
             </div>

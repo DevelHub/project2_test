@@ -1,0 +1,100 @@
+
+.pageContainer{
+    width: 90%;
+    height: 80vh;
+    background-color: white;
+    padding: 2em;
+    border-radius: 5px;
+    box-shadow: 3px 3px 5px #606060;
+    margin: auto;
+}
+
+.itemViewImageDiv{
+    width: 100%;
+    height: 20em;
+    background-color: grey;
+    text-align: center;
+    line-height: 20em;
+    border-radius: 5px;
+}
+
+.itemOptions{
+    margin-top: 1em;
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr 1fr 1fr;
+}
+
+.temp{
+    color: white !important;
+}
+
+.itemImage{
+    border-radius: 5px;
+}
+
+.itemInformation{
+    width: 100%;
+}
+
+.inline{
+    height: 100%;
+    display: inline-block;
+    /* background-color: black; */
+    margin: auto;
+}
+
+.colorCheckBox{
+    display: inline-block;
+    width: 16px;
+    height: 16px; 
+    border-radius: 8px;
+    margin-right: 3px;
+    cursor: pointer;
+}
+
+.blue{
+    background-color: blue;
+}
+
+.red{
+    background-color: red;
+}
+
+.grey{
+    background-color: grey;
+}
+
+.optionTitle{
+    font-size: 16px;
+}
+
+.optionDiv{
+    margin-top: 1em;
+}
+
+.myHr{
+    margin: 0 !important;
+}
+
+.sizeSelect{
+    display: inline-block;
+    margin-right: 5px;
+    cursor: pointer;
+}
+
+.itemDescription{
+    width: 100%;
+    margin-top: 2em;
+    font-size: 14px;
+}
+
+.addToCartButton{
+    width: 9em;
+    height: 3em;
+    border-radius: 10px;
+    background-color: #193399;
+}
+
+.buttonInline{
+    line-height: 100%;
+}
