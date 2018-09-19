@@ -2,8 +2,7 @@ import React, { Component } from 'react';
 import SidebarLink from './SidebarLink';
 import SidebarCategory from './SidebarCategory';
 import store from '../../../app/store';
-import {setProductList} from '../../../redux/actions/productActions';
-
+import {setCurrentProduct, setProductList} from '../../../redux/actions/productActions';
 
 class SidebarContent extends Component {
 
@@ -15,12 +14,25 @@ class SidebarContent extends Component {
   setProductList = (type) => {
     if(type === "Hat")
     {
-      const products = {
-        name: "The most amazing hat!",
-        company: "Mad Hatters",
+      const products = [{
+        title: "The most amazing hat!",
+        subtitle: "Mad Hatters",
         description: "A perfectly designed hat made from the finest mercurous nitrate induced hatters"
+      }];
+
+      const currentProduct = {
+        title: "",
+        subtitle: "",
+        price: "",
+        image: "",
+        description: ""
       }
+      console.log("State before dispatch:");
+      console.log(store.getState());
       store.dispatch(setProductList(products));
+      store.dispatch(setCurrentProduct(currentProduct));
+      console.log("State after dispatch:")
+      console.log(store.getState());
      }
   }
 

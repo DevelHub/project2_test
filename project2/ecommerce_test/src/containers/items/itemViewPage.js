@@ -1,8 +1,14 @@
 import * as React from 'react';
 import './itemViewStyles.css';
+import {connect} from 'react-redux';
 
 export class ItemViewPage extends React.Component
 {
+    constructor(props)
+    {
+        super(props);
+    }
+
     render()
     {
         return(
@@ -14,7 +20,7 @@ export class ItemViewPage extends React.Component
                 <div className="itemInformation">
                     <div className="itemOptions">
                         <div className="inline">
-                            <div className="optionTitle">Item Name<hr className="myHr"/></div>
+                            <div className="optionTitle">{this.props.currentProduct.title}<hr className="myHr"/></div>
                             <div className="optionDiv">Company</div>
                         </div>
                         <div className="inline">
@@ -40,7 +46,7 @@ export class ItemViewPage extends React.Component
                             </div>
                         </div>
                         <div className="inline buttonInline">
-                        <button className="addToCartButton">Add To Cart</button>
+                        <button className="addToCartButton" onClick={() => this.props.history.push("/pages/cart")}>Add To Cart</button>
                         </div>
                     </div>
                     
@@ -54,3 +60,10 @@ export class ItemViewPage extends React.Component
         )
     }
 }
+
+const mapStateToProps = (state) => {
+    console.log(state);
+    return {currentProduct: state.product.currentProduct};
+}
+
+export default connect(mapStateToProps, null) (ItemViewPage);

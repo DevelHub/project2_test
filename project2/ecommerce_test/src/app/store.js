@@ -6,7 +6,7 @@ const reducer = combineReducers({
   form: reduxFormReducer, // mounted under "form",
   theme: themeReducer,
   sidebar: sidebarReducer,
-  product: productReducer
+  product: productReducer,
 });
 
 const store = createStore(reducer);

@@ -2,14 +2,20 @@ import * as types from '../actions/productActions'
 
 const initialState = {
     productList: [],
-    currentProduct: {}
+    currentProduct: {
+        title: "",
+        subtitle: "",
+        price: "",
+        image: "",
+        description: ""
+    }
 }
 
 export default function (state = initialState, action) 
 {
     const type = action.type;
-
-    if(type === types.SET_PRODUCT_LIST)
+    
+    if(action.type === types.SET_PRODUCT_LIST)
     {
         return {
             ...state,
