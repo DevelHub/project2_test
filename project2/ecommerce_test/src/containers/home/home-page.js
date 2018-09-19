@@ -65,10 +65,11 @@ export class HomePage extends Component {
     if (this.animating) return;
     this.setState({ activeIndex: newIndex });
   }
+
   componentDidMount(){
    
     let user = localStorage.getItem('user');
-    console.log(user);
+   alert(user);
   }
 
 

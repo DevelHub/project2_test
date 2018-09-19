@@ -8,7 +8,7 @@ export const logInRequest = {
     getById,
     update,
     getAll
-  
+
 };
 
 function login(username, password) {
@@ -19,14 +19,17 @@ function login(username, password) {
     };
 
     return fetch(`http://localhost:8000/credential/login`, requestOptions)
-    // return fetch(`http://ec2-54-200-103-68.us-west-2.compute.amazonaws.com:3001/credential/login`, requestOptions)
+        .then(user => user.json())
+
+        // return fetch(`http://ec2-54-200-103-68.us-west-2.compute.amazonaws.com:3001/credential/login`, requestOptions)
+
 
         .then(user => {
-            // login successful if there's a jwt token in the response
-            if (user.token) {
-                // store user details and jwt token in local storage to keep user logged in between page refreshes
-                localStorage.setItem('user', JSON.stringify(user));
-            }
+            
+            localStorage.setItem('user', JSON.stringify(user));
+            let loginUser = localStorage.getItem('user');
+            alert(`Succesfuly login username=  ${loginUser.username}`);
+
 
             return user;
         });
