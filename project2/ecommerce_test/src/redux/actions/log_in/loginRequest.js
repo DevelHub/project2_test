@@ -1,14 +1,14 @@
-import config from 'config';
+
 import { authHeader } from './authHeader';
 
 export const logInRequest = {
     login,
     logout,
     register,
-    getAll,
     getById,
     update,
-    delete: _delete
+    getAll
+  
 };
 
 function login(username, password) {
@@ -18,8 +18,9 @@ function login(username, password) {
         body: JSON.stringify({ username, password })
     };
 
-    return fetch(`localhost:8000/credential/login`, requestOptions)
-        .then(handleResponse)
+    return fetch(`http://localhost:8000/credential/login`, requestOptions)
+    // return fetch(`http://ec2-54-200-103-68.us-west-2.compute.amazonaws.com:3001/credential/login`, requestOptions)
+
         .then(user => {
             // login successful if there's a jwt token in the response
             if (user.token) {
@@ -36,22 +37,22 @@ function logout() {
     localStorage.removeItem('user');
 }
 
-function getAll() {
-    const requestOptions = {
-        method: 'GET',
-        headers: authHeader()
-    };
-
-    return fetch(`${config.apiUrl}/users`, requestOptions).then(handleResponse);
-}
-
 function getById(id) {
     const requestOptions = {
         method: 'GET',
         headers: authHeader()
     };
 
-    return fetch(`${config.apiUrl}/users/${id}`, requestOptions).then(handleResponse);
+    return fetch(`http://localhost:8000/users/${id}`, requestOptions);
+}
+
+function getAll() {
+    const requestOptions = {
+        method: 'GET',
+        headers: authHeader()
+    };
+
+    return fetch(`http://localhost:8000/`, requestOptions);
 }
 
 function register(user) {
@@ -61,7 +62,7 @@ function register(user) {
         body: JSON.stringify(user)
     };
 
-    return fetch(`${config.apiUrl}/users/register`, requestOptions).then(handleResponse);
+    return fetch(`http://localhost:8000/users/register`, requestOptions);
 }
 
 function update(user) {
@@ -71,33 +72,6 @@ function update(user) {
         body: JSON.stringify(user)
     };
 
-    return fetch(`${config.apiUrl}/users/${user.id}`, requestOptions).then(handleResponse);;
+    return fetch(`http://localhost:8000/users/${user.id}`, requestOptions);
 }
 
-// prefixed function name with underscore because delete is a reserved word in javascript
-function _delete(id) {
-    const requestOptions = {
-        method: 'DELETE',
-        headers: authHeader()
-    };
-
-    return fetch(`${config.apiUrl}/users/${id}`, requestOptions).then(handleResponse);
-}
-
-function handleResponse(response) {
-    return response.text().then(text => {
-        const data = text && JSON.parse(text);
-        if (!response.ok) {
-            if (response.status === 401) {
-                // auto logout if 401 response returned from api
-                logout();
-                // location.reload(true);
-            }
-
-            const error = (data && data.message) || response.statusText;
-            return Promise.reject(error);
-        }
-
-        return data;
-    });
-}

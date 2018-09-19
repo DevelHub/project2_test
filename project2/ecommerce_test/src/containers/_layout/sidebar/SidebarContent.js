@@ -3,6 +3,7 @@ import SidebarLink from './SidebarLink';
 import SidebarCategory from './SidebarCategory';
 import store from '../../../app/store';
 import {setProductList} from '../../../redux/actions/productActions';
+import {logInActions} from '../../../redux/actions/log_in/loginAction';
 
 
 class SidebarContent extends Component {
@@ -11,6 +12,8 @@ class SidebarContent extends Component {
     this.props.onClick();
     this.setProductList(e.target.innerText);
   };
+
+
 
   setProductList = (type) => {
     if(type === "Hat")
@@ -25,6 +28,7 @@ class SidebarContent extends Component {
   }
 
   render() {
+ 
     return (
       <div className='sidebar_content'>
 
@@ -58,7 +62,7 @@ class SidebarContent extends Component {
 
         <ul className='sidebar_block'>
           <SidebarCategory title='Account' icon='user'>
-            <SidebarLink title='Profile' route='pages/profile' onClick={this.hideSidebar} />
+            <SidebarLink title='Profile' route='/pages/profile' onClick={this.hideSidebar} />
             <SidebarLink title='Register Item' route='/' onClick={this.hideSidebar} />
           </SidebarCategory>
           <SidebarLink title='Log In' icon='exit' route='/log_in' onClick={this.hideSidebar} />

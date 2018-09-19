@@ -13,6 +13,7 @@ import { AdminHomePage } from '../containers/admin/admin-home-page';
 import {ItemViewPage} from '../containers/items/itemViewPage';
 import {CartPage} from '../containers/cart/cart-page';
 import {PaymentPage} from '../containers/payment/payment-page';
+import {RegisterPage} from '../containers/register/register-page';
 
 const Router = () => (
   <MainWrapper>
@@ -48,7 +49,8 @@ const Pages = () => (
     <Route path="/pages/profile" component={ProfilePage}/>
     <Route path="/pages/cart" component={CartPage}/>
     <Route path="/pages/payment" component={PaymentPage}/>
-    <Route component={AdminHomePage}/>
+    <Route path="/pages/register" component={RegisterPage}/>
+    <Route component={HomePage}/>
   </Switch>
 );
 

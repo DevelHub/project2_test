@@ -2,6 +2,7 @@
 import React, { Component } from 'react';
 import { Col, Container, Row } from 'reactstrap';
 import './home.css';
+import {logInActions} from '../../redux/actions/log_in/loginAction';
 // import { Col, Container, Row } from 'reactstrap';
 import {
   Carousel,
@@ -64,9 +65,18 @@ export class HomePage extends Component {
     if (this.animating) return;
     this.setState({ activeIndex: newIndex });
   }
+  componentDidMount(){
+   
+    let user = localStorage.getItem('user');
+    console.log(user);
+  }
+
+
+
 
   render() {
     const { activeIndex } = this.state;
+    // const {user, users} = this.props;
 
     const slides = items.map((item) => {
       return (
@@ -100,7 +110,7 @@ export class HomePage extends Component {
         <Container className='dashboard'>
                 <Row>
                     <Col md={12}>
-                        <h2 id="header-company">Welcome to Home Page</h2>
+                        <h2 id="header-company">Welcome to Home Page</h2> 
                         <h3 className="header-stat">JM-Terrely has many brands with unique styles</h3>
                     </Col>
                 </Row>

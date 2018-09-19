@@ -5,7 +5,7 @@ import {Link} from 'react-router-dom';
 export default class TopbarMenuLinks extends PureComponent {
   static propTypes = {
     title: PropTypes.string.isRequired,
-    icon: PropTypes.string.isRequired,
+    icon: PropTypes.string,
     path: PropTypes.string.isRequired
   };
   
