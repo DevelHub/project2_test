@@ -1,20 +1,20 @@
-import { userType } from '../actions/userType';
+import { logInTypes } from '../actions/log_in/loginTypes';
 
 export function users(state = {}, action) {
   switch (action.type) {
-    case userType.GETALL_REQUEST:
+    case logInTypes.GETALL_REQUEST:
       return {
         loading: true
       };
-    case userType.GETALL_SUCCESS:
+    case logInTypes.GETALL_SUCCESS:
       return {
         items: action.users
       };
-    case userType.GETALL_FAILURE:
+    case logInTypes.GETALL_FAILURE:
       return { 
         error: action.error
       };
-    case userType.DELETE_REQUEST:
+    case logInTypes.DELETE_REQUEST:
       // add 'deleting:true' property to user being deleted
       return {
         ...state,
@@ -24,12 +24,12 @@ export function users(state = {}, action) {
             : user
         )
       };
-    case userType.DELETE_SUCCESS:
+    case logInTypes.DELETE_SUCCESS:
       // remove deleted user from state
       return {
         items: state.items.filter(user => user.id !== action.id)
       };
-    case userType.DELETE_FAILURE:
+    case logInTypes.DELETE_FAILURE:
       // remove 'deleting:true' property and add 'deleteError:[error]' property to user 
       return {
         ...state,
