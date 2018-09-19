@@ -15,28 +15,6 @@ class SidebarContent extends Component {
   };
 
   setProductList = (type) => {
-    // if (type === "Hat") {
-    //   const products = [{
-    //     title: "The most amazing hat!",
-    //     subtitle: "Mad Hatters",
-    //     description: "A perfectly designed hat made from the finest mercurous nitrate induced hatters"
-    //   }];
-
-    //   const currentProduct = {
-    //     title: "",
-    //     subtitle: "",
-    //     price: "",
-    //     image: "",
-    //     description: ""
-    //   }
-    //   console.log("State before dispatch:");
-    //   console.log(store.getState());
-    //   store.dispatch(setProductList(products));
-    //   store.dispatch(setCurrentProduct(currentProduct));
-    //   console.log("State after dispatch:")
-    //   console.log(store.getState());
-    // }
-
     fetch(`http://ec2-54-200-103-68.us-west-2.compute.amazonaws.com:3001/item-type/pants`, {
       headers: {
         "Content-Type":"application/json"
