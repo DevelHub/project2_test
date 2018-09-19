@@ -20,12 +20,12 @@ export class ItemViewPage extends React.Component
                 <div className="itemInformation">
                     <div className="itemOptions">
                         <div className="inline">
-                            <div className="optionTitle">{this.props.currentProduct.title}<hr className="myHr"/></div>
-                            <div className="optionDiv">Company</div>
+                            <div className="optionTitle">{this.props.currentProduct.name}<hr className="myHr"/></div>
+                            <div className="optionDiv">{this.props.currentProduct.company}</div>
                         </div>
                         <div className="inline">
                             <div className="optionTitle">Price<hr className="myHr"/></div>
-                            <div className="optionDiv">$234.56</div>
+                            <div className="optionDiv">{this.props.currentProduct.price}</div>
                         </div>
                         <div className="inline">
                             <div className="optionTitle">Choose Color<hr className="myHr"/></div>
@@ -51,9 +51,7 @@ export class ItemViewPage extends React.Component
                     </div>
                     
                     <div className="itemDescription">
-                        This is a test description for a test item that does not actually exist simply because it is used for testing, therefore this description should not be 
-                        taken as a serious method of understanding the properties of the current testing item that is being displayed. If this were not a test item that does not 
-                        actually exist, a more serious description of the item that does indeed display acurate properties of the item being displayed would be in this place. 
+                        {this.props.currentProduct.description} 
                     </div>
                 </div>
             </div>

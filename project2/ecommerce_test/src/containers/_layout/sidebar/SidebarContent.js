@@ -9,17 +9,10 @@ class SidebarContent extends Component {
     super(props);
   }
 
-  populateItems(type) 
-  {
-    
-  }
-
   hideSidebar = (e) => {
     this.props.onClick();
     this.setProductList(e.target.innerText);
   };
-
-
 
   setProductList = (type) => {
     // if (type === "Hat") {
@@ -44,7 +37,7 @@ class SidebarContent extends Component {
     //   console.log(store.getState());
     // }
 
-    fetch(`http://ec2-54-200-103-68.us-west-2.compute.amazonaws.com:3001/item-type/pants/item-type/pants`, {
+    fetch(`http://ec2-54-200-103-68.us-west-2.compute.amazonaws.com:3001/item-type/pants`, {
       headers: {
         "Content-Type":"application/json"
       },
@@ -59,7 +52,8 @@ class SidebarContent extends Component {
     })
     .then(items => {
       console.log(items);
-      alert("got those items!");
+      store.dispatch(setProductList(items.item));
+      store.dispatch(setCurrentProduct(items));
     })
   }
 
