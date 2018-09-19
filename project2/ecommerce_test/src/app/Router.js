@@ -5,12 +5,12 @@ import MainWrapper from './MainWrapper';
 
 import LogIn from '../containers/log_in';
 import {HomePage} from '../containers/home/home-page';
-import {ItemsPage} from '../containers/items/itemsPage';
+import ItemsPage from '../containers/items/itemsPage';
 import {CompanyPage} from '../containers/company/company-page';
 import {CustomerPage} from '../containers/customer/customer-page';
 import {ProfilePage} from '../containers/profile/profile-page';
 import { AdminHomePage } from '../containers/admin/admin-home-page';
-import {ItemViewPage} from '../containers/items/itemViewPage';
+import ItemViewPage from '../containers/items/itemViewPage';
 import {CartPage} from '../containers/cart/cart-page';
 import {PaymentPage} from '../containers/payment/payment-page';
 

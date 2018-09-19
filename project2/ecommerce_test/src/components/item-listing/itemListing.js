@@ -2,18 +2,21 @@ import * as React from 'react';
 import PropTypes from 'prop-types';
 import {ItemTitle, ItemSubtitle, ItemImage, ItemDescription} from '../../components/item-listing/';
 import './itemStyles.css';
+import store from '../../app/store';
+import {setCurrentProduct} from '../../redux/actions/productActions';
 
 export class ItemListing extends React.Component
 {
     constructor(props)
     {
         super(props);
+        this.listingClicked = this.listingClicked.bind(this);
     }
 
     render()
     {
         return (
-            <div className="itemListing" onClick={() => this.props.onClicked(this.props.item)}>
+            <div className="itemListing" onClick={this.listingClicked}>
                 <ItemTitle>{this.props.item.title}</ItemTitle>
                 <ItemSubtitle>{this.props.item.subtitle}</ItemSubtitle>
                 <ItemImage src={this.props.item.image}/>
@@ -21,5 +24,11 @@ export class ItemListing extends React.Component
             </div>
         )
         
+    }
+
+    listingClicked()
+    {
+        store.dispatch(setCurrentProduct(this.props.item));
+        this.props.history.push("/pages/clothes/product");
     }
 }

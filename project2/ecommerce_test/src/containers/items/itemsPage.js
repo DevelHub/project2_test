@@ -5,7 +5,6 @@ import store from '../../app/store';
 import {connect} from 'react-redux';
 import {App} from '../../app/App';
 import {ItemRow, ItemListing, ItemTitle, ItemSubtitle, ItemImage, ItemDescription} from '../../components/item-listing/index';
-import {setCurrentProduct} from '../../redux/actions/productActions';
 
 // interface Item
 // {
@@ -21,13 +20,6 @@ export class ItemsPage extends React.Component
     constructor(props)
     {
         super(props);
-        this.listingClicked = this.listingClicked.bind(this);
-    }
-
-    listingClicked(product)
-    {
-        store.dispatch(setCurrentProduct(product));
-        this.props.history.push("/pages/clothes/product");
     }
 
     render()
@@ -60,7 +52,7 @@ export class ItemsPage extends React.Component
             {
                 if(i < data.length)
                 {
-                    listings.push(<ItemListing item={data[i++]} onClicked={this.listingClicked()}/>)
+                    listings.push(<ItemListing item={data[i++]} history={this.props.history}/>)
                 }
             }
             i--;

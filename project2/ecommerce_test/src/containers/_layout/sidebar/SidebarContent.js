@@ -2,9 +2,17 @@ import React, { Component } from 'react';
 import SidebarLink from './SidebarLink';
 import SidebarCategory from './SidebarCategory';
 import store from '../../../app/store';
-import {setCurrentProduct, setProductList} from '../../../redux/actions/productActions';
+import { setCurrentProduct, setProductList } from '../../../redux/actions/productActions';
 
 class SidebarContent extends Component {
+  constructor(props) {
+    super(props);
+  }
+
+  populateItems(type) 
+  {
+    
+  }
 
   hideSidebar = (e) => {
     this.props.onClick();
@@ -12,28 +20,45 @@ class SidebarContent extends Component {
   };
 
   setProductList = (type) => {
-    if(type === "Hat")
-    {
-      const products = [{
-        title: "The most amazing hat!",
-        subtitle: "Mad Hatters",
-        description: "A perfectly designed hat made from the finest mercurous nitrate induced hatters"
-      }];
+    // if (type === "Hat") {
+    //   const products = [{
+    //     title: "The most amazing hat!",
+    //     subtitle: "Mad Hatters",
+    //     description: "A perfectly designed hat made from the finest mercurous nitrate induced hatters"
+    //   }];
 
-      const currentProduct = {
-        title: "",
-        subtitle: "",
-        price: "",
-        image: "",
-        description: ""
+    //   const currentProduct = {
+    //     title: "",
+    //     subtitle: "",
+    //     price: "",
+    //     image: "",
+    //     description: ""
+    //   }
+    //   console.log("State before dispatch:");
+    //   console.log(store.getState());
+    //   store.dispatch(setProductList(products));
+    //   store.dispatch(setCurrentProduct(currentProduct));
+    //   console.log("State after dispatch:")
+    //   console.log(store.getState());
+    // }
+
+    fetch(`http://ec2-54-200-103-68.us-west-2.compute.amazonaws.com:3001/item-type/pants/item-type/pants`, {
+      headers: {
+        "Content-Type":"application/json"
+      },
+      method: "GET"
+    })
+    .then(resp => {
+      if(resp.status == 200)
+      {
+        return resp.json();
       }
-      console.log("State before dispatch:");
-      console.log(store.getState());
-      store.dispatch(setProductList(products));
-      store.dispatch(setCurrentProduct(currentProduct));
-      console.log("State after dispatch:")
-      console.log(store.getState());
-     }
+      throw Error("Could not retrieve item group");
+    })
+    .then(items => {
+      console.log(items);
+      alert("got those items!");
+    })
   }
 
   render() {
@@ -46,7 +71,7 @@ class SidebarContent extends Component {
         <ul className='sidebar_block'>
           <SidebarCategory title='Clothes' icon='store'>
             <SidebarCategory title="Categories">
-              <SidebarLink title='Hat' route='/pages/clothes/' onClick={this.hideSidebar}/>
+              <SidebarLink title='Hat' route='/pages/clothes/' onClick={this.hideSidebar} />
               <SidebarLink title='T-Shirts' route='/pages/clothes/' onClick={this.hideSidebar} />
               <SidebarLink title='Polo Shirts' route='/pages/clothes/' onClick={this.hideSidebar} />
               <SidebarLink title='SweatShirts' route='/pages/clothes/' onClick={this.hideSidebar} />
