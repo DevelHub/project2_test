@@ -5,6 +5,7 @@ import {users} from '../redux/reducers/loginReducer';
 import thunkMiddleware from 'redux-thunk';
 import {authentication} from '../redux/reducers/authenticationReducer';
 import {registration} from '../redux/reducers/registrationReducer';
+
 const reducer = combineReducers({
   form: reduxFormReducer, // mounted under "form",
   theme: themeReducer,
