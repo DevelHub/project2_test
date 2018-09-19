@@ -44,7 +44,7 @@ class SidebarContent extends Component {
     //   console.log(store.getState());
     // }
 
-    fetch(`http://ec2-54-200-103-68.us-west-2.compute.amazonaws.com:3001/item-type/pants/item-type/pants`, {
+    fetch(`http://ec2-54-200-103-68.us-west-2.compute.amazonaws.com:3001/item-type/pants`, {
       headers: {
         "Content-Type":"application/json"
       },
