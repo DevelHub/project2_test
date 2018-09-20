@@ -1,11 +1,19 @@
 import React, {Component} from 'react';
 import {Card, CardBody, Col} from 'reactstrap';
 import {Doughnut} from 'react-chartjs-2';
-
+import { logInActions } from '../../redux/actions/log_in/loginAction';
 
 function getRandomInt(min, max) {
   return Math.floor(Math.random() * (max - min + 1)) + min;
 }
+
+function fetchData (){
+  const { dispatch } = this.props;
+  dispatch(logInActions.getAll());
+
+  
+
+}   
 
 const getState = () => ({
   labels: [

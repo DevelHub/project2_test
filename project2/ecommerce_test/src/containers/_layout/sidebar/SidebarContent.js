@@ -116,14 +116,14 @@ class SidebarContent extends Component {
               </SidebarCategory>
             </SidebarCategory> */}
   
-            {/* <SidebarCategory title="Brands" icon="diamond">
+            <SidebarCategory title="Brands" icon="diamond">
               <SidebarLink title='UNI-CLO' route='/pages/company/' onClick={this.hideSidebar} />
               <SidebarLink title='OLD-NAVY' route='/pages/company/' onClick={this.hideSidebar} />
               <SidebarLink title='H&M' route='/pages/company/hm' onClick={this.hideSidebar} />
               <SidebarLink title='FOREVER21' route='/pages/company/' onClick={this.hideSidebar} />
               <SidebarLink title='ZARA' route='/pages/company/' onClick={this.hideSidebar} />
               <SidebarLink title='BANANA REPUBLIC' route='/pages/company/' onClick={this.hideSidebar} />
-            </SidebarCategory> */}
+            </SidebarCategory>
           {/* </ul> */}
   
           {/* <ul className='sidebar_block'> */}

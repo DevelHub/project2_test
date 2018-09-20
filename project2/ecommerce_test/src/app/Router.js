@@ -13,7 +13,7 @@ import { AdminHomePage } from '../containers/admin/admin-home-page';
 import ItemViewPage from '../containers/items/itemViewPage';
 import {CartPage} from '../containers/cart/cart-page';
 import {PaymentPage} from '../containers/payment/payment-page';
-import {RegisterPage} from '../containers/register/register-page';
+import {RegisterPage} from '../containers/register/conponents/register-page';
 import {Wishlist} from '../containers/wishlist/wishlist';
 
 const Router = () => (
