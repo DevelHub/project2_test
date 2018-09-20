@@ -5,7 +5,13 @@ export class ProfilePage extends React.Component
     render()
     {
         return (
-            <p>HELLO! THIS IS THE Profile PAGE!</p>
+            <div className="profilePage">
+                Hello (username)!
+                View previous purchases
+                
+                <div className="accoutInfo">
+                </div>
+            </div>
         )
     }
 }

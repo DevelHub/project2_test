@@ -4,6 +4,7 @@ import {hot} from 'react-hot-loader';
 import 'bootstrap/dist/css/bootstrap.css'
 import '../scss/app.scss';
 import Router from './Router';
+import store from './store';
 
 class App extends Component {
   constructor() {
@@ -19,6 +20,15 @@ class App extends Component {
       this.setState({loading: false});
       setTimeout(() => this.setState({loaded: true}), 500);
     });
+
+    // const stateString = localStorage.getItem("state"); 
+    // console.log("state string from localstorage");
+    // console.log(stateString);
+    // const state = JSON.parse(stateString);
+    // if(state)
+    // {
+    //   store.setState(state);
+    // }
   }
   
   render() {

@@ -24,26 +24,8 @@ export class ItemsPage extends React.Component
 
     render()
     {
-        //made dummy data below for testing. delete once mapStateToProps is working
-        // let dummyData = [];
-        // const item = {
-        //     title: "A Really Cool Hat",
-        //     subtitle: "The Mad Hatters",
-        //     image: "https://placeholdit.imgix.net/~text?txtsize=33&txt=256%C3%97180&w=256&h=180",
-        //     description: "A really well made hat. Its good. Buy it. Really, you should"
-        // }
-        // for(let i = 0; i < 7; i++)
-        // {
-        //     dummyData.push(item);
-        // }
-
-        console.log("itemsPage props:");
-        console.log(this.props);
-        // this should be used when mapStateToProps is working. gets the current list of items by category from the redux store.
         const data = this.props.productList;
-        //const data = dummyData;
 
-        //everything else below this for the render method is complete!
         let rows = [];
         for(let i = 0; i < data.length; i++)
         {
@@ -52,7 +34,13 @@ export class ItemsPage extends React.Component
             {
                 if(i < data.length)
                 {
-                    listings.push(<ItemListing item={data[i++]} history={this.props.history}/>)
+                    let children = [];
+                    children.push(<ItemTitle>{data[i].name}</ItemTitle>);
+                    children.push(<ItemSubtitle>{data[i].company}</ItemSubtitle>);
+                    children.push(<ItemImage src={data[i].image}/>);
+                    children.push(<ItemDescription>{data[i].description}</ItemDescription>);
+                    listings.push(<ItemListing  history={this.props.history}> {children} </ItemListing>)
+                    i++;
                 }
             }
             i--;
