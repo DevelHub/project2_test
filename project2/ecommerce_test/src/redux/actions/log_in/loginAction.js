@@ -59,14 +59,32 @@ function register(user,history) {
             .then(
                 user => { 
                     dispatch(success());
-                    history.push('/log_in');
                     dispatch(alertActions.success('Registration successful'));
+               
+                    fetch(`http://ec2-54-200-103-68.us-west-2.compute.amazonaws.com:3001/credential`)
+                    // history.push('/log_in');
+                    
                 },
                 error => {
                     dispatch(failure(error.toString()));
                     dispatch(alertActions.error(error.toString()));
                 }
             );
+            logInRequest.registerCustom(user)
+            .then(
+                user => { 
+                    dispatch(success());
+                    dispatch(alertActions.success('Registration successful'));
+                    fetch(`http://ec2-54-200-103-68.us-west-2.compute.amazonaws.com:3001/customer`)
+                    // history.push('/log_in');
+                    
+                },
+                error => {
+                    dispatch(failure(error.toString()));
+                    dispatch(alertActions.error(error.toString()));
+                }
+            );
+
     };
 
     function request(user) { return { type: logInTypes.REGISTER_REQUEST, user } }

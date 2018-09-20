@@ -1,4 +1,6 @@
 
+
+//ec2 endpoint : http://ec2-54-200-103-68.us-west-2.compute.amazonaws.com:3001
 import { authHeader } from './authHeader';
 
 export const logInRequest = {
@@ -7,7 +9,9 @@ export const logInRequest = {
     register,
     getById,
     update,
-    getAll
+    getAll,
+    registerCustom
+
 
 };
 
@@ -18,18 +22,14 @@ function login(username, password) {
         body: JSON.stringify({ username, password })
     };
 
-    return fetch(`http://localhost:8000/credential/login`, requestOptions)
+    // return fetch(`http://localhost:8000/credential/login`, requestOptions)
+    return fetch(`http://ec2-54-200-103-68.us-west-2.compute.amazonaws.com:3001/credential/login`, requestOptions)
         .then(user => user.json())
-
-        // return fetch(`http://ec2-54-200-103-68.us-west-2.compute.amazonaws.com:3001/credential/login`, requestOptions)
-
-
         .then(user => {
             
             localStorage.setItem('user', JSON.stringify(user));
             let loginUser = JSON.parse(localStorage.getItem('user'));
             alert(`Succesfuly login as ${loginUser[0].role}  `);
-
 
             return user;
         });
@@ -55,7 +55,13 @@ function getAll() {
         headers: authHeader()
     };
 
-    return fetch(`http://localhost:8000/`, requestOptions);
+    return fetch(`http://localhost:8000/`, requestOptions)
+    .then(user=>user.json())
+    .then(user=>{
+        localStorage.setItem('user',JSON.stringify(user));
+
+        return user;
+    });
 }
 
 function register(user) {
@@ -64,8 +70,19 @@ function register(user) {
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify(user)
     };
+    localStorage.setItem('user',user);
 
-    return fetch(`http://localhost:8000/users/register`, requestOptions);
+    return fetch(`http://ec2-54-200-103-68.us-west-2.compute.amazonaws.com:3001/credential`, requestOptions);
+
+}
+function registerCustom(user){
+    const requestOptions = {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify(user)
+    };
+    return fetch(`http://ec2-54-200-103-68.us-west-2.compute.amazonaws.com:3001/customer`, requestOptions);
+
 }
 
 function update(user) {
