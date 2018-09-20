@@ -4,22 +4,21 @@ import { Card, CardImg, CardText, CardBody,
 import store from '../../app/store';
 import {connect} from 'react-redux';
 import {App} from '../../app/App';
-import {ItemRow, ItemListing, ItemTitle, ItemSubtitle, ItemImage, ItemDescription} from '../../components/item-listing/index';
+import {ItemCard, ItemRow, ItemListing, ItemTitle, ItemSubtitle, ItemImage, ItemDescription} from '../../components/item-listing/index';
+import {setCurrentProduct} from '../../redux/actions/productActions';
 
-// interface Item
-// {
-//     name: string,
-    
-// }
-// interface ItemsData
-// {
-
-// }
 export class ItemsPage extends React.Component
 {
     constructor(props)
     {
         super(props);
+        this.listingClicked = this.listingClicked.bind(this);
+    }
+
+    listingClicked(item)
+    {
+        store.dispatch(setCurrentProduct(item));
+        this.props.history.push("/pages/clothes/product");
     }
 
     render()
@@ -34,12 +33,20 @@ export class ItemsPage extends React.Component
             {
                 if(i < data.length)
                 {
+                    let item = {
+                        name: data[i].name,
+                        company: data[i].company.companyName,
+                        image: data[i].image,
+                        description: data[i].description
+                    }
+
                     let children = [];
-                    children.push(<ItemTitle>{data[i].name}</ItemTitle>);
-                    children.push(<ItemSubtitle>{data[i].company}</ItemSubtitle>);
-                    children.push(<ItemImage src={data[i].image}/>);
-                    children.push(<ItemDescription>{data[i].description}</ItemDescription>);
-                    listings.push(<ItemListing  history={this.props.history}> {children} </ItemListing>)
+                    children.push(<ItemTitle>{item.name}</ItemTitle>);
+                    children.push(<ItemSubtitle>{item.company}</ItemSubtitle>);
+                    children.push(<ItemImage src={item.image}/>);
+                    children.push(<ItemDescription>{item.description}</ItemDescription>);
+
+                    listings.push(<ItemListing clicked={this.listingClicked} currentProduct={item}> {children} </ItemListing>)
                     i++;
                 }
             }
