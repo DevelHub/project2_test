@@ -1,6 +1,8 @@
 import * as React from 'react';
 import './itemViewStyles.css';
 import {connect} from 'react-redux';
+import {ItemCard, ItemRow, ItemListing, ItemTitle, ItemSubtitle, ItemImage, ItemDescription} from '../../components/item-listing/index';
+
 
 export class ItemViewPage extends React.Component
 {
@@ -12,10 +14,8 @@ export class ItemViewPage extends React.Component
     render()
     {
         return(
-            <div className="pageContainer">
-                <div className="itemViewImageDiv">
-                    <p className="temp">Image Size??</p>
-                </div>
+            <ItemCard>
+                <ItemImage src="https://via.placeholder.com/350x150"/>
 
                 <div className="itemInformation">
                     <div className="itemOptions">
@@ -54,7 +54,7 @@ export class ItemViewPage extends React.Component
                         {this.props.currentProduct.description} 
                     </div>
                 </div>
-            </div>
+            </ItemCard>
         )
     }
 }

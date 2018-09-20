@@ -1,0 +1,23 @@
+
+.profileColumns{
+    width: 100%;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+}
+
+.pageTitle{
+    text-align: center;
+    margin-bottom: 4em;
+}
+
+.accountComponent{
+    width: 90%;
+    min-height: 10em;
+    margin: 0 auto;
+}
+
+.previousPurchases{
+    width: 90%;
+    min-height: 10em;
+    margin: 0 auto;
+}
