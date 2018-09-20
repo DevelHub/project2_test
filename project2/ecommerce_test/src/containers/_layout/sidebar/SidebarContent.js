@@ -32,6 +32,7 @@ class SidebarContent extends Component {
       console.log(items);
       store.dispatch(setProductList(items.item));
       store.dispatch(setCurrentProduct(items));
+      //localStorage.setItem("state", JSON.stringify(store.getState()));
     })
   }
 

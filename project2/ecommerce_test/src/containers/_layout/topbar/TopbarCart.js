@@ -33,7 +33,7 @@ export default class TopbarCart extends PureComponent {
          {this.state.collapse && <div className='topbar_back' onClick={this.toggle}/>} 
         <Collapse isOpen={this.state.collapse} className='topbar_menu-wrap'>
           <div className='topbar_menu'>
-            <TopbarMenuLink title='Wish List'  path='/pages/cart/wish_list'/>
+            <TopbarMenuLink title='Wish List'  path='/pages/wishlist'/>
             <TopbarMenuLink title='Cart'  path='/pages/cart'/>
            </div>
         </Collapse>
