@@ -53,7 +53,7 @@ function getAll() {
         headers: authHeader()
     };
 
-    return fetch(`http://localhost:8000/`, requestOptions)
+    return fetch(`http://ec2-54-200-103-68.us-west-2.compute.amazonaws.com:3001/customer`, requestOptions)
     // .then(user=>user.json())
     // .then(user=>{
     //     localStorage.setItem('user',JSON.stringify(user));

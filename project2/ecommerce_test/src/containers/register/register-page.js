@@ -46,7 +46,7 @@ handleSubmit(event) {
     const { dispatch } = this.props;
     if (user.firstname && user.lastname && user.username && user.password) {
         dispatch(logInActions.register(user),this.props.history);
-        dispatch(logInActions.registerCustom(user),this.props.histry);
+        dispatch(logInActions.registerCustom(user),this.props.history);
     }
 }
 

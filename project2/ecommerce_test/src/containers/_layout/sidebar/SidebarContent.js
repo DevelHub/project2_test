@@ -4,8 +4,20 @@ import SidebarCategory from './SidebarCategory';
 import store from '../../../app/store';
 import { setCurrentProduct, setProductList } from '../../../redux/actions/productActions';
 
+let isGuest = false;
 
+if(!localStorage.getItem('user')){
+  isGuest = true;
+}
+else{
+  isGuest = false;
+ 
+}
 let userStore = JSON.parse(localStorage.getItem('user'));
+
+
+
+
 
 // let userStore ;
 
@@ -71,7 +83,7 @@ class SidebarContent extends Component {
     const clothesCategory = <SidebarCategory title="Clothes" icon="store">{clothesCategories}</SidebarCategory>;
     const brandsCategory = <SidebarCategory title="Brands" icon="diamond">{companyLinks}</SidebarCategory>;
 
-    if(userStore[0]&&userStore[0].role==='customer'){
+    if(!isGuest&&userStore[0]&&userStore[0].role==='customer'){
       return (
         <div className='sidebar_content'>
   
@@ -94,7 +106,7 @@ class SidebarContent extends Component {
         </div>
       )}
 
-    else if(userStore[0]&&userStore[0].role==='company'){
+    else if(!isGuest&&userStore[0]&&userStore[0].role==='company'){
       return (
         <div className='sidebar_content'>
   
