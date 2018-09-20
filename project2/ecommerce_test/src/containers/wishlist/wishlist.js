@@ -13,12 +13,16 @@ export class Wishlist extends React.Component
         }]
         return (
             <div className="wishlistContainer">
-                <div className="wishlistItem">
-                    <div className="wishlistImage">
-                    </div>
-
-                    <div className="wishlistTitle"></div>
-                </div>
+                <ItemRow>
+                    <ItemListing>
+                        <ItemTitle>Testing Wishlist</ItemTitle>
+                        <ItemSubtitle>Test Company</ItemSubtitle>
+                        <ItemImage src=""/>
+                        <ItemDescription>Test description</ItemDescription>
+                        <button>Remove</button>
+                        <button>Add To Cart</button>
+                    </ItemListing>
+                </ItemRow>
             </div>
         )
     }
