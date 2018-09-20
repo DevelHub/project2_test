@@ -5,7 +5,7 @@ import store from '../../../app/store';
 import { setCurrentProduct, setProductList } from '../../../redux/actions/productActions';
 
 
-const user = JSON.parse(localStorage.getItem('user'));
+let userStore = JSON.parse(localStorage.getItem('user'));
 
 class SidebarContent extends Component {
   constructor(props) {
@@ -44,7 +44,7 @@ class SidebarContent extends Component {
   
 
   render() {
-    if(user&&user[0].role==='customer'){
+    if(userStore&&userStore[0].role==='customer'){
       return (
         <div className='sidebar_content'>
   
@@ -92,7 +92,7 @@ class SidebarContent extends Component {
 
       )}
 
-    else if(user&&user[0].role==='company'){
+    else if(userStore&&userStore[0].role==='company'){
       return (
         <div className='sidebar_content'>
   

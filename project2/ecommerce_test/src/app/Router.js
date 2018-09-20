@@ -13,7 +13,7 @@ import { AdminHomePage } from '../containers/admin/admin-home-page';
 import ItemViewPage from '../containers/items/itemViewPage';
 import {CartPage} from '../containers/cart/cart-page';
 import {PaymentPage} from '../containers/payment/payment-page';
-import {RegisterPage} from '../containers/register/conponents/register-page';
+import {RegisterPage} from '../containers/register/register-page';
 import {Wishlist} from '../containers/wishlist/wishlist';
 
 const Router = () => (
@@ -49,7 +49,7 @@ const Pages = () => (
     <Route path="/pages/customer" component={CustomerPage}/>
     <Route path="/pages/profile" component={ProfilePage}/>
     <Route path="/pages/cart" component={CartPage}/>
-    <Route path="/pages/payment" component={PaymentPage}/>
+    <Route path="/pages/payment" component={PaymentPage}/>  
     <Route path="/pages/register" component={RegisterPage}/>
     <Route path="/pages/wishlist" component={Wishlist}/>
     <Route component={HomePage}/>

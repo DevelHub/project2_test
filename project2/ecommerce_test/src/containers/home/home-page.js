@@ -28,7 +28,7 @@ const items = [
     caption: 'Join us now to get 10% discounts'
   }
 ];
-const user = JSON.parse(localStorage.getItem('user'));
+
 
 
 
