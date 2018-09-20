@@ -13,7 +13,9 @@ constructor(props){
             firstName:'',
             lastName:'',
             username:'',
-            password:''
+            password:'',
+            age: Number
+            
         },
         submitted: false
     };
@@ -74,6 +76,13 @@ handleSubmit(event) {
                             <div className="help-block">Last Name is required</div>
                         }
                     </div>
+                    <div className={'form-group' + (submitted && !user.age ? ' has-error' : '')}>
+                        <label htmlFor="age">Age</label>
+                        <input type="age" className="form-control" name="age" value={user.age} onChange={this.handleChange} />
+                        {submitted && !user.age && 
+                            <div className="help-block">Age is required & must be number</div>
+                        }
+                    </div>
                     <div className={'form-group' + (submitted && !user.username ? ' has-error' : '')}>
                         <label htmlFor="username">Username</label>
                         <input type="text" className="form-control" name="username" value={user.username} onChange={this.handleChange} />
@@ -88,9 +97,11 @@ handleSubmit(event) {
                             <div className="help-block">Password is required</div>
                         }
                     </div>
+                    
+
                     <div className="form-group">
                         <button className="btn btn-primary">Register</button>
-                        {registering }
+                        {registering}
                         <Link to="/log_in" className="btn btn-link">Cancel</Link>
                     </div>
                 </form>

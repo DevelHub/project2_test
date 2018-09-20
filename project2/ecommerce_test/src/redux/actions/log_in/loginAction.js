@@ -21,7 +21,18 @@ function login(username, password, history) {
                 user => { 
                     dispatch(success(user));
                     dispatch(alertActions.success('login successful'));
-                    history.push('/pages/home');
+                    
+                    if(user[0].role==='customer'){
+                        history.push('/pages/customer');
+                    }
+                    else if(user[0].role==='company'){
+                        history.push('/pages/company');
+
+                    }
+                    else{
+                        history.push('/pages/home');
+                    }
+                  
               
                 },
                 error => {

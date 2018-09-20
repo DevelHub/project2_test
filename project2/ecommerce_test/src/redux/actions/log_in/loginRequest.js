@@ -27,8 +27,8 @@ function login(username, password) {
         .then(user => {
             
             localStorage.setItem('user', JSON.stringify(user));
-            let loginUser = localStorage.getItem('user');
-            alert(`Succesfuly login username=  ${loginUser.username}`);
+            let loginUser = JSON.parse(localStorage.getItem('user'));
+            alert(`Succesfuly login as ${loginUser[0].role}  `);
 
 
             return user;

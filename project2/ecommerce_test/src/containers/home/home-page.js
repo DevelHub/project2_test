@@ -2,7 +2,6 @@
 import React, { Component } from 'react';
 import { Col, Container, Row } from 'reactstrap';
 import './home.css';
-import {logInActions} from '../../redux/actions/log_in/loginAction';
 // import { Col, Container, Row } from 'reactstrap';
 import {
   Carousel,
@@ -29,6 +28,9 @@ const items = [
     caption: 'Join us now to get 10% discounts'
   }
 ];
+const user = JSON.parse(localStorage.getItem('user'));
+
+
 
 export class HomePage extends Component {
   constructor(props) {
@@ -68,8 +70,8 @@ export class HomePage extends Component {
 
   componentDidMount(){
    
-    let user = localStorage.getItem('user');
-   alert(user);
+    // let user = JSON.parse(localStorage.getItem('user'));
+  //  alert(user[0].username);
   }
 
 
@@ -111,7 +113,7 @@ export class HomePage extends Component {
         <Container className='dashboard'>
                 <Row>
                     <Col md={12}>
-                        <h2 id="header-company">Welcome to Home Page</h2> 
+                        <h2 id="header-company">Welcome to Homepage</h2> 
                         <h3 className="header-stat">JM-Terrely has many brands with unique styles</h3>
                     </Col>
                 </Row>

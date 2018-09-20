@@ -1,9 +1,10 @@
 import React, { Component } from 'react';
 import { Col, Container, Row } from 'reactstrap';
-import {TotalItems} from '../admin/components/TotalItems';
-import { TotalSubscribers } from '../admin/components/TotalSubscribers';
+import {TotalItems} from '../../components/charts/TotalItems';
+import { TotalSubscribers } from '../../components/charts/TotalSubscribers';
 import {Carousel,CarouselItem,CarouselControl, CarouselIndicators,CarouselCaption} from 'reactstrap';
 import './company.css';
+import {DoughnutChart} from '../../components/charts/DoughnutChart';
   
 
 
@@ -107,6 +108,7 @@ const items = [
                 <Row>
                     <TotalSubscribers />
                     <TotalItems />
+                    <DoughnutChart/>
 
                 </Row>
 
