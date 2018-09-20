@@ -7,9 +7,11 @@ import { setCurrentProduct, setProductList } from '../../../redux/actions/produc
 
 let userStore = JSON.parse(localStorage.getItem('user'));
 
+// let userStore ;
+
 class SidebarContent extends Component {
   constructor(props) {
-    super(props);
+    super(props); 
   }
 
   hideSidebar = (e) => {
@@ -40,9 +42,7 @@ class SidebarContent extends Component {
   }
 
 
-
-  
-
+ 
   render() {
     if(userStore&&userStore[0].role==='customer'){
       return (

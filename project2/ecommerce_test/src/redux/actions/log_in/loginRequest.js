@@ -26,13 +26,11 @@ function login(username, password) {
     return fetch(`http://ec2-54-200-103-68.us-west-2.compute.amazonaws.com:3001/credential/login`, requestOptions)
         .then(user => user.json())
         .then(user => {
-            
             localStorage.setItem('user', JSON.stringify(user));
             let loginUser = JSON.parse(localStorage.getItem('user'));
             alert(`Succesfuly login as ${loginUser[0].role}  `);
-
             return user;
-        });
+        }); 
 }
 
 function logout() {
@@ -71,12 +69,21 @@ function register(user) {
         body: JSON.stringify(user)
     };
 
-    return fetch(`http://ec2-54-200-103-68.us-west-2.compute.amazonaws.com:3001/credential`, requestOptions);
-
+     return fetch(`http://ec2-54-200-103-68.us-west-2.compute.amazonaws.com:3001/credential`, requestOptions);
+     //      .then(user => user.json())
+//      .then(user => {
+         
+//          localStorage.setItem('user', JSON.stringify(user));
+//          let registerUser = JSON.parse(localStorage.getItem('user'));
+//          alert(`Succesfuly login as ${registerUser[0].id}  `);
+//      });
+// }
 }
+
+
 function registerCustom(user){
 
-    alert(JSON.stringify(user));
+   
     const requestOptions = {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },

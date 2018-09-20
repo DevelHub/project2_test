@@ -1,19 +1,30 @@
-import React, {Component} from 'react';
-import {Card, CardBody, Col} from 'reactstrap';
-import {Doughnut} from 'react-chartjs-2';
+import React, { Component } from 'react';
+import { Card, CardBody, Col } from 'reactstrap';
+import { Doughnut } from 'react-chartjs-2';
 import { logInActions } from '../../redux/actions/log_in/loginAction';
 
 function getRandomInt(min, max) {
   return Math.floor(Math.random() * (max - min + 1)) + min;
 }
 
-function fetchData (){
-  // const { dispatch } = this.props;
-  // dispatch(logInActions.getAll());
+function fetchData() {
 
-  
+  fetch(`http://ec2-54-200-103-68.us-west-2.compute.amazonaws.com:3001/customer`, {
+    headers: {
+      "Content-Type": "application/json"
+    },
+    method: "GET"
+  })
+    .then(resp => resp.json())
+    .then(resp => {
+      localStorage.setItem('data', JSON.stringify(resp));
+      return resp;  
+    }); 
+}
 
-}   
+fetchData();
+let getData = JSON.parse((localStorage.getItem('data')));
+console.log(getData[0].age);
 
 const getState = () => ({
   labels: [
@@ -24,7 +35,7 @@ const getState = () => ({
     'Over 60'
   ],
   datasets: [{
-    data: [getRandomInt(50, 200), getRandomInt(100, 150), getRandomInt(150, 250),getRandomInt(150, 250),getRandomInt(150, 250)],
+    data: [getRandomInt(50, 200), getRandomInt(100, 150), getRandomInt(150, 250), getRandomInt(150, 250), getRandomInt(150, 250)],
     backgroundColor: [
       '#FF6384', //red
       '#36A2EB', //blue
@@ -51,15 +62,15 @@ export class DoughnutChart extends Component {
       data: getState()
     };
   }
-  
+
   componentWillMount() {
     setInterval(() => {
-      this.setState({data: getState()});
+      this.setState({ data: getState() });
     }, 4000);
   }
-  
+
   render() {
-   
+
     return (
       <Col md={12} lg={12} xl={6}>
         <Card>
@@ -67,7 +78,7 @@ export class DoughnutChart extends Component {
             <div className='card__title'>
               <h5 className='bold-text'>Age Demographic Groups</h5>
             </div>
-            <Doughnut data={this.state.data}/>
+            <Doughnut data={this.state.data} />
           </CardBody>
         </Card>
       </Col>
