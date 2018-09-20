@@ -71,7 +71,7 @@ class SidebarContent extends Component {
     const clothesCategory = <SidebarCategory title="Clothes" icon="store">{clothesCategories}</SidebarCategory>;
     const brandsCategory = <SidebarCategory title="Brands" icon="diamond">{companyLinks}</SidebarCategory>;
 
-    if(userStore&&userStore[0].role==='customer'){
+    if(userStore[0]&&userStore[0].role==='customer'){
       return (
         <div className='sidebar_content'>
   
@@ -94,7 +94,7 @@ class SidebarContent extends Component {
         </div>
       )}
 
-    else if(userStore&&userStore[0].role==='company'){
+    else if(userStore[0]&&userStore[0].role==='company'){
       return (
         <div className='sidebar_content'>
   
