@@ -11,13 +11,9 @@ let userStore = JSON.parse(localStorage.getItem('user'));
 
 class SidebarContent extends Component {
   constructor(props) {
-<<<<<<< HEAD
-    super(props); 
-=======
     super(props);
     console.log("User:");
     console.log(localStorage.getItem("user"));
->>>>>>> 8338e7578aa1d7ac6265dd65172da4d118d28c04
   }
 
   hideSidebar = (e) => {
@@ -75,11 +71,6 @@ class SidebarContent extends Component {
     const clothesCategory = <SidebarCategory title="Clothes" icon="store">{clothesCategories}</SidebarCategory>;
     const brandsCategory = <SidebarCategory title="Brands" icon="diamond">{companyLinks}</SidebarCategory>;
 
-<<<<<<< HEAD
- 
-  render() {
-=======
->>>>>>> 8338e7578aa1d7ac6265dd65172da4d118d28c04
     if(userStore&&userStore[0].role==='customer'){
       return (
         <div className='sidebar_content'>
