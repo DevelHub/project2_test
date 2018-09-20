@@ -9,6 +9,7 @@ export const logInActions = {
     logout,
     register,
     getAll,
+    registerCustom
    
 };
 
@@ -60,8 +61,6 @@ function register(user,history) {
                 user => { 
                     dispatch(success());
                     dispatch(alertActions.success('Registration successful'));
-               
-                    fetch(`http://ec2-54-200-103-68.us-west-2.compute.amazonaws.com:3001/credential`)
                     // history.push('/log_in');
                     
                 },
@@ -70,26 +69,39 @@ function register(user,history) {
                     dispatch(alertActions.error(error.toString()));
                 }
             );
-            logInRequest.registerCustom(user)
-            .then(
-                user => { 
-                    dispatch(success());
-                    dispatch(alertActions.success('Registration successful'));
-                    fetch(`http://ec2-54-200-103-68.us-west-2.compute.amazonaws.com:3001/customer`)
-                    // history.push('/log_in');
-                    
-                },
-                error => {
-                    dispatch(failure(error.toString()));
-                    dispatch(alertActions.error(error.toString()));
-                }
-            );
+          
 
     };
 
     function request(user) { return { type: logInTypes.REGISTER_REQUEST, user } }
     function success(user) { return { type: logInTypes.REGISTER_SUCCESS, user } }
     function failure(error) { return { type: logInTypes.REGISTER_FAILURE, error } }
+}
+function registerCustom(user,history){
+    return dispatch => {
+        dispatch(request(user));
+
+        logInRequest.registerCustom(user)
+            .then(
+                user => { 
+                    dispatch(success());
+                    dispatch(alertActions.success('Registration successful'));
+                    // history.push('/log_in');
+                    
+                },
+                error => {
+                    dispatch(failure(error.toString()));
+                    dispatch(alertActions.error(error.toString()));
+                }
+            );
+          
+
+    };
+
+    function request(user) { return { type: logInTypes.REGISTER_REQUEST, user } }
+    function success(user) { return { type: logInTypes.REGISTER_SUCCESS, user } }
+    function failure(error) { return { type: logInTypes.REGISTER_FAILURE, error } }
+
 }
 
 function getAll() {

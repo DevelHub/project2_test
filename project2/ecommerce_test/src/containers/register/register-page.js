@@ -2,7 +2,7 @@ import React from 'react';
 // import {Register} from './components/Register';
 import { connect } from 'react-redux';
 import {Link} from 'react-router-dom';
-import {logInActions} from '../../../redux/actions/log_in/loginAction';
+import {logInActions} from '../../redux/actions/log_in/loginAction';
 import { withRouter } from 'react-router';
 
 
@@ -16,7 +16,7 @@ constructor(props){
             lastname:'',
             username:'',
             password:'',
-            age: Number
+            age: ''
             
         },
         submitted: false
@@ -46,6 +46,7 @@ handleSubmit(event) {
     const { dispatch } = this.props;
     if (user.firstname && user.lastname && user.username && user.password) {
         dispatch(logInActions.register(user),this.props.history);
+        dispatch(logInActions.registerCustom(user),this.props.histry);
     }
 }
 
@@ -82,7 +83,7 @@ handleSubmit(event) {
                         <label htmlFor="age">Age</label>
                         <input type="age" className="form-control" name="age" value={user.age} onChange={this.handleChange} />
                         {submitted && !user.age && 
-                            <div className="help-block">Age is required and must be number</div>
+                            <div className="help-block">Age is requiredr</div>
                         }
                     </div>
                     <div className={'form-group' + (submitted && !user.username ? ' has-error' : '')}>
@@ -117,7 +118,7 @@ handleSubmit(event) {
 
 
 function mapStateToProps(state) {
-    const  registering = state.registration;
+    const  {registering} = state.registration;
     return {
         registering
     };

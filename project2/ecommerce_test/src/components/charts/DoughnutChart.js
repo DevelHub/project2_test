@@ -8,8 +8,8 @@ function getRandomInt(min, max) {
 }
 
 function fetchData (){
-  const { dispatch } = this.props;
-  dispatch(logInActions.getAll());
+  // const { dispatch } = this.props;
+  // dispatch(logInActions.getAll());
 
   
 

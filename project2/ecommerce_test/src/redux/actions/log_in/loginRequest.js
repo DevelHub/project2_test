@@ -56,12 +56,12 @@ function getAll() {
     };
 
     return fetch(`http://localhost:8000/`, requestOptions)
-    .then(user=>user.json())
-    .then(user=>{
-        localStorage.setItem('user',JSON.stringify(user));
+    // .then(user=>user.json())
+    // .then(user=>{
+    //     localStorage.setItem('user',JSON.stringify(user));
 
-        return user;
-    });
+    //     return user;
+    // });
 }
 
 function register(user) {
@@ -70,12 +70,13 @@ function register(user) {
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify(user)
     };
-    localStorage.setItem('user',user);
 
     return fetch(`http://ec2-54-200-103-68.us-west-2.compute.amazonaws.com:3001/credential`, requestOptions);
 
 }
 function registerCustom(user){
+
+    alert(JSON.stringify(user));
     const requestOptions = {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
