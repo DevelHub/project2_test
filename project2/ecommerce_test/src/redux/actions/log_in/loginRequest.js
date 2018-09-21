@@ -75,15 +75,11 @@ function register(user) {
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify(user)
     };
+    console.log(user);
+    // console.log("got in register");
 
      return fetch(`http://ec2-54-200-103-68.us-west-2.compute.amazonaws.com:3001/credential`, requestOptions)
-     .then(user => user.json())
-        .then(user => {
-            localStorage.setItem('user', JSON.stringify(user));
-            // let loginUser = JSON.parse(localStorage.getItem('user'));
-            // alert(`Succesfuly login as ${loginUser[0].role}  `);
-            return user;
-        }); 
+     
 }
 
 
@@ -95,6 +91,7 @@ function registerCustom(user){
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify(user)
     };
+   
     return fetch(`http://ec2-54-200-103-68.us-west-2.compute.amazonaws.com:3001/customer`, requestOptions);
 
 }

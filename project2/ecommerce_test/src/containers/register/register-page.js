@@ -4,6 +4,7 @@ import { connect } from 'react-redux';
 import {Link} from 'react-router-dom';
 import {logInActions} from '../../redux/actions/log_in/loginAction';
 import { withRouter } from 'react-router';
+// import {Redirect} from 'react-router-dom';
 
 
 class RegisterPage extends React.Component {
@@ -11,19 +12,25 @@ class RegisterPage extends React.Component {
 constructor(props){
     super(props);
     this.state={
-        user:{
-            firstname:'',
-            lastname:'',
-            age: '',
-            gender:'',
+        
+        user: {
             username:'',
             password:'',
-            id:0,
+        },
+        customer:{
+            firstname:'',
+            lastname:'',
+            age:0,
+            gender:'',
+            address:[
+                {type:'billing'},
+                {city:'fl'}
+    
+            ]
         },
         submitted: false,
       
     };
-
     this.handleChange = this.handleChange.bind(this);
     this.handleSubmit = this.handleSubmit.bind(this);
 
@@ -32,39 +39,49 @@ constructor(props){
 handleChange(event) {
     const { name, value } = event.target;
     const { user } = this.state;
-    this.setState({
-        user:{
-            ...user,
-            [name]:value
-        },
-        
-    });
+    const {customer} =this.state;
+    switch(name) {
+        case "username": case "password":
+        this.setState({
+            ...this.state,
+            user: {
+                ...user,
+                [name]: value
+            }
+        }); break;
+        case "firstname": case "lastname": case "age": case "gender": case "userid":
+        this.setState({
+            ...this.state,
+            customer: {
+                ...customer,
+                [name]: value
+            }
+        }); break;
+    }
 }
 
 handleSubmit(event) {
     event.preventDefault();
 
     this.setState({ submitted: true });
-    const { user } = this.state;
+    //const { user } = this.state;
+    const user = this.state.user;
+    user.customer = this.state.customer;
+    // user.address = this.state.customer.address;
     const { dispatch } = this.props;
-    if (user.firstname && user.lastname && user.username && user.password) {
+    if (user.username && user.password) {
         dispatch(logInActions.register(user),this.props.history);
-        let newUser = localStorage.getItem('user');
-        this.setState({
-            user:{
-                ...user,
-                id: newUser.id
-            }
-
-        });
-        dispatch(logInActions.registerCustom(user),this.props.history);
     }
+    // return <Redirect to ='/pages/register/customer'/>
 }
+
 
 
   render() {
     const { registering } = this.props;
-    const { user, submitted, } = this.state;
+    const { submitted } = this.state;
+    const {user} = this.state;
+    const {customer} = this.state;
     return (
       <div className='account'>
         <div className='account_wrapper'>
@@ -76,53 +93,43 @@ handleSubmit(event) {
             </div>
 
             <form name="form" onSubmit={this.handleSubmit}>
-                    <div className={'form-group' + (submitted && !user.firstname ? ' has-error' : '')}>
+                    <div>
                         <label htmlFor="firstname">First Name</label>
-                        <input type="text" className="form-control" name="firstname" value={user.firstname} onChange={this.handleChange} />
-                        {submitted && !user.firstname &&
+                        <input type="text" className="form-control" name="firstname" value={customer.firstname} onChange={this.handleChange} />
+                        {submitted && !customer.firstname &&
                             <div className="help-block">First Name is required</div>
                         }
                     </div>
-                    <div className={'form-group' + (submitted && !user.lastname ? ' has-error' : '')}>
+                    <div>
                         <label htmlFor="lastname">Last Name</label>
-                        <input type="text" className="form-control" name="lastname" value={user.lastname} onChange={this.handleChange} />
-                        {submitted && !user.lastname &&
+                        <input type="text" className="form-control" name="lastname" value={customer.lastname} onChange={this.handleChange} />
+                        {submitted && !customer.lastname &&
                             <div className="help-block">Last Name is required</div>
                         }
                     </div>
-                    <div className={'form-group' + (submitted && !user.age ? ' has-error' : '')}>
+                    <div >
                         <label htmlFor="age">Age</label>
-                        <input type="text" className="form-control" name="age" value={user.age} onChange={this.handleChange} />
-                        {submitted && !user.age && 
+                        <input type="text" className="form-control" name="age" value={customer.age} onChange={this.handleChange} />
+                        {submitted && !customer.age && 
                             <div className="help-block">Age is requiredr</div>
                         }
                     </div>
-                    <div className={'form-group' + (submitted && !user.gender ? ' has-error' : '')}>
+                    <div>
                         <label htmlFor="age">Gender(type male or female)</label>
-                        <input type="text" className="form-control" name="gender" value={user.gender} onChange={this.handleChange} />
-                        {submitted && !user.age && 
+                        <input type="text" className="form-control" name="gender" value={customer.gender} onChange={this.handleChange} />
+                        {submitted && !customer.age && 
                             <div className="help-block">Gender is requiredr</div>
                         }
                     </div>
 
-                    {/* <div className={'form-group' + (submitted && !user.gender ? ' has-error' : '')}>
-                        <label htmlFor="gender">Gender</label>
-                        <p>Male</p>
-                        <input type="radio" className="form-control" name="gender" value="male" checked={this.gender ===user.gender} onChange={this.handleChange} />
-                        <p>Female</p>
-                        <input type="radio" className="form-control" name="gender" value="female" checked={this.gender ===user.gender} onChange={this.handleChange} />
-                       
-                    </div> */}
-
-
-                    <div className={'form-group' + (submitted && !user.username ? ' has-error' : '')}>
+                    <div>
                         <label htmlFor="username">username</label>
                         <input type="text" className="form-control" name="username" value={user.username} onChange={this.handleChange} />
                         {submitted && !user.username &&
                             <div className="help-block">username is required</div>
                         }
                     </div>
-                    <div className={'form-group' + (submitted && !user.password ? ' has-error' : '')}>
+                    <div>
                         <label htmlFor="password">Password</label>
                         <input type="password" className="form-control" name="password" value={user.password} onChange={this.handleChange} />
                         {submitted && !user.password &&
@@ -132,8 +139,11 @@ handleSubmit(event) {
                     
 
                     <div className="form-group">
-                        <button className="btn btn-primary">Register</button>
+                        <button className="btn btn-primary" >Register</button>
                         {registering}
+                         {/* <Link to="/pages/register/customer" onSubmit={this.handleSubmit} className="btn btn-link">Next</Link>  */}
+                        
+                        
                         <Link to="/log_in" className="btn btn-link">Cancel</Link>
                     </div>
                 </form>
