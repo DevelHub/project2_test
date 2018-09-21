@@ -1,51 +1,41 @@
-import React, { PureComponent } from 'react';
+import React, { Component } from 'react';
 import { Card, CardBody, Col } from 'reactstrap';
 import { BarChart, XAxis, YAxis, Bar, Cell, ResponsiveContainer, CartesianGrid, Tooltip, Legend } from 'recharts';
 
 
-// number of User is test data
+let data=[];
+function getData(){
+    fetch(`http://ec2-54-200-103-68.us-west-2.compute.amazonaws.com:3001/subscription`, {
+  headers: {
+    "Content-Type": "application/json"
+  },
+  method: "GET"
+})
+  .then(resp => resp.json())
+  .then(resp => {
+     for(let i=0; i<resp.length;i++){
+         data.push(resp[i]);
+       
+     }
+    console.log(data[0]);
+    return data;
+  });//end fetch
 
-// fetch(`http://ec2-54-200-103-68.us-west-2.compute.amazonaws.com:3001/customer`, {
-//   headers: {
-//     "Content-Type": "application/json"
-//   },
-//   method: "GET"
-// })
-//   .then(resp => resp.json())
-//   .then(resp => {
-//     // localStorage.setItem('data', JSON.stringify(resp));
-//     // console.log(resp.length);
-//     for (let i = 0; i < resp.length; i++) {
-//       if (resp[i].age < 20) {
-//         ageGroupOne += 1;
-//       }
-//       else if (resp[i].age < 31) {
-//         ageGroupTwo += 1;
-//       }
-//       else if (resp[i].age < 46) {
-//         ageGroupThree += 1;
-//       }
-//       else if (resp[i].age < 61) {
-//         ageGroupFour += 1;
-//       }
-//       else {
-//         ageGroupFive += 1;
-//       }
-//     }//end for
-//   });//end fetch
+}
+getData();
 
-const data = [
-    { name: 'UNI-CLO', numOfSubscriber: 50 },
-    { name: 'OLD-NAVY', numOfSubscriber: 60 },
-    { name: 'H&M', numOfSubscriber: 40 },
-    { name: 'FOREVER21', numOfSubscriber: 60 },
-    { name: 'ZARA', numOfSubscriber: 20 },
-    { name: 'BANANA-REPUBLIC', numOfSubscriber: 100 }
-]
+// let data = [
+//     // { name: 'UNI-CLO', numOfSubscriber: 50 },
+//     // { name: 'OLD-NAVY', numOfSubscriber: 60 },
+//     // { name: 'H&M', numOfSubscriber: 40 },
+//     // { name: 'FOREVER21', numOfSubscriber: 60 },
+//     // { name: 'ZARA', numOfSubscriber: 20 },
+//     // { name: 'BANANA-REPUBLIC', numOfSubscriber: 100 }
+    
+// ]
 
 
-
-export class TotalSubscribers extends PureComponent {
+export class TotalSubscribers extends Component {
     constructor(props) {
         super(props);
         this.state = {
@@ -66,7 +56,7 @@ export class TotalSubscribers extends PureComponent {
     render() {
         const { activeIndex, data } = this.state;
         const activeItem = data[activeIndex];
-        const { t } = this.props;
+        
 
         return (
 
@@ -79,10 +69,11 @@ export class TotalSubscribers extends PureComponent {
                         </div>
                         <div className='dashboard_total'>
                             <p className='dashboard_total-stat'>
-                                {/* {(activeItem.numOfSubscriber)} */}
-                                {(activeItem.name)}
-                                {("   Subscribers = ")}
-                                {(activeItem.numOfSubscriber)}
+                               
+                                {/* {(activeItem.name)} */}
+                                {/* {data[activeIndex].name} */}
+                                {/* {("   Subscribers = ")} */}
+                                {/* {(activeItem.total)} */}
                             </p>
                             <ResponsiveContainer height={150} className='dashboard_chart-container'>
                                 <BarChart data={data}>
@@ -90,7 +81,7 @@ export class TotalSubscribers extends PureComponent {
                                     <YAxis />
                                     <CartesianGrid strokeDasharray="3 3" />
 
-                                    <Bar dataKey='numOfSubscriber' onClick={this.handleClick}>
+                                    <Bar dataKey='total' onClick={this.handleClick}>
                                         {
                                             // change color when the mouse cursor clicks the bar
                                             data.map((entry, index) => (

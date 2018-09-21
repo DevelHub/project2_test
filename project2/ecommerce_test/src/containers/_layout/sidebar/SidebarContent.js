@@ -16,11 +16,6 @@ else{
 let userStore = JSON.parse(localStorage.getItem('user'));
 
 
-
-
-
-// let userStore ;
-
 class SidebarContent extends Component {
   constructor(props) {
     super(props);

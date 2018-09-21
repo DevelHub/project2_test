@@ -3,9 +3,6 @@ import { Card, CardBody, Col } from 'reactstrap';
 import { Doughnut } from 'react-chartjs-2';
 import { logInActions } from '../../redux/actions/log_in/loginAction';
 
-function getRandomInt(min, max) {
-  return Math.floor(Math.random() * (max - min + 1)) + min;
-}
 
 let ageGroupOne = 0;
 let ageGroupTwo = 0;
@@ -15,7 +12,6 @@ let ageGroupFive = 0;
 
 
 
-// localStorage.removeItem('data');
 
 fetch(`http://ec2-54-200-103-68.us-west-2.compute.amazonaws.com:3001/customer`, {
   headers: {
@@ -25,8 +21,7 @@ fetch(`http://ec2-54-200-103-68.us-west-2.compute.amazonaws.com:3001/customer`, 
 })
   .then(resp => resp.json())
   .then(resp => {
-    // localStorage.setItem('data', JSON.stringify(resp));
-    // console.log(resp.length);
+    
     for (let i = 0; i < resp.length; i++) {
       if (resp[i].age < 20) {
         ageGroupOne += 1;
