@@ -14,12 +14,14 @@ constructor(props){
         user:{
             firstname:'',
             lastname:'',
+            age: '',
+            gender:'',
             username:'',
             password:'',
-            age: ''
-            
+            id:0,
         },
-        submitted: false
+        submitted: false,
+      
     };
 
     this.handleChange = this.handleChange.bind(this);
@@ -31,10 +33,11 @@ handleChange(event) {
     const { name, value } = event.target;
     const { user } = this.state;
     this.setState({
-        user: {
+        user:{
             ...user,
-            [name]: value
-        }
+            [name]:value
+        },
+        
     });
 }
 
@@ -46,6 +49,14 @@ handleSubmit(event) {
     const { dispatch } = this.props;
     if (user.firstname && user.lastname && user.username && user.password) {
         dispatch(logInActions.register(user),this.props.history);
+        let newUser = localStorage.getItem('user');
+        this.setState({
+            user:{
+                ...user,
+                id: newUser.id
+            }
+
+        });
         dispatch(logInActions.registerCustom(user),this.props.history);
     }
 }
@@ -53,7 +64,7 @@ handleSubmit(event) {
 
   render() {
     const { registering } = this.props;
-    const { user, submitted } = this.state;
+    const { user, submitted, } = this.state;
     return (
       <div className='account'>
         <div className='account_wrapper'>
@@ -81,16 +92,34 @@ handleSubmit(event) {
                     </div>
                     <div className={'form-group' + (submitted && !user.age ? ' has-error' : '')}>
                         <label htmlFor="age">Age</label>
-                        <input type="age" className="form-control" name="age" value={user.age} onChange={this.handleChange} />
+                        <input type="text" className="form-control" name="age" value={user.age} onChange={this.handleChange} />
                         {submitted && !user.age && 
                             <div className="help-block">Age is requiredr</div>
                         }
                     </div>
+                    <div className={'form-group' + (submitted && !user.gender ? ' has-error' : '')}>
+                        <label htmlFor="age">Gender(type male or female)</label>
+                        <input type="text" className="form-control" name="gender" value={user.gender} onChange={this.handleChange} />
+                        {submitted && !user.age && 
+                            <div className="help-block">Gender is requiredr</div>
+                        }
+                    </div>
+
+                    {/* <div className={'form-group' + (submitted && !user.gender ? ' has-error' : '')}>
+                        <label htmlFor="gender">Gender</label>
+                        <p>Male</p>
+                        <input type="radio" className="form-control" name="gender" value="male" checked={this.gender ===user.gender} onChange={this.handleChange} />
+                        <p>Female</p>
+                        <input type="radio" className="form-control" name="gender" value="female" checked={this.gender ===user.gender} onChange={this.handleChange} />
+                       
+                    </div> */}
+
+
                     <div className={'form-group' + (submitted && !user.username ? ' has-error' : '')}>
-                        <label htmlFor="username">Username</label>
+                        <label htmlFor="username">username</label>
                         <input type="text" className="form-control" name="username" value={user.username} onChange={this.handleChange} />
                         {submitted && !user.username &&
-                            <div className="help-block">Username is required</div>
+                            <div className="help-block">username is required</div>
                         }
                     </div>
                     <div className={'form-group' + (submitted && !user.password ? ' has-error' : '')}>

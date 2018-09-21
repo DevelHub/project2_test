@@ -61,7 +61,8 @@ function register(user,history) {
                 user => { 
                     dispatch(success());
                     dispatch(alertActions.success('Registration successful'));
-                    // history.push('/log_in');
+                     history.push('/log_in');
+                    // alert("register done")
                     
                 },
                 error => {

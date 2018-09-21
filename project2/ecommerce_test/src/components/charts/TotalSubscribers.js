@@ -4,6 +4,36 @@ import { BarChart, XAxis, YAxis, Bar, Cell, ResponsiveContainer, CartesianGrid, 
 
 
 // number of User is test data
+
+// fetch(`http://ec2-54-200-103-68.us-west-2.compute.amazonaws.com:3001/customer`, {
+//   headers: {
+//     "Content-Type": "application/json"
+//   },
+//   method: "GET"
+// })
+//   .then(resp => resp.json())
+//   .then(resp => {
+//     // localStorage.setItem('data', JSON.stringify(resp));
+//     // console.log(resp.length);
+//     for (let i = 0; i < resp.length; i++) {
+//       if (resp[i].age < 20) {
+//         ageGroupOne += 1;
+//       }
+//       else if (resp[i].age < 31) {
+//         ageGroupTwo += 1;
+//       }
+//       else if (resp[i].age < 46) {
+//         ageGroupThree += 1;
+//       }
+//       else if (resp[i].age < 61) {
+//         ageGroupFour += 1;
+//       }
+//       else {
+//         ageGroupFive += 1;
+//       }
+//     }//end for
+//   });//end fetch
+
 const data = [
     { name: 'UNI-CLO', numOfSubscriber: 50 },
     { name: 'OLD-NAVY', numOfSubscriber: 60 },
