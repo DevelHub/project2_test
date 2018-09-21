@@ -1,6 +1,6 @@
 import React, {PureComponent, Component} from 'react';
 import {Col, Container, Row} from 'reactstrap';
-import CartCard from './components/CartCard';
+import {CartCard} from './components/CartCard';
 
 export  class CartPage extends Component {
   render() {

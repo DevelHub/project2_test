@@ -1,11 +1,11 @@
-import React, {PureComponent} from 'react';
+import React, {Component} from 'react';
 import {Card, CardBody, Col} from 'reactstrap';
 import cart_list from './test';
 import Table from '../../../components/table/Table';
 import DeleteForeverIcon from 'mdi-react/DeleteForeverIcon';
 import CartPurchase from './CartPurchase';
 
-export default class CartCard extends PureComponent {
+export class CartCard extends Component {
   render() {
     return (
       <Col md={12} lg={12}>
@@ -21,7 +21,6 @@ export default class CartCard extends PureComponent {
                 <th>Name</th>
                 <th>Quantity</th>
                 <th>Price</th>
-                <th>Tax</th>
                 <th>Total</th>
                 <th/>
               </tr>
@@ -35,7 +34,6 @@ export default class CartCard extends PureComponent {
                   </td>
                   <td>{ct.quantity}</td>
                   <td>${ct.price.toFixed(2)}</td>
-                  <td>${ct.tax.toFixed(2)}</td>
                   <td>${ct.total.toFixed(2)}</td>
                   <td>
                     <button className='cart_table-btn'>

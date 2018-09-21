@@ -23,9 +23,20 @@ constructor(props){
             age:0,
             gender:'',
             address:[
-                {type:'billing'},
-                {city:'fl'}
-    
+                // billing:{
+                // type: '',
+                // city:'',
+                // state:'',
+                // zipcode:0,
+                // country:'',
+                // },
+                // shipping:{
+                //     shippingType:{type:"shipping"}
+                // }
+                {type:"billing"},
+                {city:"fl"}
+                
+                
             ]
         },
         submitted: false,
@@ -40,6 +51,8 @@ handleChange(event) {
     const { name, value } = event.target;
     const { user } = this.state;
     const {customer} =this.state;
+    const {address} =this.state;
+    
     switch(name) {
         case "username": case "password":
         this.setState({
@@ -57,6 +70,14 @@ handleChange(event) {
                 [name]: value
             }
         }); break;
+        // case "type": case"city": case "state": case "zipcode": case"country":
+        // this.setState({
+        //     ...this.state,
+        //         address:[{
+        //             ...address,
+        //             [name]: value
+        //         }]
+        //     });break;
     }
 }
 
@@ -67,8 +88,10 @@ handleSubmit(event) {
     //const { user } = this.state;
     const user = this.state.user;
     user.customer = this.state.customer;
+    // user.customer.address=this.state.address;
     // user.address = this.state.customer.address;
     const { dispatch } = this.props;
+
     if (user.username && user.password) {
         dispatch(logInActions.register(user),this.props.history);
     }
@@ -93,6 +116,7 @@ handleSubmit(event) {
             </div>
 
             <form name="form" onSubmit={this.handleSubmit}>
+                    <h4 >Credentials</h4>
                     <div>
                         <label htmlFor="firstname">First Name</label>
                         <input type="text" className="form-control" name="firstname" value={customer.firstname} onChange={this.handleChange} />
@@ -115,13 +139,56 @@ handleSubmit(event) {
                         }
                     </div>
                     <div>
-                        <label htmlFor="age">Gender(type male or female)</label>
+                        <label htmlFor="age">Gender(male or female)</label>
                         <input type="text" className="form-control" name="gender" value={customer.gender} onChange={this.handleChange} />
                         {submitted && !customer.age && 
                             <div className="help-block">Gender is requiredr</div>
                         }
                     </div>
+                    <br></br>
 
+                    {/* <h4>Address</h4>
+                    <div>
+                        <label htmlFor="type">Type(home or shipping)</label>
+                        <input type="text" className="form-control" name="type" value={customer.address.billing.type} onChange={this.handleChange} />
+                        {submitted && !customer.address.type && 
+                            <div className="help-block">type is requiredr</div>
+                        }
+                    </div>
+
+                     <div>
+                        <label htmlFor="type">City</label>
+                        <input type="text" className="form-control" name="city" value={customer.address.billing.city} onChange={this.handleChange} />
+                        {submitted && !customer.address.city && 
+                            <div className="help-block">city is requiredr</div>
+                        }
+                    </div>
+
+                     <div>
+                        <label htmlFor="type">State</label>
+                        <input type="text" className="form-control" name="state" value={customer.address.billing.state} onChange={this.handleChange} />
+                        {submitted && !customer.address.state && 
+                            <div className="help-block">state is requiredr</div>
+                        }
+                    </div>
+
+                     <div>
+                        <label htmlFor="type">Country</label>
+                        <input type="text" className="form-control" name="state" value={customer.address.billing.country} onChange={this.handleChange} />
+                        {submitted && !customer.address.state && 
+                            <div className="help-block">country is requiredr</div>
+                        }
+                    </div>
+
+                    <div>
+                        <label htmlFor="type">Zipcode</label>
+                        <input type="text" className="form-control" name="zipcode" value={customer.address.billing.zipcode} onChange={this.handleChange} />
+                        {submitted && !customer.address.zipcode && 
+                            <div className="help-block">zipcode is requiredr</div>
+                        }
+                    </div> */}
+                    <br></br>
+                    <h4>Username & ID</h4>
                     <div>
                         <label htmlFor="username">username</label>
                         <input type="text" className="form-control" name="username" value={user.username} onChange={this.handleChange} />
@@ -136,6 +203,7 @@ handleSubmit(event) {
                             <div className="help-block">Password is required</div>
                         }
                     </div>
+                    <br></br>
                     
 
                     <div className="form-group">
@@ -166,5 +234,3 @@ function mapStateToProps(state) {
 const connectedRegisterPage = withRouter(connect(mapStateToProps)(RegisterPage));
 export { connectedRegisterPage as RegisterPage };
 
-// if you want to add select, date-picker and time-picker in your app you need to uncomment the first
-// four lines in /scss/components/form.scss to add styles
