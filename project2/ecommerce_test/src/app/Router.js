@@ -16,6 +16,7 @@ import {PaymentPage} from '../containers/payment/payment-page';
 import {RegisterPage} from '../containers/register/register-page';
 import {Wishlist} from '../containers/wishlist/wishlist';
 
+
 const Router = () => (
   <MainWrapper>
     <main>

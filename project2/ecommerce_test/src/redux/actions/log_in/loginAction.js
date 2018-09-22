@@ -61,7 +61,9 @@ function register(user,history) {
                 user => { 
                     dispatch(success());
                     dispatch(alertActions.success('Registration successful'));
+                    alert("Register Success");
                     // history.push('/log_in');
+                    // alert("register done")
                     
                 },
                 error => {
@@ -77,7 +79,7 @@ function register(user,history) {
     function success(user) { return { type: logInTypes.REGISTER_SUCCESS, user } }
     function failure(error) { return { type: logInTypes.REGISTER_FAILURE, error } }
 }
-function registerCustom(user,history){
+function registerCustom(user){
     return dispatch => {
         dispatch(request(user));
 

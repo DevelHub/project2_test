@@ -5,15 +5,23 @@ import store from '../../../app/store';
 import {connect} from 'react-redux';
 import { setCurrentProduct, setProductList, setAllProducts } from '../../../redux/actions/productActions';
 
+let isGuest = false;
 
+if(!localStorage.getItem('user')){
+  isGuest = true;
+}
+else{
+  isGuest = false;
+ 
+}
 let userStore = JSON.parse(localStorage.getItem('user'));
 
-export class SidebarContent extends Component {
+
+class SidebarContent extends Component {
   constructor(props) {
     super(props);
-    console.log("User:");
-    console.log(localStorage.getItem("user"));
-    // this.fetchAllGroupedByType()
+    // console.log("User:");
+    // console.log(localStorage.getItem("user"));
   }
 
   hideSidebar = (e) => {
@@ -37,9 +45,6 @@ export class SidebarContent extends Component {
     let all = store.getState().product.allProducts;
     let productList = [];
 
-    console.log("all");
-    console.log(all);
-    
     for(let i = 0; i < all[type].length; i++)
     {
       if(all[type][i].gender === gender)
@@ -47,9 +52,7 @@ export class SidebarContent extends Component {
         productList.push(all[type][i]);
       }
     }
-    console.log("productList before dispatch");
-    console.log(productList);
-    alert("breakpoint");
+
     store.dispatch(setProductList(productList));
   }
 
@@ -81,7 +84,7 @@ export class SidebarContent extends Component {
     const clothesCategory = <SidebarCategory title="Clothes" icon="store">{clothesCategories}</SidebarCategory>;
     const brandsCategory = <SidebarCategory title="Brands" icon="diamond">{companyLinks}</SidebarCategory>;
 
-    if(userStore&&userStore[0].role==='customer'){
+    if(!isGuest&&userStore[0]&&userStore[0].role==='customer'){
       return (
         <div className='sidebar_content'>
   
@@ -104,7 +107,7 @@ export class SidebarContent extends Component {
         </div>
       )}
 
-    else if(userStore&&userStore[0].role==='company'){
+    else if(!isGuest&&userStore[0]&&userStore[0].role==='company'){
       return (
         <div className='sidebar_content'>
   

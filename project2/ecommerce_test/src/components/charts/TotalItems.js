@@ -3,15 +3,36 @@ import { Card, CardBody, Col } from 'reactstrap';
 import { BarChart, XAxis, YAxis, Bar, Cell, ResponsiveContainer, CartesianGrid, Tooltip, Legend } from 'recharts';
 
 
-// items is test data
-const data = [
-    { name: 'UNI-CLO', items: 50 },
-    { name: 'OLD-NAVY', items: 60 },
-    { name: 'H&M', items: 40 },
-    { name: 'FOREVER21', itemes: 60 },
-    { name: 'ZARA', items: 20 },
-    { name: 'BANANA-REPUBLIC', items: 1200 }
-]
+let data=[];
+function getData(){
+    fetch(`http://ec2-54-200-103-68.us-west-2.compute.amazonaws.com:3001/item/total`, {
+  headers: {
+    "Content-Type": "application/json"
+  },
+  method: "GET"
+})
+  .then(resp => resp.json())
+  .then(resp => {
+     for(let i=0; i<resp.length;i++){
+         data.push(resp[i]);
+       
+     }
+    
+    return data;
+  });//end fetch
+
+}
+getData();
+
+
+// const data = [
+//     { name: 'UNI-CLO', items: 50 },
+//     { name: 'OLD-NAVY', items: 60 },
+//     { name: 'H&M', items: 40 },
+//     { name: 'FOREVER21', itemes: 60 },
+//     { name: 'ZARA', items: 20 },
+//     { name: 'BANANA-REPUBLIC', items: 1200 }
+// ]
 
 
 export class TotalItems extends PureComponent {
@@ -49,9 +70,9 @@ export class TotalItems extends PureComponent {
                         <div className='dashboard_total'>
                             <p className='dashboard_total-stat'>
                                 {/* {(activeItem.items)} */}
-                                {(activeItem.name)}
+                                {/* {(activeItem.name)} */}
                                 {("   Total Number of Items = ")}
-                                {(activeItem.items)}
+                                {/* {(activeItem.items)} */}
                             </p>
                             <ResponsiveContainer height={150} className='dashboard_chart-container'>
                                 <BarChart data={data}>
@@ -59,12 +80,11 @@ export class TotalItems extends PureComponent {
                                     <YAxis />
                                     <CartesianGrid strokeDasharray="3 3" />
 
-                                    <Bar dataKey='items' onClick={this.handleClick}>
+                                    <Bar dataKey='total' onClick={this.handleClick}>
                                         {
                                             // change color when the mouse cursor clicks the bar
                                             data.map((entry, index) => (
                                                 <Cell cursor='pointer' fill={index === activeIndex ? '#4ce1b6' : '#c88ffa'}
-
                                                     key={`cell-${index}`} />
                                             ))
                                         }

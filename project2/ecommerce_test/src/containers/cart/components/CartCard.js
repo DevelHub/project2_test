@@ -1,11 +1,37 @@
-import React, {PureComponent} from 'react';
+import React, {Component} from 'react';
 import {Card, CardBody, Col} from 'reactstrap';
 import cart_list from './test';
 import Table from '../../../components/table/Table';
 import DeleteForeverIcon from 'mdi-react/DeleteForeverIcon';
 import CartPurchase from './CartPurchase';
 
-export default class CartCard extends PureComponent {
+
+
+
+// let data=[];
+// let getCustomerId = localStorage.getItem('user');
+// // getCustomerId.
+// function getData(){
+//     fetch(`http://ec2-54-200-103-68.us-west-2.compute.amazonaws.com:3001/cart/get/${customerId}`, {
+//   headers: {
+//     "Content-Type": "application/json"
+//   },
+//   method: "GET"
+// })
+//   .then(resp => resp.json())
+//   .then(resp => {
+//      for(let i=0; i<resp.length;i++){
+//          data.push(resp[i]);
+       
+//      }
+    
+//     return data;
+//   });//end fetch
+
+// }
+// getData();
+
+export class CartCard extends Component {
   render() {
     return (
       <Col md={12} lg={12}>
@@ -21,7 +47,6 @@ export default class CartCard extends PureComponent {
                 <th>Name</th>
                 <th>Quantity</th>
                 <th>Price</th>
-                <th>Tax</th>
                 <th>Total</th>
                 <th/>
               </tr>
@@ -35,7 +60,6 @@ export default class CartCard extends PureComponent {
                   </td>
                   <td>{ct.quantity}</td>
                   <td>${ct.price.toFixed(2)}</td>
-                  <td>${ct.tax.toFixed(2)}</td>
                   <td>${ct.total.toFixed(2)}</td>
                   <td>
                     <button className='cart_table-btn'>

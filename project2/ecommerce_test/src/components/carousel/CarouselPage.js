@@ -1,10 +1,8 @@
 import React, { Component } from 'react';
 import { Col, Container, Row } from 'reactstrap';
-import {TotalItems} from '../../components/charts/TotalItems';
-import { TotalSubscribers } from '../../components/charts/TotalSubscribers';
 import {Carousel,CarouselItem,CarouselControl, CarouselIndicators,CarouselCaption} from 'reactstrap';
-import './company.css';
-import {DoughnutChart} from '../../components/charts/DoughnutChart';
+// import './company.css';
+
   
 
 
@@ -30,7 +28,7 @@ const items = [
     }
   ];
   
-  export class CompanyPage extends Component {
+  export class CarouselPage extends Component {
     constructor(props) {
       super(props);
       this.state = { activeIndex: 0 };
@@ -97,31 +95,6 @@ const items = [
             <CarouselControl direction="prev" directionText="Previous" onClickHandler={this.previous} />
             <CarouselControl direction="next" directionText="Next" onClickHandler={this.next} />
           </Carousel>
-
-
-          <Container className='dashboard'>
-                <Row>
-                    <Col md={12}>
-                        <h2 id="header-company">Welcome to Company Page</h2>
-                        <h3 className="header-stat">statistics: Subscribers, Items, and Reviews</h3>
-                    </Col>
-                </Row>
-
-                <Row>
-                    <TotalSubscribers />
-                    <TotalItems />
-                    <DoughnutChart/>
-
-                </Row>
-
-                <Row>
-                    {/* <TotalItemsTable/> */}
-                </Row>
-
-
-
-            </Container>
-
 
         </div> //whole return wrapper
       );

@@ -5,6 +5,12 @@ import {Field, reduxForm} from 'redux-form';
 import {Link} from 'react-router-dom';
 
 class CartPurchase extends PureComponent {
+
+  handleSubmit(event){
+    event.preventDefault();
+
+
+  }
   
   render() {
     const {handleSubmit} = this.props;
