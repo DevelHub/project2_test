@@ -5,23 +5,9 @@ import store from '../../../app/store';
 import {connect} from 'react-redux';
 import { setCurrentProduct, setProductList, setAllProducts } from '../../../redux/actions/productActions';
 
-let isGuest = false;
-
-if(!localStorage.getItem('user')){
-  isGuest = true;
-}
-else{
-  isGuest = false;
- 
-}
-let userStore = JSON.parse(localStorage.getItem('user'));
-
-
 class SidebarContent extends Component {
   constructor(props) {
     super(props);
-    console.log("User:");
-    console.log(localStorage.getItem("user"));
   }
 
   hideSidebar = (e) => {
@@ -56,8 +42,22 @@ class SidebarContent extends Component {
     store.dispatch(setProductList(productList));
   }
 
+  logout()
+  {
+    this.props.onClick();
+    alert("You are now Logged out. Called from SidebarContent.logout()");
+    localStorage.removeItem("user");
+  }
+
   render() 
   {
+    const user = JSON.parse(localStorage.getItem("user"));
+    let role = "guest";
+    if(user)
+    {
+      role = user[0].role.toLowerCase();
+    }
+
     const mensCategoryLinks = [];
     const womensCategoryLinks = [];
 
@@ -92,12 +92,6 @@ class SidebarContent extends Component {
       }
     }
 
-    // for(let i = 0; i < types.length; i++)
-    // {
-    //   mensCategoryLinks.push(<SidebarLink title={types[i]} gender="men" route="/pages/clothes/" onClick={this.setMenList}/>);
-    //   womensCategoryLinks.push(<SidebarLink title={types[i]} gender="women" route="/pages/clothes/" onClick={this.setWomenList}/>);
-    // }
-
     const companyLinks = [];
     companyLinks.push(<SidebarLink title='UNI-CLO' route='/pages/company/' onClick={this.hideSidebar} />);
     companyLinks.push(<SidebarLink title='OLD-NAVY' route='/pages/company/' onClick={this.hideSidebar} />);
@@ -113,7 +107,8 @@ class SidebarContent extends Component {
     const clothesCategory = <SidebarCategory title="Clothes" icon="store">{clothesCategories}</SidebarCategory>;
     const brandsCategory = <SidebarCategory title="Brands" icon="diamond">{companyLinks}</SidebarCategory>;
 
-    if(!isGuest&&userStore[0]&&userStore[0].role==='customer'){
+    if(role === "customer") // customer view. needs logout, categories and brands
+    {
       return (
         <div className='sidebar_content'>
   
@@ -129,14 +124,14 @@ class SidebarContent extends Component {
           <ul className='sidebar_block'>     
             <SidebarCategory title='Account' icon='user'>
               <SidebarLink title='Profile' route='/pages/profile' onClick={this.hideSidebar} />
-                {/* <SidebarLink title='Register Item' route='/' onClick={this.hideSidebar} /> */}
-              </SidebarCategory>
-            <SidebarLink title='Log In' icon='exit' route='/log_in' onClick={this.hideSidebar} />
+            </SidebarCategory>
+            <SidebarLink title='Log Out' icon='exit' route='/pages/home' onClick={this.logout} />
           </ul>
         </div>
       )}
 
-    else if(!isGuest&&userStore[0]&&userStore[0].role==='company'){
+    else if(role === "company") // company view. needs logout, and categories. no brands
+    {
       return (
         <div className='sidebar_content'>
   
@@ -146,24 +141,21 @@ class SidebarContent extends Component {
 
           <ul className='sidebar_block'>
             {clothesCategory}
-            {brandsCategory}
+            <SidebarLink title='Register Item' route='/' onClick={this.hideSidebar} />
           </ul>
   
-          {/* <ul className='sidebar_block'> */}          
-            <SidebarCategory title='Account' icon='user'>
-              <SidebarLink title='Profile' route='/pages/profile' onClick={this.hideSidebar} />
-              <SidebarLink title='Register Item' route='/' onClick={this.hideSidebar} />
-            </SidebarCategory>
-            <SidebarLink title='Log In' icon='exit' route='/log_in' onClick={this.hideSidebar} />
-          {/* </ul> */}
+          <ul className='sidebar_block'>          
+            <SidebarLink title='Log Out' icon='exit' route='/pages/home' onClick={this.logout} />
+          </ul>
         </div>
       )
     }
-    else{
+    else //guest view. needs login categories and brands
+    {
       return (
         <div className='sidebar_content'>
           <ul className='sidebar_block'>
-            <SidebarLink title='Home' icon='home' route='/pages/customer' onClick={this.hideSidebar} />
+            <SidebarLink title='Home' icon='home' route='/pages/home' onClick={this.hideSidebar} />
           </ul>
 
           <ul className='sidebar_block'>
@@ -172,10 +164,6 @@ class SidebarContent extends Component {
           </ul>
   
           <ul className='sidebar_block'>
-            {/* <SidebarCategory title='Account' icon='user'>
-              <SidebarLink title='Profile' route='/pages/profile' onClick={this.hideSidebar} />
-              <SidebarLink title='Register Item' route='/' onClick={this.hideSidebar} />
-            </SidebarCategory> */}
             <SidebarLink title='Log In' icon='exit' route='/log_in' onClick={this.hideSidebar} />
           </ul>
         </div>
