@@ -16,8 +16,28 @@
     margin: 0 auto;
 }
 
+.infoCols{
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+}
+
 .previousPurchases{
     width: 90%;
     min-height: 10em;
     margin: 0 auto;
 }
+
+.purchase{
+    width: 100%;
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr;
+    margin-bottom: 1em;
+    padding-bottom: 1em;
+    border-bottom: 1px solid #606060;
+}
+
+.pcol{
+    width: 100%;
+    text-align: center;
+}
+

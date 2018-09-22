@@ -20,8 +20,8 @@ let userStore = JSON.parse(localStorage.getItem('user'));
 class SidebarContent extends Component {
   constructor(props) {
     super(props);
-    // console.log("User:");
-    // console.log(localStorage.getItem("user"));
+    console.log("User:");
+    console.log(localStorage.getItem("user"));
   }
 
   hideSidebar = (e) => {
@@ -63,8 +63,6 @@ class SidebarContent extends Component {
 
     let types = this.props.typesList;
     let all = this.props.allProducts;
-    console.log("all:");
-    console.log(all);
     
     for(let t = 0; t < types.length; t++)
     {
