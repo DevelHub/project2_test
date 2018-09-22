@@ -15,14 +15,14 @@ export class AccountComponent extends React.Component
             <div className="accountComponent">
                 <h3>Account Info</h3><hr/>
                 <div className="infoCols">
-                    <div>
+                    <div className="pcol">
                         <p>First Name:</p>
                         <p>Last Name:</p>
                         <p>Username:</p>
                         <p>Email:</p>
                     </div>
 
-                    <div>
+                    <div className="pcol">
                         <p>{firstname}</p>
                         <p>{lastname}</p>
                         <p>{username}</p>
