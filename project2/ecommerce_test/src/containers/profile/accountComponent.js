@@ -30,7 +30,7 @@ export class AccountComponent extends React.Component
                 <p>Last Name:{data.lastname}</p>
                 <p>Username:{data.username}</p>
                 <p>Email:{data.email}</p>
-                <button className="btn btn-primary">Edit</button>
+                {/* <button className="btn btn-primary">Edit</button> */}
             </div>
         )
     }
