@@ -64,8 +64,6 @@ export class ItemsPage extends React.Component
 }
 
 const mapStateToProps = (state) => {
-    console.log("state passed into mapstatetoprops");
-    console.log(state);
     return {productList: state.product.productList};
 }
   

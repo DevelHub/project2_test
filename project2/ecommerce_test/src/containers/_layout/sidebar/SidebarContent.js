@@ -62,12 +62,43 @@ class SidebarContent extends Component {
     const womensCategoryLinks = [];
 
     let types = this.props.typesList;
+    let all = this.props.allProducts;
+    console.log("all:");
+    console.log(all);
     
-    for(let i = 0; i < types.length; i++)
+    for(let t = 0; t < types.length; t++)
     {
-      mensCategoryLinks.push(<SidebarLink title={types[i]} gender="men" route="/pages/clothes/" onClick={this.setMenList}/>);
-      womensCategoryLinks.push(<SidebarLink title={types[i]} gender="women" route="/pages/clothes/" onClick={this.setWomenList}/>);
+      if(all[types[t]].length != 0)
+      {
+        let men = false;
+        let women = false;
+        for(let i = 0; i < all[types[t]].length; i++)
+        {
+          if(all[types[t]][i].gender === "men")
+          {
+            men = true;
+          }
+          else if(all[types[t]][i].gender === "women")
+          {
+            women = true;
+          }
+        }
+        if(men)
+        {
+          mensCategoryLinks.push(<SidebarLink title={types[t]} gender="men" route="/pages/clothes/" onClick={this.setMenList}/>);
+        }
+        if(women)
+        {
+          womensCategoryLinks.push(<SidebarLink title={types[t]} gender="women" route="/pages/clothes/" onClick={this.setWomenList}/>);
+        }
+      }
     }
+
+    // for(let i = 0; i < types.length; i++)
+    // {
+    //   mensCategoryLinks.push(<SidebarLink title={types[i]} gender="men" route="/pages/clothes/" onClick={this.setMenList}/>);
+    //   womensCategoryLinks.push(<SidebarLink title={types[i]} gender="women" route="/pages/clothes/" onClick={this.setWomenList}/>);
+    // }
 
     const companyLinks = [];
     companyLinks.push(<SidebarLink title='UNI-CLO' route='/pages/company/' onClick={this.hideSidebar} />);
@@ -116,7 +147,7 @@ class SidebarContent extends Component {
           </ul>
 
           <ul className='sidebar_block'>
-            {/* {clothesCategory} */}
+            {clothesCategory}
             {brandsCategory}
           </ul>
   
@@ -156,7 +187,10 @@ class SidebarContent extends Component {
 }
 
 const mapStateToProps = (state) => {
-  return {typesList: state.product.typesList};
+  return {
+    typesList: state.product.typesList,
+    allProducts: state.product.allProducts
+  };
 }
 
 export default connect(mapStateToProps, null) (SidebarContent);
