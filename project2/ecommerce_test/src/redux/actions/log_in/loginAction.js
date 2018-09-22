@@ -1,9 +1,8 @@
 import { logInTypes } from './loginTypes';
 import { logInRequest } from './loginRequest';
 import { alertActions } from './alertAction';
-import { createBrowserHistory } from 'history';
-
-export const history = createBrowserHistory();
+// import { createBrowserHistory } from 'history';
+// export const history = createBrowserHistory();
 
 export const logInActions = {
     login,
@@ -53,7 +52,7 @@ function logout() {
     return { type: logInTypes.LOGOUT };
 }
 
-function register(user) {
+function register(user,history) {
     return dispatch => {
         dispatch(request(user));
 
@@ -63,7 +62,7 @@ function register(user) {
                     dispatch(success());
                     dispatch(alertActions.success('Registration successful'));
                     alert("Register Success");
-                    history.push('/log_in');
+                    // history.push('/log_in');
                     // alert("register done")
                     
                 },

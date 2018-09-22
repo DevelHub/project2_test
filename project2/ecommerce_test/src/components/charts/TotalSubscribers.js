@@ -17,7 +17,7 @@ function getData(){
          data.push(resp[i]);
        
      }
-    console.log(data[0]);
+    
     return data;
   });//end fetch
 

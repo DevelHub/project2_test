@@ -5,6 +5,32 @@ import Table from '../../../components/table/Table';
 import DeleteForeverIcon from 'mdi-react/DeleteForeverIcon';
 import CartPurchase from './CartPurchase';
 
+
+
+
+// let data=[];
+// let getCustomerId = localStorage.getItem('user');
+// // getCustomerId.
+// function getData(){
+//     fetch(`http://ec2-54-200-103-68.us-west-2.compute.amazonaws.com:3001/cart/get/${customerId}`, {
+//   headers: {
+//     "Content-Type": "application/json"
+//   },
+//   method: "GET"
+// })
+//   .then(resp => resp.json())
+//   .then(resp => {
+//      for(let i=0; i<resp.length;i++){
+//          data.push(resp[i]);
+       
+//      }
+    
+//     return data;
+//   });//end fetch
+
+// }
+// getData();
+
 export class CartCard extends Component {
   render() {
     return (

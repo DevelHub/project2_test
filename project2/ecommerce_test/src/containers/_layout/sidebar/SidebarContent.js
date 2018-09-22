@@ -19,8 +19,8 @@ let userStore = JSON.parse(localStorage.getItem('user'));
 class SidebarContent extends Component {
   constructor(props) {
     super(props);
-    console.log("User:");
-    console.log(localStorage.getItem("user"));
+    // console.log("User:");
+    // console.log(localStorage.getItem("user"));
   }
 
   hideSidebar = (e) => {
