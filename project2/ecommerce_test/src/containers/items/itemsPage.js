@@ -35,9 +35,10 @@ export class ItemsPage extends React.Component
                 {
                     let item = {
                         name: data[i].name,
-                        company: data[i].company.companyName,
+                        company: data[i].company,
                         image: data[i].image,
-                        description: data[i].description
+                        description: data[i].description,
+                        price: data[i].price
                     }
 
                     let children = [];

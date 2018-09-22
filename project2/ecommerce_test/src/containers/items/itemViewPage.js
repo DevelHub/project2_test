@@ -25,7 +25,7 @@ export class ItemViewPage extends React.Component
                         </div>
                         <div className="inline">
                             <div className="optionTitle">Price<hr className="myHr"/></div>
-                            <div className="optionDiv">{this.props.currentProduct.price}</div>
+                            <div className="optionDiv">${this.props.currentProduct.price}</div>
                         </div>
                         <div className="inline">
                             <div className="optionTitle">Choose Color<hr className="myHr"/></div>

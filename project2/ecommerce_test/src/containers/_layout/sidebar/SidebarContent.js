@@ -2,57 +2,69 @@ import React, { Component } from 'react';
 import SidebarLink from './SidebarLink';
 import SidebarCategory from './SidebarCategory';
 import store from '../../../app/store';
-import { setCurrentProduct, setProductList } from '../../../redux/actions/productActions';
+import {connect} from 'react-redux';
+import { setCurrentProduct, setProductList, setAllProducts } from '../../../redux/actions/productActions';
 
 
 let userStore = JSON.parse(localStorage.getItem('user'));
 
-class SidebarContent extends Component {
+export class SidebarContent extends Component {
   constructor(props) {
     super(props);
     console.log("User:");
     console.log(localStorage.getItem("user"));
+    // this.fetchAllGroupedByType()
   }
 
   hideSidebar = (e) => {
     this.props.onClick();
-    this.setProductList(e.target.innerText);
   };
 
-  setProductList = (type) => {
-    fetch(`http://ec2-54-200-103-68.us-west-2.compute.amazonaws.com:3001/item-type/pants`, {
-      headers: {
-        "Content-Type":"application/json"
-      },
-      method: "GET"
-    })
-    .then(resp => {
-      if(resp.status == 200)
+  setMenList = (e) => {
+    this.props.onClick();
+    store.dispatch(setProductList([]));
+    this.setProductList(e.target.innerText, "men");
+  };
+
+  setWomenList = (e) => {
+    this.props.onClick();
+    store.dispatch(setProductList([]));
+    this.setProductList(e.target.innerText, "women");
+  };
+
+  setProductList(type, gender)
+  {
+    let all = store.getState().product.allProducts;
+    let productList = [];
+
+    console.log("all");
+    console.log(all);
+    
+    for(let i = 0; i < all[type].length; i++)
+    {
+      if(all[type][i].gender === gender)
       {
-        return resp.json();
+        productList.push(all[type][i]);
       }
-      throw Error("Could not retrieve item group");
-    })
-    .then(items => {
-      console.log(items);
-      store.dispatch(setProductList(items.item));
-      store.dispatch(setCurrentProduct(items));
-      //localStorage.setItem("state", JSON.stringify(store.getState()));
-    })
+    }
+    console.log("productList before dispatch");
+    console.log(productList);
+    alert("breakpoint");
+    store.dispatch(setProductList(productList));
   }
 
   render() 
   {
-    const categoryLinks = [];
-    categoryLinks.push(<SidebarLink title='Hat' route='/pages/clothes/' onClick={this.hideSidebar} />);
-    categoryLinks.push(<SidebarLink title='T-Shirts' route='/pages/clothes/' onClick={this.hideSidebar} />);
-    categoryLinks.push(<SidebarLink title='Polo Shirts' route='/pages/clothes/' onClick={this.hideSidebar} />);
-    categoryLinks.push(<SidebarLink title='SweatShirts' route='/pages/clothes/' onClick={this.hideSidebar} />);
-    categoryLinks.push(<SidebarLink title='SweatPants' route='/pages/clothes/' onClick={this.hideSidebar} />);
-    categoryLinks.push(<SidebarLink title='Dress' route='/pages/clothes/' onClick={this.hideSidebar} />);
-    categoryLinks.push(<SidebarLink title='Jeans' route='/pages/clothes/' onClick={this.hideSidebar} />);
-    categoryLinks.push(<SidebarLink title='Pants' route='/pages/clothes/' onClick={this.hideSidebar} />);
-    categoryLinks.push(<SidebarLink title='Activewear' route='/pages/clothes/' onClick={this.hideSidebar} />);
+    const mensCategoryLinks = [];
+    const womensCategoryLinks = [];
+
+    let types = this.props.typesList;
+    
+    for(let i = 0; i < types.length; i++)
+    {
+      mensCategoryLinks.push(<SidebarLink title={types[i]} gender="men" route="/pages/clothes/" onClick={this.setMenList}/>);
+      womensCategoryLinks.push(<SidebarLink title={types[i]} gender="women" route="/pages/clothes/" onClick={this.setWomenList}/>);
+    }
 
     const companyLinks = [];
     companyLinks.push(<SidebarLink title='UNI-CLO' route='/pages/company/' onClick={this.hideSidebar} />);
@@ -62,8 +74,8 @@ class SidebarContent extends Component {
     companyLinks.push(<SidebarLink title='ZARA' route='/pages/company/' onClick={this.hideSidebar} />);
     companyLinks.push(<SidebarLink title='BANANA REPUBLIC' route='/pages/company/' onClick={this.hideSidebar} />);
 
-    const menCategory = <SidebarCategory title="Men">{categoryLinks}</SidebarCategory>;
-    const womenCategory = <SidebarCategory title="Women">{categoryLinks}</SidebarCategory>;
+    const menCategory = <SidebarCategory title="Men">{mensCategoryLinks}</SidebarCategory>;
+    const womenCategory = <SidebarCategory title="Women">{womensCategoryLinks}</SidebarCategory>;
     const clothesCategories = [menCategory, womenCategory];
 
     const clothesCategory = <SidebarCategory title="Clothes" icon="store">{clothesCategories}</SidebarCategory>;
@@ -140,4 +152,8 @@ class SidebarContent extends Component {
   }
 }
 
-export default SidebarContent;
+const mapStateToProps = (state) => {
+  return {typesList: state.product.typesList};
+}
+
+export default connect(mapStateToProps, null) (SidebarContent);
