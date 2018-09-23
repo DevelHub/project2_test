@@ -2,7 +2,6 @@
   "name": "jmterrely",
   "version": "0.1.0",
   "private": true,
-  "homepage": "http://previews.aspirity.com/easydev",
   "dependencies": {
     "@material-ui/core": "^1.4.0",
     "autoprefixer": "7.1.6",
