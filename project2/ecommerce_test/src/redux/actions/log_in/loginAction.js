@@ -24,10 +24,10 @@ function login(username, password, history) {
                     dispatch(alertActions.success('login successful'));
                     
                     
-                    if(user[0].role==='Customer'){
+                    if(user[0].role.toLowerCase()==='customer'){
                         history.push('/pages/customer');
                     }
-                    else if(user[0].role==='company'){
+                    else if(user[0].role.toLowerCase()==='company'){
                         history.push('/pages/company');
 
                     }

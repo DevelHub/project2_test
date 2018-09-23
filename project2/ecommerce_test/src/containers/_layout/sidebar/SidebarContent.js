@@ -8,6 +8,9 @@ import { setCurrentProduct, setProductList, setAllProducts } from '../../../redu
 class SidebarContent extends Component {
   constructor(props) {
     super(props);
+
+    this.logout = this.logout.bind(this);
+
   }
 
   hideSidebar = (e) => {
@@ -103,12 +106,12 @@ class SidebarContent extends Component {
     }
 
     const companyLinks = [];
-    companyLinks.push(<SidebarLink title='UNI-CLO' route='/pages/company/' onClick={this.hideSidebar} />);
-    companyLinks.push(<SidebarLink title='OLD-NAVY' route='/pages/company/' onClick={this.hideSidebar} />);
-    companyLinks.push(<SidebarLink title='H&M' route='/pages/company/hm' onClick={this.hideSidebar} />);
-    companyLinks.push(<SidebarLink title='FOREVER21' route='/pages/company/' onClick={this.hideSidebar} />);
-    companyLinks.push(<SidebarLink title='ZARA' route='/pages/company/' onClick={this.hideSidebar} />);
-    companyLinks.push(<SidebarLink title='BANANA REPUBLIC' route='/pages/company/' onClick={this.hideSidebar} />);
+    companyLinks.push(<SidebarLink title='UNI-CLO' route='/pages/uniqlo' onClick={this.hideSidebar} />);
+    companyLinks.push(<SidebarLink title='OLD-NAVY' route='/pages/old_navy' onClick={this.hideSidebar} />);
+    companyLinks.push(<SidebarLink title='H&M' route='/pages/hm' onClick={this.hideSidebar} />);
+    companyLinks.push(<SidebarLink title='FOREVER21' route='/pages/forever21' onClick={this.hideSidebar} />);
+    companyLinks.push(<SidebarLink title='ZARA' route='/pages/zara' onClick={this.hideSidebar} />);
+    companyLinks.push(<SidebarLink title='BANANA REPUBLIC' route='/pages/banana_republic' onClick={this.hideSidebar} />);
 
     const menCategory = <SidebarCategory title="Men">{mensCategoryLinks}</SidebarCategory>;
     const womenCategory = <SidebarCategory title="Women">{womensCategoryLinks}</SidebarCategory>;

@@ -8,7 +8,7 @@ let customerId;
 let data = [];
 let cart;
 let totalPrice = 0;
-let getCustomerId = localStorage.getItem('user');
+let getCustomerId = JSON.parse(localStorage.getItem('user'));
 let isGuest = false;
 
 if (!localStorage.getItem('user')) {
@@ -16,11 +16,13 @@ if (!localStorage.getItem('user')) {
 }
 else {
   isGuest = false;
-  // customerId = getCustomerId.customer.customerId;
+  customerId = getCustomerId[0].customer.id;
 }
-
+console.log(`cart history ${customerId}`);
 function getData() {
-    fetch(`http://ec2-54-200-103-68.us-west-2.compute.amazonaws.com:3001/purchase/2`, {
+   
+   
+    fetch(`http://ec2-54-200-103-68.us-west-2.compute.amazonaws.com:3001/purchase/${customerId}`, {
       // fetch('http://localhost:3001/cart/get/2',{
       headers: {
         "Content-Type": "application/json"
