@@ -8,7 +8,7 @@ import SweetAlert from 'sweetalert2-react';
 
 // const history = createHistory();
 
-let customerId;
+let customerId=0;
 let data = [];
 let cart;
 let totalPrice = 0;
@@ -19,6 +19,7 @@ let today = new Date();
 let year = today.getFullYear();
 let month = today.getMonth()+1;
 let day = today.getDate();
+let userId;
 console.log(year);
 
 if (!localStorage.getItem('user')) {
@@ -26,11 +27,15 @@ if (!localStorage.getItem('user')) {
 }
 else {
   isGuest = false;
-  customerId = getCustomerId[0].customer.id;
+  if(isGuest===false){
+    customerId = JSON.parse(localStorage.getItem('user'));
+    userId = customerId[0].customer.id;
+  }
+ 
 }
 
 function getData() {
-  fetch(`http://ec2-54-200-103-68.us-west-2.compute.amazonaws.com:3001/cart/get/${customerId}`, {
+  fetch(`http://ec2-54-200-103-68.us-west-2.compute.amazonaws.com:3001/cart/get/${userId}`, {
     // fetch('http://localhost:3001/cart/get/2',{
     headers: {
       "Content-Type": "application/json"

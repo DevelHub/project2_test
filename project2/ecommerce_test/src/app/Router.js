@@ -21,6 +21,7 @@ import {ZaraPage} from '../containers/company/zara/ZaraMain';
 import {BananaPage} from '../containers/company/banana/BananaMain';
 import { ForeverPage } from '../containers/company/forever21/ForeverMain';
 import { HmPage } from '../containers/company/hm/HmMain';
+import { RecommendPage } from '../containers/recommend/recommend-page';
 
 
 
@@ -68,6 +69,7 @@ const Pages = () => (
     <Route path="/pages/zara" component={ZaraPage}/>
     <Route path="/pages/hm" component={HmPage}/>
     <Route path="/pages/banana_republic" component={BananaPage}/>
+    <Route path="/pages/recommend" component={RecommendPage}/>
     <Route component={HomePage}/>
   </Switch>
 );

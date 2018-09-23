@@ -3,23 +3,23 @@ import { Card, CardBody, Col } from 'reactstrap';
 import { BarChart, XAxis, YAxis, Bar, Cell, ResponsiveContainer, CartesianGrid, Tooltip, Legend } from 'recharts';
 
 
-let data=[];
-function getData(){
+let data = [];
+function getData() {
     fetch(`http://ec2-54-200-103-68.us-west-2.compute.amazonaws.com:3001/item/total`, {
-  headers: {
-    "Content-Type": "application/json"
-  },
-  method: "GET"
-})
-  .then(resp => resp.json())
-  .then(resp => {
-     for(let i=0; i<resp.length;i++){
-         data.push(resp[i]);
-       
-     }
-    
-    return data;
-  });//end fetch
+        headers: {
+            "Content-Type": "application/json"
+        },
+        method: "GET"
+    })
+        .then(resp => resp.json())
+        .then(resp => {
+            for (let i = 0; i < resp.length; i++) {
+                data.push(resp[i]);
+
+            }
+
+            return data;
+        });//end fetch
 
 }
 getData();
@@ -69,10 +69,8 @@ export class TotalItems extends PureComponent {
                         </div>
                         <div className='dashboard_total'>
                             <p className='dashboard_total-stat'>
-                                {/* {(activeItem.items)} */}
-                                {/* {(activeItem.name)} */}
-                                {/* {("   Total Number of Items = ")} */}
-                                {/* {(activeItem.total)} */}
+                                <p>{data[activeIndex].name}</p>
+                                <p>{` Total Items =  ${data[activeIndex].total}`}</p>
                             </p>
                             <ResponsiveContainer height={150} className='dashboard_chart-container'>
                                 <BarChart data={data}>

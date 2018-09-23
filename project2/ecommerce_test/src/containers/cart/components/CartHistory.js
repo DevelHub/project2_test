@@ -4,25 +4,31 @@ import Table from '../../../components/table/Table';
 import DeleteForeverIcon from 'mdi-react/DeleteForeverIcon';
 
 
-let customerId;
+let customerId=0;
 let data = [];
 let cart;
 let totalPrice = 0;
-let getCustomerId = JSON.parse(localStorage.getItem('user'));
 let isGuest = false;
+let userId;
 
 if (!localStorage.getItem('user')) {
   isGuest = true;
 }
 else {
   isGuest = false;
-  customerId = getCustomerId[0].customer.id;
+  if(isGuest ===false){
+    customerId = JSON.parse(localStorage.getItem('user'));
+    userId = customerId[0].customer.id;
+    console.log (`customer id = ${userId}`);
+
+  }
+
+
+
 }
-console.log(`cart history ${customerId}`);
 function getData() {
-   
-   
-    fetch(`http://ec2-54-200-103-68.us-west-2.compute.amazonaws.com:3001/purchase/${customerId}`, {
+    // console.log(`customer id : ${customerId[0].customer.id}`);
+    fetch(`http://ec2-54-200-103-68.us-west-2.compute.amazonaws.com:3001/purchase/${userId}`, {
       // fetch('http://localhost:3001/cart/get/2',{
       headers: {
         "Content-Type": "application/json"
@@ -34,12 +40,20 @@ function getData() {
         for (let i = 0; i < resp.length; i++) {
           data.push(resp[i]);
         }
-        // console.log(data[0].quantity);
         return data;
       });//end fetch
   
   }
   getData();
+
+  
+function calcSubTotal(price, quantity) {
+  let totalAmount = 0;
+  totalAmount =  (price * quantity);
+
+  return totalAmount;
+
+}
 
 
 
@@ -70,6 +84,7 @@ export class CartHistory extends Component {
                     <th>#</th>
                     <th>Name</th>
                     <th>Purchase Date</th>
+                    <th>Quantity</th>
                     <th>Price</th>
                     {/* <th>Total</th> */}
                     <th />
@@ -83,7 +98,8 @@ export class CartHistory extends Component {
                         <span>{cartItem.item.name}</span>
                       </td>
                       <td>{(cartItem.purchaseDate)}</td>
-                      <td>${cartItem.item.price.toFixed(2)}</td>
+                      <td>{cartItem.quantity}</td>
+                      <td>${calcSubTotal(cartItem.item.price, cartItem.quantity).toFixed(2)}</td>
                       {/* <td>${calcSubTotal(cartItem.item.price, cartItem.quantity).toFixed(2)}</td> */}
                     </tr>
                   )}

@@ -106,7 +106,7 @@ class SidebarContent extends Component {
     }
 
     const companyLinks = [];
-    companyLinks.push(<SidebarLink title='UNI-CLO' route='/pages/uniqlo' onClick={this.hideSidebar} />);
+    companyLinks.push(<SidebarLink title='UNI-QLO' route='/pages/uniqlo' onClick={this.hideSidebar} />);
     companyLinks.push(<SidebarLink title='OLD-NAVY' route='/pages/old_navy' onClick={this.hideSidebar} />);
     companyLinks.push(<SidebarLink title='H&M' route='/pages/hm' onClick={this.hideSidebar} />);
     companyLinks.push(<SidebarLink title='FOREVER21' route='/pages/forever21' onClick={this.hideSidebar} />);
@@ -132,6 +132,7 @@ class SidebarContent extends Component {
           <ul className='sidebar_block'>
             {clothesCategory}
             {brandsCategory}
+            <SidebarLink title="Recommend Item" rout = "page/recommend" onClick={this.hideSideba}/>
           </ul>
   
           <ul className='sidebar_block'>     

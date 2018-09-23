@@ -33,6 +33,56 @@ import {Link} from 'react-router-dom';
 
 
 export class HmCard extends Component {
+  constructor(props) {
+    super(props);
+    this.state = {
+        user:{
+          companyId: 0,
+          customerId: 0,
+          timeFrame: ''
+
+
+        }
+      }
+    
+
+    this.handleSubscribe = this.handleSubscribe.bind(this);
+  }
+
+
+handleSubscribe(event){
+  
+let today = new Date();
+let year = today.getFullYear();
+let month = today.getMonth()+1;
+let day = today.getDate();
+  const {user} = this.state;
+  console.log(`got in subscribe handler`);
+  event.preventDefault();
+  let currentUser = JSON.parse(localStorage.getItem('user'));
+
+  user.companyId = 4;
+  user.customerId = currentUser[0].customer.id;
+  user.timeFrame = `${year}-0${month}-${day}`;
+
+  console.log(user.companyId);
+  console.log(user.customerId);
+  console.log(user.timeFrame);
+ 
+
+  fetch(`http://ec2-54-200-103-68.us-west-2.compute.amazonaws.com:3001/subscription/add`, {
+    headers: {
+      "Content-Type": "application/json"
+    },
+    body: JSON.stringify(user),
+    method: "POST"
+  });//end fetch
+
+  console.log('added to h&m')
+  alert(`Success to subscribe H&M`);
+
+
+}
 
 
   render() {
@@ -59,7 +109,7 @@ export class HmCard extends Component {
               </div>
             </div>
           </CardBody>
-          <button className='btn btn-primary' >Subscribe</button>
+          <button className='btn btn-primary' onClick={this.handleSubscribe} >Subscribe</button>
         </Card>
       </Col>
     )

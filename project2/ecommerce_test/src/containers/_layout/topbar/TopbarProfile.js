@@ -45,8 +45,7 @@ export default class TopbarProfile extends PureComponent {
     if(!isGuest&&user)
     {
       role = user[0].role.toLowerCase();
-      console.log(role);
-      console.log('this is not guest');
+    
     }
 
     else if(role === "customer")
