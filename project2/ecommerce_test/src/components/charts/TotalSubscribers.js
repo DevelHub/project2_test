@@ -1,4 +1,4 @@
-import React, { Component } from 'react';
+import React, { PureComponent } from 'react';
 import { Card, CardBody, Col } from 'reactstrap';
 import { BarChart, XAxis, YAxis, Bar, Cell, ResponsiveContainer, CartesianGrid, Tooltip, Legend } from 'recharts';
 
@@ -22,20 +22,10 @@ function getData(){
   });//end fetch
 
 }
-getData();
-
-// let data = [
-//     // { name: 'UNI-CLO', numOfSubscriber: 50 },
-//     // { name: 'OLD-NAVY', numOfSubscriber: 60 },
-//     // { name: 'H&M', numOfSubscriber: 40 },
-//     // { name: 'FOREVER21', numOfSubscriber: 60 },
-//     // { name: 'ZARA', numOfSubscriber: 20 },
-//     // { name: 'BANANA-REPUBLIC', numOfSubscriber: 100 }
-    
-// ]
+getData()
 
 
-export class TotalSubscribers extends Component {
+export class TotalSubscribers extends PureComponent {
     constructor(props) {
         super(props);
         this.state = {
@@ -56,6 +46,9 @@ export class TotalSubscribers extends Component {
     render() {
         const { activeIndex, data } = this.state;
         const activeItem = data[activeIndex];
+
+        // console.log(data[0].name);
+        // console.log(activeItem);
         
 
         return (
@@ -70,10 +63,9 @@ export class TotalSubscribers extends Component {
                         <div className='dashboard_total'>
                             <p className='dashboard_total-stat'>
                                
-                                {/* {(activeItem.name)} */}
-                                {/* {data[activeIndex].name} */}
-                                {/* {("   Subscribers = ")} */}
-                                {/* {(activeItem.total)} */}
+                                <p>{data[activeIndex].name}</p>
+                                <p>{` Subscribers =  ${data[activeIndex].total}`}</p>
+                               
                             </p>
                             <ResponsiveContainer height={150} className='dashboard_chart-container'>
                                 <BarChart data={data}>

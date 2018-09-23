@@ -22,7 +22,7 @@ export default class TopbarProfile extends PureComponent {
   logout()
   {
     alert("logged out");
-    localStorage.removeItem("user");
+    localStorage.removeItem(`user`);
   }
 
   render() {
@@ -31,12 +31,24 @@ export default class TopbarProfile extends PureComponent {
     let name = "Guest";
     let menu = [];
 
-    if(user)
-    {
+    let isGuest = false;
+
+    if(!localStorage.getItem('user')){
+      isGuest = true;
+    }
+    else{
+      isGuest = false;
+      // let userStorage = JSON.parse(localStorage.getItem('user'));
       role = user[0].role.toLowerCase();
     }
 
-    if(role === "customer")
+    if(!isGuest&&user)
+    {
+      role = user[0].role.toLowerCase();
+    
+    }
+
+    else if(role === "customer")
     {
       name = user[0].customer.firstname;
       menu.push(<TopbarMenuLink title='Profile' icon='user' path='/pages/profile/'/>);

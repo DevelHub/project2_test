@@ -42,7 +42,7 @@ export class PreviousPurchases extends React.Component
                         name: purchases[i].item.name,
                         company: purchases[i].item.company.companyName,
                         price: purchases[i].item.price,
-                        quantity: 1
+                        quantity: purchases[i].quantity
                     };
                     items.push(item);
                 }

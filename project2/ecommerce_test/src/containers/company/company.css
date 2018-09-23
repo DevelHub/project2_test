@@ -38,5 +38,58 @@
     background-size: cover;
 
 }
+.company-uni{
+    /* max-width: 20%; */
+    width: 350px;
+    height: 350px;
+    background-image: url(../company/img/uni.png);
+    background-position: top left;
+    background-repeat: no-repeat;
+    background-size: cover;
 
+}
+.company-banana{
+    width: 550px;
+    height: 350px;
+    background-image: url(../company/img/banana.jpg);
+    background-position: top left;
+    background-repeat: no-repeat;
+    background-size: cover;
+
+}
+.company-forever{
+    width: 350px;
+    height: 350px;
+    background-image: url(../company/img/forever.png);
+    background-position: top left;
+    background-repeat: no-repeat;
+    background-size: cover;
+
+}
+.company-hm{
+    width: 550px;
+    height: 350px;
+    background-image: url(../company/img/hm.png);
+    background-position: top left;
+    background-repeat: no-repeat;
+    background-size: cover;
+
+}
+.company-old{
+    width: 1050px;
+    height: 400px;
+    background-image: url(../company/img/old.png);
+    background-position: top left;
+    background-repeat: no-repeat;
+    background-size: cover;
+}
+.company-zara{
+    width: 350;
+    height: 400px;
+    background-image: url(../company/img/zara.jpg);
+    background-position: top left;
+    background-repeat: no-repeat;
+    background-size: cover;
+
+}
 

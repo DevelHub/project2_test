@@ -23,10 +23,11 @@ function login(username, password, history) {
                     dispatch(success(user));
                     dispatch(alertActions.success('login successful'));
                     
-                    if(user[0].role==='customer'){
+                    
+                    if(user[0].role.toLowerCase()==='customer'){
                         history.push('/pages/customer');
                     }
-                    else if(user[0].role==='company'){
+                    else if(user[0].role.toLowerCase()==='company'){
                         history.push('/pages/company');
 
                     }
@@ -62,7 +63,7 @@ function register(user,history) {
                     dispatch(success());
                     dispatch(alertActions.success('Registration successful'));
                     alert("Register Success");
-                    // history.push('/log_in');
+                    // this.context.history.push('/log_in');
                     // alert("register done")
                     
                 },
