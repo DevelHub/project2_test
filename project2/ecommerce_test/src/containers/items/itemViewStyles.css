@@ -1,7 +1,7 @@
 
-.pageContainer{
+.itemView{
     width: 90%;
-    height: 80vh;
+    min-height: 120vh;
     background-color: white;
     padding: 2em;
     border-radius: 5px;
@@ -9,12 +9,12 @@
     margin: auto;
 }
 
-.itemViewImageDiv{
+.ViewImageDiv{
     width: 100%;
-    height: 20em;
-    background-color: grey;
-    text-align: center;
-    line-height: 20em;
+    border-radius: 5px;
+}
+
+.viewImage{
     border-radius: 5px;
 }
 
@@ -84,7 +84,8 @@
 
 .itemDescription{
     width: 100%;
-    margin-top: 2em;
+    /* height: 50vh; */
+    margin-top: 4em;
     font-size: 14px;
 }
 
@@ -97,4 +98,20 @@
 
 .buttonInline{
     line-height: 100%;
+}
+
+.cols{
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    margin-top: 3em;
+}
+
+.sec{
+    width: 90%;
+    padding-bottom: 2em;
+    margin-bottom: 3em;
+}
+
+.bb{
+    border-bottom: solid grey 1px;
 }

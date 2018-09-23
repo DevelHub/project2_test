@@ -31,12 +31,26 @@ class SidebarContent extends Component {
 
   setProductList(type, gender)
   {
+    let user = JSON.parse(localStorage.getItem("user"));
+    let role = "";
+    if(user)
+    {
+      role = user[0].role;
+    }
+
     let all = store.getState().product.allProducts;
     let productList = [];
 
     for(let i = 0; i < all[type].length; i++)
     {
-      if(all[type][i].gender === gender)
+      if(role === "company")
+      {
+        if(all[type][i].companyId === user[0].company.id && all[type][i].gender === gender)
+        {
+          productList.push(all[type][i]);
+        }
+      }
+      else if(all[type][i].gender === gender)
       {
         productList.push(all[type][i]);
       }
@@ -48,7 +62,6 @@ class SidebarContent extends Component {
   logout()
   {
     this.props.onClick();
-    alert("You are now Logged out. Called from SidebarContent.logout()");
     localStorage.removeItem("user");
   }
 
@@ -71,6 +84,12 @@ class SidebarContent extends Component {
     //   role = user[0].role.toLowerCase();
     // }
 
+    let userCompany = "";
+    if(role === "company")
+    {
+      userCompany = user[0].company.id;
+    }
+
     const mensCategoryLinks = [];
     const womensCategoryLinks = [];
 
@@ -81,17 +100,35 @@ class SidebarContent extends Component {
     {
       if(all[types[t]].length != 0)
       {
+        
         let men = false;
         let women = false;
         for(let i = 0; i < all[types[t]].length; i++)
         {
-          if(all[types[t]][i].gender === "men")
+          if(role === "company")
           {
-            men = true;
+            if(all[types[t]][i].companyId === userCompany)
+            {
+              if(all[types[t]][i].gender === "men")
+              {
+                men = true;
+              }
+              else if(all[types[t]][i].gender === "women")
+              {
+                women = true;
+              }
+            }
           }
-          else if(all[types[t]][i].gender === "women")
+          else
           {
-            women = true;
+            if(all[types[t]][i].gender === "men")
+            {
+              men = true;
+            }
+            else if(all[types[t]][i].gender === "women")
+            {
+              women = true;
+            }
           }
         }
         if(men)
@@ -155,7 +192,7 @@ class SidebarContent extends Component {
 
           <ul className='sidebar_block'>
             {clothesCategory}
-            <SidebarLink title='Register Item' route='/' onClick={this.hideSidebar} />
+            <SidebarLink title='Register Item' route='/pages/register-item' onClick={this.hideSidebar} />
           </ul>
   
           <ul className='sidebar_block'>          
