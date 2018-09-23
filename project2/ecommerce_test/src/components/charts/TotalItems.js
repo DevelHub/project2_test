@@ -25,16 +25,6 @@ function getData() {
 getData();
 
 
-// const data = [
-//     { name: 'UNI-CLO', items: 50 },
-//     { name: 'OLD-NAVY', items: 60 },
-//     { name: 'H&M', items: 40 },
-//     { name: 'FOREVER21', itemes: 60 },
-//     { name: 'ZARA', items: 20 },
-//     { name: 'BANANA-REPUBLIC', items: 1200 }
-// ]
-
-
 export class TotalItems extends PureComponent {
     constructor(props) {
         super(props);
