@@ -13,7 +13,7 @@ let ageGroupFive = 0;
 
 
 
-fetch(`http://ec2-54-200-103-68.us-west-2.compute.amazonaws.com:3001/customer`, {
+fetch(`http://ec2-54-200-103-68.us-west-2.compute.amazonaws.com:3001/customer/age`, {
   headers: {
     "Content-Type": "application/json"
   },

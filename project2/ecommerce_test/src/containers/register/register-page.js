@@ -93,7 +93,7 @@ handleSubmit(event) {
     const { dispatch } = this.props;
 
     if (user.username && user.password) {
-        dispatch(logInActions.register(user),this.props.history);
+        dispatch(logInActions.register(user), this.props.history);
     }
     // return <Redirect to ='/pages/register/customer'/>
 }
@@ -231,6 +231,6 @@ function mapStateToProps(state) {
     };
 }
 
-const connectedRegisterPage = withRouter(connect(mapStateToProps)(RegisterPage));
+const connectedRegisterPage = (connect(mapStateToProps)(RegisterPage));
 export { connectedRegisterPage as RegisterPage };
 

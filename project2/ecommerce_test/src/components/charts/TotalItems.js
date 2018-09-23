@@ -71,8 +71,8 @@ export class TotalItems extends PureComponent {
                             <p className='dashboard_total-stat'>
                                 {/* {(activeItem.items)} */}
                                 {/* {(activeItem.name)} */}
-                                {("   Total Number of Items = ")}
-                                {/* {(activeItem.items)} */}
+                                {/* {("   Total Number of Items = ")} */}
+                                {/* {(activeItem.total)} */}
                             </p>
                             <ResponsiveContainer height={150} className='dashboard_chart-container'>
                                 <BarChart data={data}>
