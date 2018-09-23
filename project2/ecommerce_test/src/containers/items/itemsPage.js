@@ -4,18 +4,9 @@ import { Card, CardImg, CardText, CardBody,
 import store from '../../app/store';
 import {connect} from 'react-redux';
 import {App} from '../../app/App';
-import {ItemRow, ItemListing, ItemTitle, ItemSubtitle, ItemImage, ItemDescription} from '../../components/item-listing/index';
+import {ItemCard, ItemRow, ItemListing, ItemTitle, ItemSubtitle, ItemImage, ItemDescription} from '../../components/item-listing/index';
 import {setCurrentProduct} from '../../redux/actions/productActions';
 
-// interface Item
-// {
-//     name: string,
-    
-// }
-// interface ItemsData
-// {
-
-// }
 export class ItemsPage extends React.Component
 {
     constructor(props)
@@ -24,32 +15,16 @@ export class ItemsPage extends React.Component
         this.listingClicked = this.listingClicked.bind(this);
     }
 
-    listingClicked(product)
+    listingClicked(item)
     {
-        store.dispatch(setCurrentProduct(product));
+        store.dispatch(setCurrentProduct(item));
         this.props.history.push("/pages/clothes/product");
     }
 
     render()
     {
-        //made dummy data below for testing. delete once mapStateToProps is working
-        let dummyData = [];
-        const item = {
-            title: "A Really Cool Hat",
-            subtitle: "The Mad Hatters",
-            image: "https://placeholdit.imgix.net/~text?txtsize=33&txt=256%C3%97180&w=256&h=180",
-            description: "A really well made hat. Its good. Buy it. Really, you should"
-        }
-        for(let i = 0; i < 7; i++)
-        {
-            dummyData.push(item);
-        }
+        const data = this.props.productList;
 
-        // this should be used when mapStateToProps is working. gets the current list of items by category from the redux store.
-        // const data = this.props.productList;
-        const data = dummyData;
-
-        //everything else below this for the render method is complete!
         let rows = [];
         for(let i = 0; i < data.length; i++)
         {
@@ -58,7 +33,22 @@ export class ItemsPage extends React.Component
             {
                 if(i < data.length)
                 {
-                    listings.push(<ItemListing item={data[i++]} onClicked={this.listingClicked}/>)
+                    let item = {
+                        name: data[i].name,
+                        company: data[i].company,
+                        image: data[i].image,
+                        description: data[i].description,
+                        price: data[i].price
+                    }
+
+                    let children = [];
+                    children.push(<ItemTitle>{item.name}</ItemTitle>);
+                    children.push(<ItemSubtitle>{item.company}</ItemSubtitle>);
+                    children.push(<ItemImage src={item.image}/>);
+                    children.push(<ItemDescription>{item.description}</ItemDescription>);
+
+                    listings.push(<ItemListing clicked={this.listingClicked} currentProduct={item}> {children} </ItemListing>)
+                    i++;
                 }
             }
             i--;
@@ -74,10 +64,7 @@ export class ItemsPage extends React.Component
 }
 
 const mapStateToProps = (state) => {
-    console.log("state from mapstatetoprops");
-    console.log(state);
-    alert("map state to props was called");
-    return {productList: state};
+    return {productList: state.product.productList};
 }
   
 export default connect(mapStateToProps, null) (ItemsPage);

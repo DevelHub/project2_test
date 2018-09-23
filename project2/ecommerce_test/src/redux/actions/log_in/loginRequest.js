@@ -1,14 +1,18 @@
-import config from 'config';
+
+
+//ec2 endpoint : http://ec2-54-200-103-68.us-west-2.compute.amazonaws.com:3001
 import { authHeader } from './authHeader';
 
 export const logInRequest = {
     login,
     logout,
     register,
-    getAll,
     getById,
     update,
-    delete: _delete
+    getAll,
+    registerCustom
+
+
 };
 
 function login(username, password) {
@@ -18,31 +22,20 @@ function login(username, password) {
         body: JSON.stringify({ username, password })
     };
 
-    return fetch(`localhost:8000/credential/login`, requestOptions)
-        .then(handleResponse)
+    // return fetch(`http://localhost:8000/credential/login`, requestOptions)
+    return fetch(`http://ec2-54-200-103-68.us-west-2.compute.amazonaws.com:3001/credential/login`, requestOptions)
+        .then(user => user.json())
         .then(user => {
-            // login successful if there's a jwt token in the response
-            if (user.token) {
-                // store user details and jwt token in local storage to keep user logged in between page refreshes
-                localStorage.setItem('user', JSON.stringify(user));
-            }
-
+            localStorage.setItem('user', JSON.stringify(user));
+            let loginUser = JSON.parse(localStorage.getItem('user'));
+            alert(`Succesfuly login as ${loginUser[0].role}  `);
             return user;
-        });
+        }); 
 }
 
 function logout() {
     // remove user from local storage to log user out
     localStorage.removeItem('user');
-}
-
-function getAll() {
-    const requestOptions = {
-        method: 'GET',
-        headers: authHeader()
-    };
-
-    return fetch(`${config.apiUrl}/users`, requestOptions).then(handleResponse);
 }
 
 function getById(id) {
@@ -51,7 +44,29 @@ function getById(id) {
         headers: authHeader()
     };
 
-    return fetch(`${config.apiUrl}/users/${id}`, requestOptions).then(handleResponse);
+    return fetch(`http://localhost:8000/users/${id}`, requestOptions);
+}
+
+function getAll() {
+    const requestOptions = {
+        method: 'GET',
+        headers: authHeader()
+    };
+
+    return fetch(`http://ec2-54-200-103-68.us-west-2.compute.amazonaws.com:3001/customer`, requestOptions)
+    .then(user => user.json())
+        .then(user => {
+            localStorage.setItem('user', JSON.stringify(user));
+            // let loginUser = JSON.parse(localStorage.getItem('user'));
+            // alert(`Succesfuly login as ${loginUser[0].role}  `);
+            return user;
+        }); 
+    // .then(user=>user.json())
+    // .then(user=>{
+    //     localStorage.setItem('user',JSON.stringify(user));
+
+    //     return user;
+    // });
 }
 
 function register(user) {
@@ -60,8 +75,26 @@ function register(user) {
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify(user)
     };
+    
+    // console.log("got in register");
 
-    return fetch(`${config.apiUrl}/users/register`, requestOptions).then(handleResponse);
+     return fetch(`http://ec2-54-200-103-68.us-west-2.compute.amazonaws.com:3001/credential`, requestOptions)
+     
+     
+}
+
+
+function registerCustom(user){
+
+   
+    const requestOptions = {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify(user)
+    };
+   
+    return fetch(`http://ec2-54-200-103-68.us-west-2.compute.amazonaws.com:3001/customer`, requestOptions);
+
 }
 
 function update(user) {
@@ -71,33 +104,6 @@ function update(user) {
         body: JSON.stringify(user)
     };
 
-    return fetch(`${config.apiUrl}/users/${user.id}`, requestOptions).then(handleResponse);;
+    return fetch(`http://localhost:8000/users/${user.id}`, requestOptions);
 }
 
-// prefixed function name with underscore because delete is a reserved word in javascript
-function _delete(id) {
-    const requestOptions = {
-        method: 'DELETE',
-        headers: authHeader()
-    };
-
-    return fetch(`${config.apiUrl}/users/${id}`, requestOptions).then(handleResponse);
-}
-
-function handleResponse(response) {
-    return response.text().then(text => {
-        const data = text && JSON.parse(text);
-        if (!response.ok) {
-            if (response.status === 401) {
-                // auto logout if 401 response returned from api
-                logout();
-                // location.reload(true);
-            }
-
-            const error = (data && data.message) || response.statusText;
-            return Promise.reject(error);
-        }
-
-        return data;
-    });
-}

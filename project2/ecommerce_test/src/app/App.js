@@ -4,6 +4,19 @@ import {hot} from 'react-hot-loader';
 import 'bootstrap/dist/css/bootstrap.css'
 import '../scss/app.scss';
 import Router from './Router';
+import store from './store';
+import { setCurrentProduct, setProductList, setAllProducts, setTypesList } from '../redux/actions/productActions';
+
+let isGuest = false;
+
+if(!localStorage.getItem('user')){
+  isGuest = true;
+}
+else{
+  isGuest = false;
+ 
+}
+let userStore = JSON.parse(localStorage.getItem('user'));
 
 class App extends Component {
   constructor() {
@@ -12,6 +25,7 @@ class App extends Component {
       loading: true,
       loaded: false
     }
+    this.fetchAllGroupedByType();
   }
   
   componentDidMount() {
@@ -19,6 +33,15 @@ class App extends Component {
       this.setState({loading: false});
       setTimeout(() => this.setState({loaded: true}), 500);
     });
+
+    // const stateString = localStorage.getItem("state"); 
+    // console.log("state string from localstorage");
+    // console.log(stateString);
+    // const state = JSON.parse(stateString);
+    // if(state)
+    // {
+    //   store.setState(state);
+    // }
   }
   
   render() {
@@ -38,6 +61,49 @@ class App extends Component {
       </div>
     )
   }
+
+  fetchAllGroupedByType()
+  {
+    fetch("http://ec2-54-200-103-68.us-west-2.compute.amazonaws.com:3001/item-type", {
+      headers: {
+        "Content-Type":"application/json"
+      },
+      method: "GET"
+    })
+    .then(resp => {
+      if(resp.status == 200)
+      {
+        return resp.json();
+      }
+      throw Error("Could not retrieve item groups");
+    })
+    .then(rawItems => {
+      let formattedItems = {};
+      let typesList = [];
+      for(let t = 0; t < rawItems.length; t++)
+      {
+        const type = rawItems[t].type;
+        typesList.push(type);
+        formattedItems[type] = [];
+        for(let i = 0; i < rawItems[t].item.length; i++)
+        {
+          let item = {};
+          const ci = rawItems[t].item[i];
+          item["name"] = ci.name;
+          item["company"] = ci.company.companyName;
+          item["description"] = ci.description;
+          item["gender"] = ci.gender;
+          item["price"] = ci.price;
+          item["status"] = ci.status;
+          formattedItems[type].push(item);
+        }
+      }
+      store.dispatch(setAllProducts(formattedItems));
+      store.dispatch(setTypesList(typesList));
+    })    
+  }
 }
+
+
 
 export default hot(module)(App)

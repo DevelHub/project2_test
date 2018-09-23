@@ -2,73 +2,194 @@ import React, { Component } from 'react';
 import SidebarLink from './SidebarLink';
 import SidebarCategory from './SidebarCategory';
 import store from '../../../app/store';
-import {setProductList} from '../../../redux/actions/productActions';
-
+import {connect} from 'react-redux';
+import { setCurrentProduct, setProductList, setAllProducts } from '../../../redux/actions/productActions';
 
 class SidebarContent extends Component {
+  constructor(props) {
+    super(props);
+
+    this.logout = this.logout.bind(this);
+
+  }
 
   hideSidebar = (e) => {
     this.props.onClick();
-    this.setProductList(e.target.innerText);
   };
 
-  setProductList = (type) => {
-    if(type === "Hat")
+  setMenList = (e) => {
+    this.props.onClick();
+    store.dispatch(setProductList([]));
+    this.setProductList(e.target.innerText, "men");
+  };
+
+  setWomenList = (e) => {
+    this.props.onClick();
+    store.dispatch(setProductList([]));
+    this.setProductList(e.target.innerText, "women");
+  };
+
+  setProductList(type, gender)
+  {
+    let all = store.getState().product.allProducts;
+    let productList = [];
+
+    for(let i = 0; i < all[type].length; i++)
     {
-      const products = {
-        name: "The most amazing hat!",
-        company: "Mad Hatters",
-        description: "A perfectly designed hat made from the finest mercurous nitrate induced hatters"
+      if(all[type][i].gender === gender)
+      {
+        productList.push(all[type][i]);
       }
-      store.dispatch(setProductList(products));
-     }
+    }
+
+    store.dispatch(setProductList(productList));
   }
 
-  render() {
-    return (
-      <div className='sidebar_content'>
+  logout()
+  {
+    this.props.onClick();
+    alert("You are now Logged out. Called from SidebarContent.logout()");
+    localStorage.removeItem("user");
+  }
 
-        <ul className='sidebar_block'>
-          <SidebarLink title='Home' icon='home' route='/pages/home' onClick={this.hideSidebar} />
-        </ul>
-        <ul className='sidebar_block'>
-          <SidebarCategory title='Clothes' icon='store'>
-            <SidebarCategory title="Categories">
-              <SidebarLink title='Hat' route='/pages/clothes/' onClick={this.hideSidebar}/>
-              <SidebarLink title='T-Shirts' route='/pages/clothes/' onClick={this.hideSidebar} />
-              <SidebarLink title='Polo Shirts' route='/pages/clothes/' onClick={this.hideSidebar} />
-              <SidebarLink title='SweatShirts' route='/pages/clothes/' onClick={this.hideSidebar} />
-              <SidebarLink title='SweatPants' route='/pages/clothes/' onClick={this.hideSidebar} />
-              <SidebarLink title='Dress' route='/pages/clothes/' onClick={this.hideSidebar} />
-              <SidebarLink title='Jeans' route='/pages/clothes/' onClick={this.hideSidebar} />
-              <SidebarLink title='Pants' route='/pages/clothes/' onClick={this.hideSidebar} />
-              <SidebarLink title='Activewear' route='/pages/clothes/' onClick={this.hideSidebar} />
+  render() 
+  {
+    const user = JSON.parse(localStorage.getItem("user"));
+    let role = "guest";
+    let isGuest = false;
+
+    if(!localStorage.getItem('user')){
+      isGuest = true;
+    }
+    else{
+      isGuest = false;
+      let userStorage = JSON.parse(localStorage.getItem('user'));
+      role = user[0].role.toLowerCase();
+    }
+    // if(user)
+    // {
+    //   role = user[0].role.toLowerCase();
+    // }
+
+    const mensCategoryLinks = [];
+    const womensCategoryLinks = [];
+
+    let types = this.props.typesList;
+    let all = this.props.allProducts;
+    
+    for(let t = 0; t < types.length; t++)
+    {
+      if(all[types[t]].length != 0)
+      {
+        let men = false;
+        let women = false;
+        for(let i = 0; i < all[types[t]].length; i++)
+        {
+          if(all[types[t]][i].gender === "men")
+          {
+            men = true;
+          }
+          else if(all[types[t]][i].gender === "women")
+          {
+            women = true;
+          }
+        }
+        if(men)
+        {
+          mensCategoryLinks.push(<SidebarLink title={types[t]} gender="men" route="/pages/clothes/" onClick={this.setMenList}/>);
+        }
+        if(women)
+        {
+          womensCategoryLinks.push(<SidebarLink title={types[t]} gender="women" route="/pages/clothes/" onClick={this.setWomenList}/>);
+        }
+      }
+    }
+
+    const companyLinks = [];
+    companyLinks.push(<SidebarLink title='UNI-CLO' route='/pages/uniqlo' onClick={this.hideSidebar} />);
+    companyLinks.push(<SidebarLink title='OLD-NAVY' route='/pages/old_navy' onClick={this.hideSidebar} />);
+    companyLinks.push(<SidebarLink title='H&M' route='/pages/hm' onClick={this.hideSidebar} />);
+    companyLinks.push(<SidebarLink title='FOREVER21' route='/pages/forever21' onClick={this.hideSidebar} />);
+    companyLinks.push(<SidebarLink title='ZARA' route='/pages/zara' onClick={this.hideSidebar} />);
+    companyLinks.push(<SidebarLink title='BANANA REPUBLIC' route='/pages/banana_republic' onClick={this.hideSidebar} />);
+
+    const menCategory = <SidebarCategory title="Men">{mensCategoryLinks}</SidebarCategory>;
+    const womenCategory = <SidebarCategory title="Women">{womensCategoryLinks}</SidebarCategory>;
+    const clothesCategories = [menCategory, womenCategory];
+
+    const clothesCategory = <SidebarCategory key={18} title="Clothes" icon="store">{clothesCategories}</SidebarCategory>;
+    const brandsCategory = <SidebarCategory key={19}title="Brands" icon="diamond">{companyLinks}</SidebarCategory>;
+
+    if(role === "customer") // customer view. needs logout, categories and brands
+    {
+      return (
+        <div className='sidebar_content'>
+  
+          <ul className='sidebar_block'>
+            <SidebarLink title='Home' icon='home' route='/pages/customer' onClick={this.hideSidebar} />
+          </ul>
+
+          <ul className='sidebar_block'>
+            {clothesCategory}
+            {brandsCategory}
+          </ul>
+  
+          <ul className='sidebar_block'>     
+            <SidebarCategory title='Account' icon='user'>
+              <SidebarLink title='Profile' route='/pages/profile' onClick={this.hideSidebar} />
             </SidebarCategory>
-          </SidebarCategory>
+            <SidebarLink title='Log Out' icon='exit' route='/pages/home' onClick={this.logout} />
+          </ul>
+        </div>
+      )}
 
-          <SidebarCategory title="Brands" icon="diamond">
-            <SidebarLink title='UNI-CLO' route='/pages/company/' onClick={this.hideSidebar} />
-            <SidebarLink title='OLD-NAVY' route='/pages/company/' onClick={this.hideSidebar} />
-            <SidebarLink title='H&M' route='/pages/company/hm' onClick={this.hideSidebar} />
-            <SidebarLink title='FOREVER21' route='/pages/company/' onClick={this.hideSidebar} />
-            <SidebarLink title='ZARA' route='/pages/company/' onClick={this.hideSidebar} />
-            <SidebarLink title='BANANA REPUBLIC' route='/pages/company/' onClick={this.hideSidebar} />
-          </SidebarCategory>
-        </ul>
+    else if(role === "company") // company view. needs logout, and categories. no brands
+    {
+      return (
+        <div className='sidebar_content'>
+  
+          <ul className='sidebar_block'>
+            <SidebarLink title='Home' icon='home' route='/pages/company' onClick={this.hideSidebar} />
+          </ul>
 
-        <ul className='sidebar_block'>
-          <SidebarCategory title='Account' icon='user'>
-            <SidebarLink title='Profile' route='pages/profile' onClick={this.hideSidebar} />
+          <ul className='sidebar_block'>
+            {clothesCategory}
             <SidebarLink title='Register Item' route='/' onClick={this.hideSidebar} />
-          </SidebarCategory>
-          <SidebarLink title='Log In' icon='exit' route='/log_in' onClick={this.hideSidebar} />
+          </ul>
+  
+          <ul className='sidebar_block'>          
+            <SidebarLink title='Log Out' icon='exit' route='/pages/home' onClick={this.logout} />
+          </ul>
+        </div>
+      )
+    }
+    else //guest view. needs login categories and brands
+    {
+      return (
+        <div className='sidebar_content'>
+          <ul className='sidebar_block'>
+            <SidebarLink title='Home' icon='home' route='/pages/home' onClick={this.hideSidebar} />
+          </ul>
 
-        </ul>
-
-
-      </div>
-    )
+          <ul className='sidebar_block'>
+            {clothesCategory}
+            {brandsCategory}
+          </ul>
+  
+          <ul className='sidebar_block'>
+            <SidebarLink title='Log In' icon='exit' route='/log_in' onClick={this.hideSidebar} />
+          </ul>
+        </div>
+      )
+    } 
   }
 }
 
-export default SidebarContent;
+const mapStateToProps = (state) => {
+  return {
+    typesList: state.product.typesList,
+    allProducts: state.product.allProducts
+  };
+}
+
+export default connect(mapStateToProps, null) (SidebarContent);

@@ -1,7 +1,7 @@
 import * as React from 'react';
 import { Col, Container, Row } from 'reactstrap';
-import {TotalItems} from './components/TotalItems';
-import { TotalSubscribers } from './components/TotalSubscribers';
+import {TotalItems} from '../../components/charts/TotalItems';
+import { TotalSubscribers } from '../../components/charts/TotalSubscribers';
 // import { TotalItemsTable } from './components/TotalItemsTable';
 
 

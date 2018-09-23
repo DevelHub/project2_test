@@ -3,18 +3,29 @@ import { Card, CardBody, Col } from 'reactstrap';
 import { BarChart, XAxis, YAxis, Bar, Cell, ResponsiveContainer, CartesianGrid, Tooltip, Legend } from 'recharts';
 
 
-// items is test data
-const data = [
-    { name: 'UNI-CLO', items: 50 },
-    { name: 'OLD-NAVY', items: 60 },
-    { name: 'H&M', items: 40 },
-    { name: 'FOREVER21', itemes: 60 },
-    { name: 'ZARA', items: 20 },
-    { name: 'BANANA-REPUBLIC', items: 1200 }
-]
+let data=[];
+function getData(){
+    fetch(`http://ec2-54-200-103-68.us-west-2.compute.amazonaws.com:3001/subscription`, {
+  headers: {
+    "Content-Type": "application/json"
+  },
+  method: "GET"
+})
+  .then(resp => resp.json())
+  .then(resp => {
+     for(let i=0; i<resp.length;i++){
+         data.push(resp[i]);
+       
+     }
+    
+    return data;
+  });//end fetch
+
+}
+getData()
 
 
-export class TotalItems extends PureComponent {
+export class TotalSubscribers extends PureComponent {
     constructor(props) {
         super(props);
         this.state = {
@@ -35,7 +46,7 @@ export class TotalItems extends PureComponent {
     render() {
         const { activeIndex, data } = this.state;
         const activeItem = data[activeIndex];
-        const { t } = this.props;
+        
 
         return (
 
@@ -44,14 +55,14 @@ export class TotalItems extends PureComponent {
                     <CardBody className='dashboard_card-widget'>
                         <div className='card_title'>
                             {/* <h5 className='bold-text'>{t('dashboard_default.new_users')}</h5> */}
-                            <h5 className='bold-text'>Items For Each Companny</h5>
+                            <h5 className='bold-text'>Subscribers For Each Companny</h5>
                         </div>
                         <div className='dashboard_total'>
                             <p className='dashboard_total-stat'>
-                                {/* {(activeItem.items)} */}
-                                {(activeItem.name)}
-                                {("   Total Number of Items = ")}
-                                {(activeItem.items)}
+                               
+                                {/* {`name : ${activeItem.name}`} */}
+                                {/* {("   Subscribers = ")} */}
+                                {/* {activeItem.total} */}
                             </p>
                             <ResponsiveContainer height={150} className='dashboard_chart-container'>
                                 <BarChart data={data}>
@@ -59,7 +70,7 @@ export class TotalItems extends PureComponent {
                                     <YAxis />
                                     <CartesianGrid strokeDasharray="3 3" />
 
-                                    <Bar dataKey='items' onClick={this.handleClick}>
+                                    <Bar dataKey='total' onClick={this.handleClick}>
                                         {
                                             // change color when the mouse cursor clicks the bar
                                             data.map((entry, index) => (
@@ -69,6 +80,7 @@ export class TotalItems extends PureComponent {
                                             ))
                                         }
                                     </Bar>
+
                                 </BarChart>
                             </ResponsiveContainer>
                         </div>
