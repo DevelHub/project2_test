@@ -6,6 +6,7 @@ import {NavLink} from 'react-router-dom';
 class SidebarLink extends Component {
   static propTypes = {
     title: PropTypes.string.isRequired,
+    // gender: PropTypes.string,
     icon: PropTypes.string,
     new: PropTypes.bool,
     route: PropTypes.string

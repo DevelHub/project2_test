@@ -2,83 +2,123 @@ import React, { Component } from 'react';
 import SidebarLink from './SidebarLink';
 import SidebarCategory from './SidebarCategory';
 import store from '../../../app/store';
-import { setCurrentProduct, setProductList } from '../../../redux/actions/productActions';
-
-let isGuest = false;
-
-if(!localStorage.getItem('user')){
-  isGuest = true;
-}
-else{
-  isGuest = false;
- 
-}
-let userStore = JSON.parse(localStorage.getItem('user'));
-
+import {connect} from 'react-redux';
+import { setCurrentProduct, setProductList, setAllProducts } from '../../../redux/actions/productActions';
 
 class SidebarContent extends Component {
   constructor(props) {
     super(props);
-    // console.log("User:");
-    // console.log(localStorage.getItem("user"));
   }
 
   hideSidebar = (e) => {
     this.props.onClick();
-    this.setProductList(e.target.innerText);
   };
 
-  // setProductList = (type) => {
-  //   fetch(`http://ec2-54-200-103-68.us-west-2.compute.amazonaws.com:3001/item-type/pants`, {
-  //     headers: {
-  //       "Content-Type":"application/json"
-  //     },
-  //     method: "GET"
-  //   })
-  //   .then(resp => {
-  //     if(resp.status == 200)
-  //     {
-  //       return resp.json();
-  //     }
-  //     throw Error("Could not retrieve item group");
-  //   })
-  //   .then(items => {
-  //     console.log(items);
-  //     store.dispatch(setProductList(items.item));
-  //     store.dispatch(setCurrentProduct(items));
-  //     localStorage.setItem("state", JSON.stringify(store.getState()));
-  //   })
-  // }
+  setMenList = (e) => {
+    this.props.onClick();
+    store.dispatch(setProductList([]));
+    this.setProductList(e.target.innerText, "men");
+  };
+
+  setWomenList = (e) => {
+    this.props.onClick();
+    store.dispatch(setProductList([]));
+    this.setProductList(e.target.innerText, "women");
+  };
+
+  setProductList(type, gender)
+  {
+    let all = store.getState().product.allProducts;
+    let productList = [];
+
+    for(let i = 0; i < all[type].length; i++)
+    {
+      if(all[type][i].gender === gender)
+      {
+        productList.push(all[type][i]);
+      }
+    }
+
+    store.dispatch(setProductList(productList));
+  }
+
+  logout()
+  {
+    this.props.onClick();
+    alert("You are now Logged out. Called from SidebarContent.logout()");
+    localStorage.removeItem("user");
+  }
 
   render() 
   {
-    const categoryLinks = [];
-    categoryLinks.push(<SidebarLink key={1} title='Hat' route='/pages/clothes/' onClick={this.hideSidebar} />);
-    categoryLinks.push(<SidebarLink key={2}title='T-Shirts' route='/pages/clothes/' onClick={this.hideSidebar} />);
-    categoryLinks.push(<SidebarLink key={3}title='Polo Shirts' route='/pages/clothes/' onClick={this.hideSidebar} />);
-    categoryLinks.push(<SidebarLink key={4}title='SweatShirts' route='/pages/clothes/' onClick={this.hideSidebar} />);
-    categoryLinks.push(<SidebarLink key={5}title='SweatPants' route='/pages/clothes/' onClick={this.hideSidebar} />);
-    categoryLinks.push(<SidebarLink key={6}title='Dress' route='/pages/clothes/' onClick={this.hideSidebar} />);
-    categoryLinks.push(<SidebarLink key={7}title='Jeans' route='/pages/clothes/' onClick={this.hideSidebar} />);
-    categoryLinks.push(<SidebarLink key={8}title='Pants' route='/pages/clothes/' onClick={this.hideSidebar} />);
-    categoryLinks.push(<SidebarLink key={9}title='Activewear' route='/pages/clothes/' onClick={this.hideSidebar} />);
+    const user = JSON.parse(localStorage.getItem("user"));
+    let role = "guest";
+    let isGuest = false;
+
+    if(!localStorage.getItem('user')){
+      isGuest = true;
+    }
+    else{
+      isGuest = false;
+      let userStorage = JSON.parse(localStorage.getItem('user'));
+      role = user[0].role.toLowerCase();
+    }
+    // if(user)
+    // {
+    //   role = user[0].role.toLowerCase();
+    // }
+
+    const mensCategoryLinks = [];
+    const womensCategoryLinks = [];
+
+    let types = this.props.typesList;
+    let all = this.props.allProducts;
+    
+    for(let t = 0; t < types.length; t++)
+    {
+      if(all[types[t]].length != 0)
+      {
+        let men = false;
+        let women = false;
+        for(let i = 0; i < all[types[t]].length; i++)
+        {
+          if(all[types[t]][i].gender === "men")
+          {
+            men = true;
+          }
+          else if(all[types[t]][i].gender === "women")
+          {
+            women = true;
+          }
+        }
+        if(men)
+        {
+          mensCategoryLinks.push(<SidebarLink title={types[t]} gender="men" route="/pages/clothes/" onClick={this.setMenList}/>);
+        }
+        if(women)
+        {
+          womensCategoryLinks.push(<SidebarLink title={types[t]} gender="women" route="/pages/clothes/" onClick={this.setWomenList}/>);
+        }
+      }
+    }
 
     const companyLinks = [];
-    companyLinks.push(<SidebarLink key={10}title='UNI-QLO' route='/pages/uniqlo' onClick={this.hideSidebar} />);
-    companyLinks.push(<SidebarLink key={11}title='OLD-NAVY' route='/pages/old_navy' onClick={this.hideSidebar} />);
-    companyLinks.push(<SidebarLink key={12}title='H&M' route='/pages/hm' onClick={this.hideSidebar} />);
-    companyLinks.push(<SidebarLink key={13}title='FOREVER21' route='/pages/forever21' onClick={this.hideSidebar} />);
-    companyLinks.push(<SidebarLink key={14}title='ZARA' route='/pages/zara' onClick={this.hideSidebar} />);
-    companyLinks.push(<SidebarLink key={15}title='BANANA REPUBLIC' route='/pages/banana_republic' onClick={this.hideSidebar} />);
+    companyLinks.push(<SidebarLink title='UNI-CLO' route='/pages/company/' onClick={this.hideSidebar} />);
+    companyLinks.push(<SidebarLink title='OLD-NAVY' route='/pages/company/' onClick={this.hideSidebar} />);
+    companyLinks.push(<SidebarLink title='H&M' route='/pages/company/hm' onClick={this.hideSidebar} />);
+    companyLinks.push(<SidebarLink title='FOREVER21' route='/pages/company/' onClick={this.hideSidebar} />);
+    companyLinks.push(<SidebarLink title='ZARA' route='/pages/company/' onClick={this.hideSidebar} />);
+    companyLinks.push(<SidebarLink title='BANANA REPUBLIC' route='/pages/company/' onClick={this.hideSidebar} />);
 
-    const menCategory = <SidebarCategory key={16} title="Men">{categoryLinks}</SidebarCategory>;
-    const womenCategory = <SidebarCategory key={17} title="Women">{categoryLinks}</SidebarCategory>;
+    const menCategory = <SidebarCategory title="Men">{mensCategoryLinks}</SidebarCategory>;
+    const womenCategory = <SidebarCategory title="Women">{womensCategoryLinks}</SidebarCategory>;
     const clothesCategories = [menCategory, womenCategory];
 
     const clothesCategory = <SidebarCategory key={18} title="Clothes" icon="store">{clothesCategories}</SidebarCategory>;
     const brandsCategory = <SidebarCategory key={19}title="Brands" icon="diamond">{companyLinks}</SidebarCategory>;
 
-    if(!isGuest&&userStore[0]&&userStore[0].role==='Customer'){
+    if(role === "customer") // customer view. needs logout, categories and brands
+    {
       return (
         <div className='sidebar_content'>
   
@@ -94,14 +134,14 @@ class SidebarContent extends Component {
           <ul className='sidebar_block'>     
             <SidebarCategory title='Account' icon='user'>
               <SidebarLink title='Profile' route='/pages/profile' onClick={this.hideSidebar} />
-                {/* <SidebarLink title='Register Item' route='/' onClick={this.hideSidebar} /> */}
-              </SidebarCategory>
-            <SidebarLink title='Log In' icon='exit' route='/log_in' onClick={this.hideSidebar} />
+            </SidebarCategory>
+            <SidebarLink title='Log Out' icon='exit' route='/pages/home' onClick={this.logout} />
           </ul>
         </div>
       )}
 
-    else if(!isGuest&&userStore[0]&&userStore[0].role==='company'){
+    else if(role === "company") // company view. needs logout, and categories. no brands
+    {
       return (
         <div className='sidebar_content'>
   
@@ -110,25 +150,22 @@ class SidebarContent extends Component {
           </ul>
 
           <ul className='sidebar_block'>
-            {/* {clothesCategory} */}
-            {brandsCategory}
+            {clothesCategory}
+            <SidebarLink title='Register Item' route='/' onClick={this.hideSidebar} />
           </ul>
   
-          {/* <ul className='sidebar_block'> */}          
-            <SidebarCategory title='Account' icon='user'>
-              <SidebarLink title='Profile' route='/pages/profile' onClick={this.hideSidebar} />
-              <SidebarLink title='Register Item' route='/' onClick={this.hideSidebar} />
-            </SidebarCategory>
-            <SidebarLink title='Log In' icon='exit' route='/log_in' onClick={this.hideSidebar} />
-          {/* </ul> */}
+          <ul className='sidebar_block'>          
+            <SidebarLink title='Log Out' icon='exit' route='/pages/home' onClick={this.logout} />
+          </ul>
         </div>
       )
     }
-    else{
+    else //guest view. needs login categories and brands
+    {
       return (
         <div className='sidebar_content'>
           <ul className='sidebar_block'>
-            <SidebarLink title='Home' icon='home' route='/pages/customer' onClick={this.hideSidebar} />
+            <SidebarLink title='Home' icon='home' route='/pages/home' onClick={this.hideSidebar} />
           </ul>
 
           <ul className='sidebar_block'>
@@ -137,10 +174,6 @@ class SidebarContent extends Component {
           </ul>
   
           <ul className='sidebar_block'>
-            {/* <SidebarCategory title='Account' icon='user'>
-              <SidebarLink title='Profile' route='/pages/profile' onClick={this.hideSidebar} />
-              <SidebarLink title='Register Item' route='/' onClick={this.hideSidebar} />
-            </SidebarCategory> */}
             <SidebarLink title='Log In' icon='exit' route='/log_in' onClick={this.hideSidebar} />
           </ul>
         </div>
@@ -149,4 +182,11 @@ class SidebarContent extends Component {
   }
 }
 
-export default SidebarContent;
+const mapStateToProps = (state) => {
+  return {
+    typesList: state.product.typesList,
+    allProducts: state.product.allProducts
+  };
+}
+
+export default connect(mapStateToProps, null) (SidebarContent);

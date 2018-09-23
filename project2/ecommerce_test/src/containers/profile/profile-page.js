@@ -7,10 +7,13 @@ export class ProfilePage extends React.Component
 {
     render()
     {
+        const userString = localStorage.getItem("user");
+        const user = JSON.parse(userString);
+        const firstname = user[0].customer.firstname;
         return (
             <ItemCard>
                 <div className="pageTitle">
-                    <h2>Welcome (username)!</h2>
+                    <h2>Welcome {firstname}!</h2>
                 </div>
                 <div className="profileColumns">
                     <PreviousPurchases />

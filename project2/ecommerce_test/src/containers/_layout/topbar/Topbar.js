@@ -13,6 +13,20 @@ export default class Topbar extends PureComponent {
 
   render() {
     let {changeMobileSidebarVisibility, changeSidebarVisibility} = this.props;
+    const user = JSON.parse(localStorage.getItem("user"));
+    let role = "guest";
+    let topbar = [];
+
+    if(user)
+    {
+      role = user[0].role.toLowerCase();
+    }
+
+    if(role === "customer")
+    {
+      topbar.push(<TopbarCart/>);
+    }
+    topbar.push(<TopbarProfile/>);
 
     return (
       <div className='topbar'>
@@ -23,8 +37,7 @@ export default class Topbar extends PureComponent {
           />
           <Link className='topbar_logo' to='/'/>
           <div className='topbar_right'>
-            <TopbarCart/>
-            <TopbarProfile/>
+            {topbar}
           </div>
         </div>
       </div>
