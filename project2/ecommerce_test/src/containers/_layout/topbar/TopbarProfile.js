@@ -44,7 +44,7 @@ export default class TopbarProfile extends PureComponent {
     }
     else if(role === "company")
     {
-      name = user[0].customer.firstname;
+      name = user[0].username;
       menu.push(<TopbarMenuLink title='Log Out' icon='exit' path='/pages/home' onClick={this.logout}/>)
     }
     else

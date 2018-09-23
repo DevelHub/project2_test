@@ -4,8 +4,7 @@ import {hot} from 'react-hot-loader';
 import 'bootstrap/dist/css/bootstrap.css'
 import '../scss/app.scss';
 import Router from './Router';
-import store from './store';
-import { setCurrentProduct, setProductList, setAllProducts, setTypesList } from '../redux/actions/productActions';
+import * as Data from './item-data';
 
 let isGuest = false;
 
@@ -25,7 +24,7 @@ class App extends Component {
       loading: true,
       loaded: false
     }
-    this.fetchAllGroupedByType();
+    Data.fetchItems();
   }
   
   componentDidMount() {
@@ -61,49 +60,6 @@ class App extends Component {
       </div>
     )
   }
-
-  fetchAllGroupedByType()
-  {
-    fetch("http://ec2-54-200-103-68.us-west-2.compute.amazonaws.com:3001/item-type", {
-      headers: {
-        "Content-Type":"application/json"
-      },
-      method: "GET"
-    })
-    .then(resp => {
-      if(resp.status == 200)
-      {
-        return resp.json();
-      }
-      throw Error("Could not retrieve item groups");
-    })
-    .then(rawItems => {
-      let formattedItems = {};
-      let typesList = [];
-      for(let t = 0; t < rawItems.length; t++)
-      {
-        const type = rawItems[t].type;
-        typesList.push(type);
-        formattedItems[type] = [];
-        for(let i = 0; i < rawItems[t].item.length; i++)
-        {
-          let item = {};
-          const ci = rawItems[t].item[i];
-          item["name"] = ci.name;
-          item["company"] = ci.company.companyName;
-          item["description"] = ci.description;
-          item["gender"] = ci.gender;
-          item["price"] = ci.price;
-          item["status"] = ci.status;
-          formattedItems[type].push(item);
-        }
-      }
-      store.dispatch(setAllProducts(formattedItems));
-      store.dispatch(setTypesList(typesList));
-    })    
-  }
 }
-
-
 
 export default hot(module)(App)

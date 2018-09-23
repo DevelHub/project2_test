@@ -1,8 +1,6 @@
 import * as React from 'react';
 import './itemViewStyles.css';
 import {connect} from 'react-redux';
-import {ItemCard, ItemRow, ItemListing, ItemTitle, ItemSubtitle, ItemImage, ItemDescription} from '../../components/item-listing/index';
-
 
 export class ItemViewPage extends React.Component
 {
@@ -14,8 +12,10 @@ export class ItemViewPage extends React.Component
     render()
     {
         return(
-            <ItemCard>
-                <ItemImage src="https://via.placeholder.com/350x150"/>
+            <div className="itemView">
+                <div className="viewImageDiv">
+                    <img className="viewImage" src="https://via.placeholder.com/350x150"/>
+                </div>
 
                 <div className="itemInformation">
                     <div className="itemOptions">
@@ -46,7 +46,7 @@ export class ItemViewPage extends React.Component
                             </div>
                         </div>
                         <div className="inline buttonInline">
-                        <button className="addToCartButton" onClick={() => this.props.history.push("/pages/cart")}>Add To Cart</button>
+                        <button className="btn btn-primary" onClick={() => this.props.history.push("/pages/cart")}>Add To Cart</button>
                         </div>
                     </div>
                     
@@ -54,14 +54,13 @@ export class ItemViewPage extends React.Component
                         {this.props.currentProduct.description} 
                     </div>
                 </div>
-            </ItemCard>
+            </div>
         )
     }
 }
 
-const mapStateToProps = (state) => {
-    console.log(state);
-    return {currentProduct: state.product.currentProduct};
-}
+// const mapStateToProps = (state) => {
+//     return {currentProduct: state.product.currentProduct};
+// }
 
-export default connect(mapStateToProps, null) (ItemViewPage);
+// export default connect(mapStateToProps, null) (ItemViewPage);
