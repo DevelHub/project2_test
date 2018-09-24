@@ -1,34 +1,71 @@
 import * as React from 'react';
 import './itemViewStyles.css';
-import {connect} from 'react-redux';
+import { connect } from 'react-redux';
 
-export class ItemViewPage extends React.Component
-{
-    constructor(props)
-    {
+export class ItemViewPage extends React.Component {
+    constructor(props) {
         super(props);
+        this.state = {
+            cart: {
+                customerId: 0,
+                itemId: 0,
+                quantity: 0,
+            }
+        }
+
+        this.handleClick = this.handleClick.bind(this);
     }
 
-    render()
-    {
-        return(
+    handleClick(event) {
+        event.preventDefault();
+        const { cart } = this.state;
+        let user = JSON.parse(localStorage.getItem('user'));
+        let userId = user[0].customer.id;
+       
+        let itemId = this.props.currentProduct.itemId;
+
+        console.log(itemId);
+        console.log(userId);
+
+        cart.customerId = userId;
+        cart.itemId = itemId;
+        // cart.quantity = userId.customer.item.quantity;
+        cart.quantity=1;
+
+
+        fetch(`http://ec2-54-200-103-68.us-west-2.compute.amazonaws.com:3001/cart/add`, {
+            headers: {
+                "Content-Type": "application/json"
+            },
+            body: JSON.stringify(cart),
+            method: "POST"
+        });//end fetch
+
+        console.log('post cart done');
+
+
+        this.props.history.push("/pages/cart");
+    }
+
+    render() {
+        return (
             <div className="itemView">
                 <div className="viewImageDiv">
-                    <img className="viewImage" src="https://via.placeholder.com/350x150"/>
+                    <img className="viewImage" src="https://via.placeholder.com/350x150" />
                 </div>
 
                 <div className="itemInformation">
                     <div className="itemOptions">
                         <div className="inline">
-                            <div className="optionTitle">{this.props.currentProduct.name}<hr className="myHr"/></div>
+                            <div className="optionTitle">{this.props.currentProduct.name}<hr className="myHr" /></div>
                             <div className="optionDiv">{this.props.currentProduct.company}</div>
                         </div>
                         <div className="inline">
-                            <div className="optionTitle">Price<hr className="myHr"/></div>
+                            <div className="optionTitle">Price<hr className="myHr" /></div>
                             <div className="optionDiv">${this.props.currentProduct.price}</div>
                         </div>
                         <div className="inline">
-                            <div className="optionTitle">Choose Color<hr className="myHr"/></div>
+                            <div className="optionTitle">Choose Color<hr className="myHr" /></div>
                             <div className="optionDiv">
                                 <div className="colorCheckBox blue"></div>
                                 <div className="colorCheckBox red"></div>
@@ -36,7 +73,7 @@ export class ItemViewPage extends React.Component
                             </div>
                         </div>
                         <div className="inline">
-                            <div className="optionTitle">Choose Size<hr className="myHr"/></div>
+                            <div className="optionTitle">Choose Size<hr className="myHr" /></div>
                             <div className="optionDiv">
                                 <div className="sizeSelect">s</div>
                                 <div className="sizeSelect">m</div>
@@ -46,12 +83,12 @@ export class ItemViewPage extends React.Component
                             </div>
                         </div>
                         <div className="inline buttonInline">
-                        <button className="btn btn-primary" onClick={() => this.props.history.push("/pages/cart")}>Add To Cart</button>
+                            <button className="btn btn-primary" onClick={this.handleClick}>Add To Cart</button>
                         </div>
                     </div>
-                    
+
                     <div className="itemDescription">
-                        {this.props.currentProduct.description} 
+                        {this.props.currentProduct.description}
                     </div>
                 </div>
             </div>

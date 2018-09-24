@@ -1,5 +1,6 @@
 import React, {PureComponent, Component} from 'react';
 import {Col, Container, Row} from 'reactstrap';
+import {RecommendCard} from './RecommendCard';
 
 
 export  class RecommendPage extends Component {
@@ -8,10 +9,10 @@ export  class RecommendPage extends Component {
       <Container>
         <Row>
           <Col md={12}>
-            <h3 className='page-title'>Cart</h3>
+            <h2 className='page-title'>RECOMMENDED ITEMS</h2>
           </Col>
         </Row>
-        
+            <RecommendCard history={this.props.history}/>
         <Row>
         </Row>
       </Container>

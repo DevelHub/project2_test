@@ -7,10 +7,11 @@ export class ItemViewController extends React.Component
 {
     render()
     {
+        
         let page;
         const user = JSON.parse(localStorage.getItem("user"));
-        console.log("user from ivc");
-        console.log(user);
+        // console.log("user from ivc");
+        // console.log(user);
 
         if(user && user[0].role === "company")
         {
@@ -18,7 +19,8 @@ export class ItemViewController extends React.Component
         }
         else
         {
-            page = <ItemViewPage currentProduct={this.props.currentProduct}/>;
+            page = <ItemViewPage currentProduct={this.props.currentProduct}history = {this.props.history}/>;
+            
         }
 
         return(

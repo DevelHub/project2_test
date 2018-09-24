@@ -6,10 +6,13 @@ import DeleteForeverIcon from 'mdi-react/DeleteForeverIcon';
 
 import SweetAlert from 'sweetalert2-react';
 
-// const history = createHistory();
 
-let customerId=0;
-let data = [];
+
+export class CartCard extends Component {
+
+  constructor(props) {
+    let customerId=0;
+// let data = [];
 let cart;
 let totalPrice = 0;
 let getCustomerId = JSON.parse(localStorage.getItem('user'));
@@ -19,90 +22,79 @@ let today = new Date();
 let year = today.getFullYear();
 let month = today.getMonth()+1;
 let day = today.getDate();
-let userId;
+let userId = 0;
 console.log(year);
-
-if (!localStorage.getItem('user')) {
-  isGuest = true;
-}
-else {
-  isGuest = false;
-  if(isGuest===false){
-    customerId = JSON.parse(localStorage.getItem('user'));
-    userId = customerId[0].customer.id;
-  }
- 
-}
-
-function getData() {
-  fetch(`http://ec2-54-200-103-68.us-west-2.compute.amazonaws.com:3001/cart/get/${userId}`, {
-    // fetch('http://localhost:3001/cart/get/2',{
-    headers: {
-      "Content-Type": "application/json"
-    },
-    method: "GET"
-  })
-    .then(resp => resp.json())
-    .then(resp => {
-      for (let i = 0; i < resp.length; i++) {
-        data.push(resp[i]);
-      }
-      // console.log(data[0].quantity);
-      return data;
-    });//end fetch
-
-}
-getData();
-
-
-function calcSubTotal(price, quantity) {
-  let totalAmount = 0;
-  totalAmount += (price * quantity);
-  console.log(totalAmount);
-  calcTotal(totalAmount);
-
-  return totalAmount;
-
-}
-function calcTotal(subTotal) {
-  // console.log(totalPrice);
-  totalPrice += subTotal;
-
-}
-
-
-
-export class CartCard extends Component {
-
-  constructor(props) {
     super(props);
+
+    if (!localStorage.getItem('user')) {
+      isGuest = true;
+    }
+    else if(isGuest===false) {
+        customerId = JSON.parse(localStorage.getItem('user'));
+        userId = customerId[0].customer.id;
+      }
     this.state = {
-      data: data,
+      data: [],
       cart: {
         itemId: 0,
-        customerId: 0,
-        purchaseDate: ''
+        customerId: userId,
+        purchaseDate: '',
+        quantity:0
 
-      }
+      },
+      totalPrice: 0,
+      isGuest,
+      year,
+      month,
+      day,
+      rendered: false
     };
 
     this.handlePurchase = this.handlePurchase.bind(this);
   }
 
 
-  
+  componentDidMount() {
+    console.log(`customer id = ${this.state.cart.customerId}`);
+    setTimeout(() => {
+      
+    fetch(`http://ec2-54-200-103-68.us-west-2.compute.amazonaws.com:3001/cart/get/${this.state.cart.customerId}`, {
+      // fetch('http://localhost:3001/cart/get/2',{
+      headers: {
+        "Content-Type": "application/json"
+      },
+      method: "GET"
+    })
+      .then(resp => resp.json())
+      .then(resp => {
+        console.log(resp);
+        let price = 0;
+        for(let i = 0; i < resp.length; i++) {
+          price += (resp[0].item.price * resp[0].quantity);
+        }
+        this.setState({
+          ...this.state,
+          data: resp,
+          totalPrice: price
+        })
+            return resp;
+      });//end fetch
+    }, 10);
+  }
+
   handlePurchase(event) {
 
     console.log('you got in handle purchase');
     const { cart } = this.state;
   
-    for (let i = 0; i < data.length; i++) {
-      console.log(data[0].itemId);
-      console.log(data[0].customerId);
+    for (let i = 0; i < this.state.data.length; i++) {
+      console.log(this.state.data[0].itemId);
+      console.log(this.state.data[0].customerId);
 
-      cart.itemId=data[i].itemId;
-      cart.customerId=data[i].customerId;
-      cart.purchaseDate = `${year}-0${month}-${day}`;
+      cart.itemId=this.state.data[i].itemId;
+      cart.customerId=this.state.data[i].customerId;
+      cart.purchaseDate = `${this.state.year}-0${this.state.month}-${this.state.day}`;
+      cart.quantity = this.state.data[i].quantity;
       // cart.purchaseDate = '2018-09-25';
       
       fetch(`http://ec2-54-200-103-68.us-west-2.compute.amazonaws.com:3001/purchase`, {
@@ -115,12 +107,19 @@ export class CartCard extends Component {
   
     console.log(`purchase finished ${i}`)
     }
+
+    console.log(`this is customer id ${this.state.cart.customerId}`);
     //deleting current cart
-    fetch(`http://ec2-54-200-103-68.us-west-2.compute.amazonaws.com:3001/cart/customer/${customerId}`, {
+    fetch(`http://ec2-54-200-103-68.us-west-2.compute.amazonaws.com:3001/cart/customer/${this.state.cart.customerId}`, {
       headers: {
         "Content-Type": "application/json"
       },
       method: "DELETE"
+    })
+    this.setState({
+      ...this.state,
+      data: [],
+      totalPrice: 0
     })
 
     console.log("cart is deleted")
@@ -129,11 +128,15 @@ export class CartCard extends Component {
   }
 
 
-
+  
   render() {
-
-    const { data } = this.state;
+  
+  
+    const { data, totalPrice } = this.state;
+    console.log(`in render${data}`);
     return (
+      <div>
+        
       <Col md={12} lg={12}>
         <Card className='cart'>
           <CardBody>
@@ -160,7 +163,7 @@ export class CartCard extends Component {
                     </td>
                     <td>{cartItem.quantity}</td>
                     <td>${cartItem.item.price.toFixed(2)}</td>
-                    <td>${calcSubTotal(cartItem.item.price, cartItem.quantity).toFixed(2)}</td>
+                    <td>${cartItem.item.price * cartItem.quantity.toFixed(2)}</td>
                     <td>
                       <button className='cart_table-btn'>
                         <DeleteForeverIcon /> Remove
@@ -185,6 +188,7 @@ export class CartCard extends Component {
           </CardBody>
         </Card>
       </Col>
+      </div>
     )
   }
 }
