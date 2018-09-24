@@ -24,6 +24,8 @@ export class ItemsPage extends React.Component
     render()
     {
         const data = this.props.productList;
+        console.log("data");
+        console.log(data);
 
         let rows = [];
         for(let i = 0; i < data.length; i++)
@@ -34,11 +36,13 @@ export class ItemsPage extends React.Component
                 if(i < data.length)
                 {
                     let item = {
+                        itemId: data[i].itemId,
                         name: data[i].name,
                         company: data[i].company,
                         image: data[i].image,
                         description: data[i].description,
-                        price: data[i].price
+                        price: data[i].price,
+                        status: data[i].status
                     }
 
                     let children = [];

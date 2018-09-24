@@ -10,17 +10,19 @@ import {CompanyPage} from '../containers/company/company-page';
 import {CustomerPage} from '../containers/customer/customer-page';
 import {ProfilePage} from '../containers/profile/profile-page';
 import { AdminHomePage } from '../containers/admin/admin-home-page';
-import ItemViewPage from '../containers/items/itemViewPage';
 import {CartPage} from '../containers/cart/cart-page';
 import {PaymentPage} from '../containers/payment/payment-page';
 import {RegisterPage} from '../containers/register/register-page';
 import {Wishlist} from '../containers/wishlist/wishlist';
+import {RegisterItem} from '../containers/registerItem/registerItem';
+import ItemViewController from '../containers/items/itemViewController';
 import {UniPage} from '../containers/company/uniqlo/UniMain';
 import {OldPage} from '../containers/company/oldnavy/OldMain';
 import {ZaraPage} from '../containers/company/zara/ZaraMain';
 import {BananaPage} from '../containers/company/banana/BananaMain';
 import { ForeverPage } from '../containers/company/forever21/ForeverMain';
 import { HmPage } from '../containers/company/hm/HmMain';
+import { RecommendPage } from '../containers/recommend/recommend-page';
 
 
 
@@ -53,7 +55,7 @@ const Pages = () => (
   <Switch>
     <Route path="/pages/home" component = {HomePage}/>
     <Route path="/pages/admin" component={AdminHomePage}/>
-    <Route path="/pages/clothes/product" component={ItemViewPage}/>
+    <Route path="/pages/clothes/product" component={ItemViewController}/>
     <Route path="/pages/clothes" component={ItemsPage}/>
     <Route path="/pages/company" component={CompanyPage}/>
     <Route path="/pages/customer" component={CustomerPage}/>
@@ -62,12 +64,14 @@ const Pages = () => (
     <Route path="/pages/payment" component={PaymentPage}/>  
     <Route path="/pages/register" component={RegisterPage}/>
     <Route path="/pages/wishlist" component={Wishlist}/>
+    <Route path="/pages/register-item" component={RegisterItem}/>
     <Route path="/pages/uniqlo" component={UniPage}/>
     <Route path="/pages/old_navy" component={OldPage}/>
     <Route path="/pages/forever21" component={ForeverPage}/>
     <Route path="/pages/zara" component={ZaraPage}/>
     <Route path="/pages/hm" component={HmPage}/>
     <Route path="/pages/banana_republic" component={BananaPage}/>
+    <Route path="/pages/recommend" component={RecommendPage}/>
     <Route component={HomePage}/>
   </Switch>
 );

@@ -21,6 +21,7 @@ export default class TopbarProfile extends PureComponent {
 
   logout()
   {
+    this.toggle();
     alert("logged out");
     localStorage.removeItem(`user`);
   }
@@ -31,33 +32,21 @@ export default class TopbarProfile extends PureComponent {
     let name = "Guest";
     let menu = [];
 
-    let isGuest = false;
-
-    if(!localStorage.getItem('user')){
-      isGuest = true;
-    }
-    else{
-      isGuest = false;
-      // let userStorage = JSON.parse(localStorage.getItem('user'));
-      role = user[0].role.toLowerCase();
-    }
-
-    if(!isGuest&&user)
+    if(user)
     {
       role = user[0].role.toLowerCase();
-      console.log(role);
-      console.log('this is not guest');
     }
-
-    else if(role === "customer")
+   
+    if(role === "customer")
     {
       name = user[0].customer.firstname;
       menu.push(<TopbarMenuLink title='Profile' icon='user' path='/pages/profile/'/>);
       menu.push(<div className='topbar_menu-divider'/>);
+      menu.push(<TopbarMenuLink title='Log Out' icon='exit' path='/pages/home' onClick={this.logout}/>)
     }
     else if(role === "company")
     {
-      name = user[0].customer.firstname;
+      name = user[0].username;
       menu.push(<TopbarMenuLink title='Log Out' icon='exit' path='/pages/home' onClick={this.logout}/>)
     }
     else

@@ -1,0 +1,23 @@
+
+.registerHeader{
+    width: 100%;
+    text-align: center;
+    border-bottom: 1px solid #606060;
+    padding-bottom: 2em;
+}
+
+.registerCols{
+    width: 100%;
+    margin-top: 3em;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+}
+
+.sec{
+    width: 100%;
+    margin-bottom: 3em;
+}
+
+.registerInput{
+    width: 50%;
+}

@@ -4,35 +4,60 @@ import StarIcon from 'mdi-react/StarIcon';
 import StarOutlineIcon from 'mdi-react/StarOutlineIcon';
 import {Link} from 'react-router-dom';
 
+let today = new Date();
+let year = today.getFullYear();
+let month = today.getMonth()+1;
+let day = today.getDate();
 
-// function getData(){
-//     fetch(`http://ec2-54-200-103-68.us-west-2.compute.amazonaws.com:3001/cart/get/2`, {
-//       // fetch('http://localhost:3001/cart/get/2',{
-//   headers: {
-//     "Content-Type": "application/json"
-//   },
-//   method: "GET"
-// })
-//   .then(resp => resp.json())
-//   .then(resp => {
-//      for(let i=0; i<resp.length;i++){
-//          data.push(resp[i]);
-       
-//      }
-//     // console.log(data[0].quantity);
-//     return data;
-//   });//end fetch
+export class UniCard extends Component {
 
-// }
-// getData();
 
-function handleClick(){
+  
+  constructor(props) {
+    super(props);
+    this.state = {
+        user:{
+          companyId: 0,
+          customerId: 0,
+          timeFrame: ''
+
+
+        }
+      }
+    
+
+    this.handleSubscribe = this.handleSubscribe.bind(this);
+  }
+
+
+handleSubscribe(event){
+  const {user} = this.state;
+  console.log(`got in subscribe handler`);
+  event.preventDefault();
+  let currentUser = JSON.parse(localStorage.getItem('user'));
+
+  user.companyId = 1;
+  user.customerId = currentUser[0].customer.id;
+  user.timeFrame = `${year}-0${month}-${day}`;
+
+  console.log(user.companyId);
+  console.log(user.customerId);
+  console.log(user.timeFrame);
+ 
+
+  fetch(`http://ec2-54-200-103-68.us-west-2.compute.amazonaws.com:3001/subscription/add`, {
+    headers: {
+      "Content-Type": "application/json"
+    },
+    body: JSON.stringify(user),
+    method: "POST"
+  });//end fetch
+
+  console.log('added to uniqlo');
+  alert(`Success to subscribe UNIQLO`);
 
 
 }
-
-
-export class UniCard extends Component {
 
 
   render() {
@@ -60,7 +85,7 @@ export class UniCard extends Component {
               </div>
             </div>
           </CardBody>
-          <button className='btn btn-primary' >Subscribe</button>
+          <button className='btn btn-primary' onClick={this.handleSubscribe} >Subscribe</button>
         </Card>
       </Col>
     )

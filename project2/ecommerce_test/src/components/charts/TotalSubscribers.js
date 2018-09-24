@@ -46,6 +46,9 @@ export class TotalSubscribers extends PureComponent {
     render() {
         const { activeIndex, data } = this.state;
         const activeItem = data[activeIndex];
+
+        // console.log(data[0].name);
+        // console.log(activeItem);
         
 
         return (
@@ -60,9 +63,9 @@ export class TotalSubscribers extends PureComponent {
                         <div className='dashboard_total'>
                             <p className='dashboard_total-stat'>
                                
-                                {/* {`name : ${activeItem.name}`} */}
-                                {/* {("   Subscribers = ")} */}
-                                {/* {activeItem.total} */}
+                                <p>{data[activeIndex].name}</p>
+                                <p>{` Subscribers =  ${data[activeIndex].total}`}</p>
+                               
                             </p>
                             <ResponsiveContainer height={150} className='dashboard_chart-container'>
                                 <BarChart data={data}>
