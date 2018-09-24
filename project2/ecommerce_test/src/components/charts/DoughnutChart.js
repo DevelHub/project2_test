@@ -41,12 +41,7 @@ fetch(`http://ec2-54-200-103-68.us-west-2.compute.amazonaws.com:3001/customer/ag
     }//end for
   });//end fetch
 
-    
-    console.log("age 1 =" + ageGroupOne);
-    console.log("age 2 =" + ageGroupTwo);
-    console.log("age 3 =" + ageGroupThree);
-    console.log("age 4 =" + ageGroupFour);
-    console.log("age 5 =" + ageGroupFive);
+  
 
     const getState = () => ({
       labels: [
