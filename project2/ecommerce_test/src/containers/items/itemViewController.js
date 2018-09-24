@@ -14,11 +14,11 @@ export class ItemViewController extends React.Component
 
         if(user && user[0].role === "company")
         {
-            page = <CompanyItemViewPage currentProduct={this.props.currentProduct}/>;
+            page = <CompanyItemViewPage history={this.props.history} currentProduct={this.props.currentProduct}/>;
         }
         else
         {
-            page = <ItemViewPage currentProduct={this.props.currentProduct}/>;
+            page = <ItemViewPage history={this.props.history} currentProduct={this.props.currentProduct}/>;
         }
 
         return(

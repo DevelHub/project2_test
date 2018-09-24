@@ -13,10 +13,6 @@
     grid-template-columns: 1fr 1fr;
 }
 
-.col{
-    width: 100%;
-}
-
 .sec{
     width: 100%;
     margin-bottom: 3em;
@@ -24,8 +20,4 @@
 
 .registerInput{
     width: 50%;
-}
-
-.area{
-    height: 100%;
 }

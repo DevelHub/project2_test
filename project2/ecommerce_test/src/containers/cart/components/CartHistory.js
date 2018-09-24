@@ -9,7 +9,7 @@ let data = [];
 let cart;
 let totalPrice = 0;
 let isGuest = false;
-let userId;
+let userId = 0;
 
 if (!localStorage.getItem('user')) {
   isGuest = true;
@@ -105,9 +105,6 @@ export class CartHistory extends Component {
                   )}
                 </tbody>
               </Table>
-  
-              
-  
             </CardBody>
           </Card>
         </Col>

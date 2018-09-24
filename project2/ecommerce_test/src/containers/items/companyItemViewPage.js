@@ -8,8 +8,22 @@ export class CompanyItemViewPage extends React.Component
     constructor(props)
     {
         super(props);
-        this.deleteItem = this.deleteItem.bind(this);
+        this.statusChanged = this.statusChanged.bind(this);
+        this.priceChanged = this.priceChanged.bind(this);
+        this.descriptionChanged = this.descriptionChanged.bind(this);
+        this.saveChanges = this.saveChanges.bind(this);
+        this.updateStatus = this.updateStatus.bind(this);
+        this.updatePrice = this.updatePrice.bind(this);
+        this.updateDescription = this.updateDescription.bind(this);
+        this.deleteItem = this.deleteItem.bind(this)
+        this.state = {
+            diplay: "",
+            price: "",
+            description: "",
+            status: this.props.currentProduct.status
+        }
     }
+
     render()
     {
         console.log("current product");
@@ -27,9 +41,9 @@ export class CompanyItemViewPage extends React.Component
                     </div>
                     <div className="sec bb">
                         <h3>Set Item Status</h3>
-                        <p><select>
-                            <option>Displayed</option>
-                            <option>Hidden</option>
+                        <p><select onChange={this.statusChanged} value={this.state.status}>
+                            <option value="displayed">Displayed</option>
+                            <option value="hidden">Hidden</option>
                         </select></p>
                     </div>
                     <div className="sec bb">
@@ -38,7 +52,7 @@ export class CompanyItemViewPage extends React.Component
                     </div>
                     <div className="sec bb">
                         <h3>Edit Price</h3>
-                        <p><input type="text"/></p>
+                        <p><input onChange={this.priceChanged} type="text"/></p>
                     </div>
                     <div className="sec bb">
                         <h3>Description</h3>
@@ -46,7 +60,7 @@ export class CompanyItemViewPage extends React.Component
                     </div>
                     <div className="sec bb">
                         <h3>Edit Description</h3>
-                        <p><input type="text"/></p>
+                        <p><input onChange={this.descriptionChanged} type="text"/></p>
                     </div>
                     <div className="sec">
                         <button className="btn btn-danger" onClick={this.deleteItem}>Delete Item</button>
@@ -59,6 +73,36 @@ export class CompanyItemViewPage extends React.Component
         )
     }
 
+    statusChanged(e)
+    {
+        const target = e.target;
+        const value = target.options[target.selectedIndex].value;
+        target.value = value;
+
+        this.setState({
+            ...this.state,
+            status: value
+        })
+    }
+
+    priceChanged(e)
+    {
+        const value = e.target.value;
+        this.setState({
+            ...this.state,
+            price: value
+        })
+    }
+
+    descriptionChanged(e)
+    {
+        const value = e.target.value;
+        this.setState({
+            ...this.state,
+            description: value
+        })
+    }
+
     deleteItem()
     {
         const item = this.props.currentProduct;
@@ -67,7 +111,36 @@ export class CompanyItemViewPage extends React.Component
 
     saveChanges()
     {
-
+        const status = this.state.status;
+        const currentStatus = this.props.currentProduct.status;
+        const price = this.state.price;
+        const description = this.state.description;
+        let updated = false;
+        if(status && status != currentStatus)
+        {
+            this.updateStatus(status);
+            updated = true;
+        }
+        setTimeout(() => {
+            if(price)
+            {
+                this.updatePrice(price);
+                updated = true;
+            }
+            setTimeout(() => {
+                if(description)
+                {
+                    this.updateDescription(description);
+                    updated = true;
+                }
+            }, 1200);
+           
+        }, 1000);
+        
+        if(updated)
+        {
+            Data.fetchItems();
+        }
     }
 
     updateStatus(status)
@@ -80,9 +153,10 @@ export class CompanyItemViewPage extends React.Component
     {
         const item = this.props.currentProduct;
         Data.updateItemPrice(item.itemId, price);
+        // setTimeout(() => {this.props.history.push("/pages/clothes/product")}, 2000);
     }
 
-    udateDescription(description)
+    updateDescription(description)
     {
         const item = this.props.currentProduct;
         Data.updateItemDescription(item.itemId, description);

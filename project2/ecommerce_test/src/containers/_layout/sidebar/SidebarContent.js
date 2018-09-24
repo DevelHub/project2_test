@@ -8,9 +8,10 @@ import { setCurrentProduct, setProductList, setAllProducts } from '../../../redu
 class SidebarContent extends Component {
   constructor(props) {
     super(props);
-
     this.logout = this.logout.bind(this);
-
+    let user = JSON.parse(localStorage.getItem("user"))
+    console.log("user");
+    console.log(user);
   }
 
   hideSidebar = (e) => {

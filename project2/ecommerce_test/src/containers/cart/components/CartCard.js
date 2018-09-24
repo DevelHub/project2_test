@@ -19,7 +19,7 @@ let today = new Date();
 let year = today.getFullYear();
 let month = today.getMonth()+1;
 let day = today.getDate();
-let userId;
+let userId = 0;
 console.log(year);
 
 if (!localStorage.getItem('user')) {
@@ -29,7 +29,7 @@ else {
   isGuest = false;
   if(isGuest===false){
     customerId = JSON.parse(localStorage.getItem('user'));
-    userId = customerId[0].customer.id;
+    //userId = customerId[0].customer.id;
   }
  
 }

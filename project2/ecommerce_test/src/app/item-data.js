@@ -1,6 +1,20 @@
 import store from './store';
 import * as pActions from '../redux/actions/productActions';
 
+function rawToFormatted(raw)
+{
+  let item = {};
+  item["itemId"] = raw.id;
+  item["name"] = raw.name;
+  item["price"] = raw.price;
+  item["description"] = raw.description;
+  item["company"] = raw.company.companyName;
+  item["companyId"] = raw.company.id;
+  item["companyUserId"] = raw.company.userId;
+  item["gender"] = raw.gender;
+  item["status"] = raw.status;
+  return item;
+}
 
 export function fetchItems()
 {
@@ -52,7 +66,7 @@ export function updateItemStatus(itemId, status)
         id: itemId,
         status: status
     }
-    fetch("http://ec2-54-200-103-68.us-west-2.compute.amazonaws.com:3001/item/updatestatus", {
+    fetch("http://ec2-54-200-103-68.us-west-2.compute.amazonaws.com:3001/item/update-status", {
         body: JSON.stringify(item),
         headers: {
             "Content-Type":"application/json"
@@ -60,11 +74,14 @@ export function updateItemStatus(itemId, status)
         method: "PATCH"
     })
     .then(resp => {
-        if(resp.status === 200)
+        if(resp.status === 200 || resp.status === 201)
         {
-          return;
+          return resp.json();
         }
         throw Error("Could not update item status");
+    })
+    .then(raw => {
+      store.dispatch(pActions.setCurrentProduct(rawToFormatted(raw)));
     })
 }
 
@@ -74,7 +91,7 @@ export function updateItemPrice(itemId, price)
     id: itemId,
     price: price
   }
-  fetch("http://ec2-54-200-103-68.us-west-2.compute.amazonaws.com:3001/item/updateprice", {
+  fetch("http://ec2-54-200-103-68.us-west-2.compute.amazonaws.com:3001/item/update-price", {
     body: JSON.stringify(item),
     headers: {
       "Content-Type":"application/json"
@@ -82,11 +99,14 @@ export function updateItemPrice(itemId, price)
     method: "PATCH"
   })
   .then(resp => {
-    if(resp.status === 200)
+    if(resp.status === 200 || resp.status === 201)
     {
-      return;
+      return resp.json();
     }
     throw Error("Could not update item price");
+  })
+  .then(raw => {
+    store.dispatch(pActions.setCurrentProduct(rawToFormatted(raw)));
   })
 }
 
@@ -96,7 +116,53 @@ export function updateItemDescription(itemId, description)
     id: itemId,
     description: description
   }
-  fetch("http://ec2-54-200-103-68.us-west-2.compute.amazonaws.com:3001/item/updatedescription", {
+  fetch("http://ec2-54-200-103-68.us-west-2.compute.amazonaws.com:3001/item/update-description", {
+    body: JSON.stringify(item),
+    headers: {
+      "Content-Type":"application/json"
+    },
+    method: "PATCH"
+  })
+  .then(resp => {
+    if(resp.status === 200 || resp.status === 201)
+    {
+      return resp.json();
+    }
+    throw Error("Could not update item description");
+  })
+  .then(raw => {
+    store.dispatch(pActions.setCurrentProduct(rawToFormatted(raw)));
+  })
+}
+
+export function updateItemName(itemId, name)
+{
+  const item = {
+    id: itemId,
+    name: name
+  }
+  fetch("http://ec2-54-200-103-68.us-west-2.compute.amazonaws.com:3001/item/update-name", {
+    body: JSON.stringify(item),
+    headers: {
+      "Content-Type":"application/json"
+    },
+    method: "PATCH"
+  })
+  .then(resp => {
+    if(resp.status === 200 || resp.status === 201)
+    {
+      return resp.json();
+    }
+    throw Error("Could not update item name");
+  })
+  .then(raw => {
+    store.dispatch(pActions.setCurrentProduct(rawToFormatted(raw)));
+  })
+}
+
+export function insertItem(item)
+{
+  fetch("http://ec2-54-200-103-68.us-west-2.compute.amazonaws.com:3001/item/add", {
     body: JSON.stringify(item),
     headers: {
       "Content-Type":"application/json"
@@ -108,28 +174,6 @@ export function updateItemDescription(itemId, description)
     {
       return;
     }
-    throw Error("Could not update item description");
-  })
-}
-
-export function updateItemName(itemId, name)
-{
-  const item = {
-    id: itemId,
-    name: name
-  }
-  fetch("http://ec2-54-200-103-68.us-west-2.compute.amazonaws.com:3001/item/updatename", {
-    body: JSON.stringify(item),
-    headers: {
-      "Content-Type":"application/json"
-    },
-    method: "PATCH"
-  })
-  .then(resp => {
-    if(resp.status === 200)
-    {
-      return;
-    }
-    throw Error("Could not update item name");
+    throw Error("Could not create new item");
   })
 }
