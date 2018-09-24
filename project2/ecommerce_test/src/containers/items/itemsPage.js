@@ -42,13 +42,14 @@ export class ItemsPage extends React.Component
                         image: data[i].image,
                         description: data[i].description,
                         price: data[i].price,
-                        status: data[i].status
+                        status: data[i].status,
+                        type: data[i].type
                     }
 
                     let children = [];
                     children.push(<ItemTitle>{item.name}</ItemTitle>);
                     children.push(<ItemSubtitle>{item.company}</ItemSubtitle>);
-                    children.push(<ItemImage src={item.image}/>);
+                    children.push(<ItemImage type={item.type} src={item.image}/>);
                     children.push(<ItemDescription>{item.description}</ItemDescription>);
 
                     listings.push(<ItemListing clicked={this.listingClicked} currentProduct={item}> {children} </ItemListing>)

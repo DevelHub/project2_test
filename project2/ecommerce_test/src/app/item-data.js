@@ -52,6 +52,7 @@ export function fetchItems()
           item["gender"] = ci.gender;
           item["price"] = ci.price;
           item["status"] = ci.status;
+          item["type"] = type;
           formattedItems[type].push(item);
         }
       }
