@@ -9,23 +9,32 @@ let data = [];
 let cart;
 let totalPrice = 0;
 let isGuest = false;
-let userId = 0;
+let userId;
+let user = JSON.parse(localStorage.getItem('user'));
+
+
+// if(!user){
+//   console.log('passed');
+// }
+// else{
+//   console.log('its not guest');
+//     customerId = JSON.parse(localStorage.getItem('user'));
+//     userId = customerId[0].customer.id;
+//     console.log (`customer id = ${userId}`);
+// }
 
 if (!localStorage.getItem('user')) {
   isGuest = true;
+  console.log('it is guest');
 }
 else {
-  isGuest = false;
-  if(isGuest ===false){
+  console.log('pased');
     customerId = JSON.parse(localStorage.getItem('user'));
     userId = customerId[0].customer.id;
     console.log (`customer id = ${userId}`);
-
   }
 
 
-
-}
 function getData() {
     // console.log(`customer id : ${customerId[0].customer.id}`);
     fetch(`http://ec2-54-200-103-68.us-west-2.compute.amazonaws.com:3001/purchase/${userId}`, {

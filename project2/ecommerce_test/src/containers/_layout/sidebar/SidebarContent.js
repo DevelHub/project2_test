@@ -72,18 +72,19 @@ class SidebarContent extends Component {
     let role = "guest";
     let isGuest = false;
 
-    if(!localStorage.getItem('user')){
-      isGuest = true;
-    }
-    else{
-      isGuest = false;
-      let userStorage = JSON.parse(localStorage.getItem('user'));
-      role = user[0].role.toLowerCase();
-    }
-    // if(user)
-    // {
+    // if(!localStorage.getItem('user')){
+    //   isGuest = true;
+    // }
+    // else{
+    //   isGuest = false;
+    //   let userStorage = JSON.parse(localStorage.getItem('user'));
     //   role = user[0].role.toLowerCase();
     // }
+
+    if(user)
+    {
+      role = user[0].role.toLowerCase();
+    }
 
     let userCompany = "";
     if(role === "company")
@@ -170,7 +171,7 @@ class SidebarContent extends Component {
           <ul className='sidebar_block'>
             {clothesCategory}
             {brandsCategory}
-            <SidebarLink title="Recommend Item" rout = "page/recommend" onClick={this.hideSideba}/>
+            <SidebarLink title="Recommended Item" icon ='store' route = "/pages/recommend" onClick={this.hideSideba}/>
           </ul>
   
           <ul className='sidebar_block'>     
