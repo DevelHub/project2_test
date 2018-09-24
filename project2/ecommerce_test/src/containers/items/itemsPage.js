@@ -6,6 +6,7 @@ import {connect} from 'react-redux';
 import {App} from '../../app/App';
 import {ItemCard, ItemRow, ItemListing, ItemTitle, ItemSubtitle, ItemImage, ItemDescription} from '../../components/item-listing/index';
 import {setCurrentProduct} from '../../redux/actions/productActions';
+import { withRouter } from 'react-router';
 
 export class ItemsPage extends React.Component
 {
@@ -72,4 +73,4 @@ const mapStateToProps = (state) => {
     return {productList: state.product.productList};
 }
   
-export default connect(mapStateToProps, null) (ItemsPage);
+export default withRouter(connect(mapStateToProps, null) (ItemsPage));
