@@ -104,8 +104,9 @@ console.log(year);
         body: JSON.stringify(cart),
         method: "POST"
       });//end fetch
-  
+      
     console.log(`purchase finished ${i}`)
+    
     }
 
     console.log(`this is customer id ${this.state.cart.customerId}`);
@@ -123,6 +124,7 @@ console.log(year);
     })
 
     console.log("cart is deleted")
+    alert('Success Purchase');
 
 
   }

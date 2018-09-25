@@ -38,12 +38,11 @@ export class RecommendCard extends Component {
             data: [],
         };
 
-         this.listingClicked = this.listingClicked.bind(this);
+        this.listingClicked = this.listingClicked.bind(this);
 
     }
 
-    listingClicked(item)
-    {
+    listingClicked(item) {
         store.dispatch(Actions.setCurrentProduct(item));
         this.props.history.push("/pages/clothes/product");
     }
@@ -59,28 +58,34 @@ export class RecommendCard extends Component {
                 },
                 method: "GET"
             })
-                .then(resp => resp.json())
+                .then(resp => {
+                    if (resp.status === 200) {
+                        return resp.json()
+
+                    }
+                    throw Error("Could not create new item");
+
+                })
                 .then(resp => {
                     console.log(resp[0][0]);
                     this.setState({
                         data: resp
                     })
                 });//end fetch
-        }, 150);
+        }, 2000);
     }
 
 
     render() {
-        
-        const data = this.state.data;
-        let rows =[];
 
-        if(data.length != 0)
-        {
+        const data = this.state.data;
+        let rows = [];
+
+        if (data.length != 0) {
             console.log(data);
             console.log(data[0][0]);
 
-            for (let i = 0; i < data.length; i++) {
+            for (let i = 0; i < data[0].length; i++) {
                 console.log('gothere');
 
                 let listings = [];
@@ -93,13 +98,41 @@ export class RecommendCard extends Component {
                             description: data[0][i].description,
                             price: data[0][i].price,
                             gender: data[0][i].gender,
-                            type: data[0][i].type,
+                            type: data[0][i].typeId,
                             status: data[0][i].status
+                        }
+                        let typeStr = '';
+                        if(item.type===1){
+                            typeStr = 'Shirts';
+                        }
+                        else if(item.type===2){
+                            typeStr = 'Sweaters';
+                        }
+                        else if(item.type===3){
+                            typeStr = 'Jackets';
+                        }
+                        else if(item.type===4){
+                            typeStr = 'Vests';
+                        }
+                        else if(item.type===5){
+                            typeStr = 'Shorts';
+                        }
+                        else if(item.type===6){
+                            typeStr = 'Pants';
+                        }
+                        else if(item.type===7){
+                            typeStr = 'Skirts';
+                        }
+                        else if(item.type===8){
+                            typeStr = 'Dresses';
+                        }
+                        else if(item.type===9){
+                            typeStr = 'Robes';
                         }
                         let children = [];
                         children.push(<ItemTitle>{item.name}</ItemTitle>);
                         children.push(<ItemSubtitle>{item.company.companyName}</ItemSubtitle>);
-                        children.push(<ItemImage type={item.type} gender={item.gender}/>);
+                        children.push(<ItemImage type={typeStr} gender={item.gender} />);
                         children.push(<ItemDescription>{item.description}</ItemDescription>);
                         listings.push(<ItemListing clicked={this.listingClicked} currentProduct={item}> {children} </ItemListing>)
                         i++;
@@ -110,7 +143,7 @@ export class RecommendCard extends Component {
                 rows.push(<ItemRow>{listings}</ItemRow>);
             }
         }
-        
+
 
 
         return (
