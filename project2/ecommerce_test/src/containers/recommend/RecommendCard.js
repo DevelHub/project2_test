@@ -62,7 +62,6 @@ export class RecommendCard extends Component {
                 .then(resp => resp.json())
                 .then(resp => {
                     console.log(resp[0][0]);
-                    localStorage.setItem('blank', JSON.stringify(resp))
                     this.setState({
                         data: resp
                     })
@@ -82,7 +81,7 @@ export class RecommendCard extends Component {
             console.log(data[0][0]);
 
             for (let i = 0; i < data.length; i++) {
-                console.log('gothere')
+                console.log('gothere');
 
                 let listings = [];
                 for (let r = 0; r < 3; r++) {
@@ -91,15 +90,16 @@ export class RecommendCard extends Component {
                             itemId: data[0][i].id,
                             name: data[0][i].name,
                             company: data[0][i].company,
-                            image: data[i].image,
                             description: data[0][i].description,
                             price: data[0][i].price,
+                            gender: data[0][i].gender,
+                            type: data[0][i].type,
                             status: data[0][i].status
                         }
                         let children = [];
                         children.push(<ItemTitle>{item.name}</ItemTitle>);
                         children.push(<ItemSubtitle>{item.company.companyName}</ItemSubtitle>);
-                        children.push(<ItemImage src={item.image}/>);
+                        children.push(<ItemImage type={item.type} gender={item.gender}/>);
                         children.push(<ItemDescription>{item.description}</ItemDescription>);
                         listings.push(<ItemListing clicked={this.listingClicked} currentProduct={item}> {children} </ItemListing>)
                         i++;

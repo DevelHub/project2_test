@@ -79,7 +79,7 @@ let day = today.getDate();
   });//end fetch
 
   console.log('added to bananaRepublic')
-  alert(`Success to subscribe BananaRepublic`);
+  alert(`subscribe BananaRepublic`);
 
 
 }

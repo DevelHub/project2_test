@@ -5,6 +5,7 @@ import {CarouselPage} from '../../components/carousel/CarouselPage';
 // import {CartCard} from '../cart/components/CartCard';
 import { TotalItems } from '../../components/charts/TotalItems';
 import { CartHistory } from '../cart/components/CartHistory';
+import { PreviousPurchases } from '../profile/previousPurchases';
 
 export class CustomerPage extends React.Component {
     render() {
@@ -28,7 +29,8 @@ export class CustomerPage extends React.Component {
 
                     <h4>Purchase History</h4>
                     <br></br>
-                    <CartHistory />
+                    {/* <CartHistory /> */}
+                    <PreviousPurchases/>
 
                     <h4>Total items for each company</h4>
                     <TotalItems/>

@@ -79,7 +79,7 @@ let day = today.getDate();
   });//end fetch
 
   console.log('added to h&m')
-  alert(`Success to subscribe H&M`);
+  alert(`subscribe H&M`);
 
 
 }

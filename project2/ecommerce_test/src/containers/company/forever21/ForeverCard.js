@@ -51,7 +51,7 @@ let day = today.getDate();
   });//end fetch
 
   console.log('added to forever21')
-  alert(`Success to subscribe Forever21`);
+  alert(`subscribe Forever21`);
 
 
 }

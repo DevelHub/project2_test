@@ -63,7 +63,7 @@ export class PreviousPurchases extends React.Component
         }
         return (
             <div className="previousPurchases">
-                <h3>PreviousPurchases</h3><hr/>
+                <h3>Previous Purchases</h3><hr/>
                 {purchases}
             </div>
         )
