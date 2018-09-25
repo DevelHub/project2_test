@@ -9,9 +9,12 @@
     margin: auto;
 }
 
-.ViewImageDiv{
-    width: 100%;
+.viewImageDiv{
+    width: 24em;
+    max-height: 36em;
     border-radius: 5px;
+    overflow: hidden;
+    margin: auto;
 }
 
 .viewImage{

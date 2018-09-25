@@ -54,7 +54,7 @@ let day = today.getDate();
   });//end fetch
 
   console.log('added to oldnavy')
-  alert(`Success to subscribe OLD NAVY`);
+  alert(`subscribe OLD NAVY`);
 
 
 }

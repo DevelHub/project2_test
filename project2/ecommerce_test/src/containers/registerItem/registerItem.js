@@ -16,6 +16,7 @@ export class RegisterItem extends React.Component
         this.descriptionChanged = this.descriptionChanged.bind(this);
         this.statusChanged = this.statusChanged.bind(this);
         this.insertItem = this.insertItem.bind(this);
+        this.typeChanged = this.typeChanged.bind(this);
         const types = store.getState().product.typesList;
         this.state = {
             name: "",
@@ -153,5 +154,6 @@ export class RegisterItem extends React.Component
             typeId: this.state.type
         }
         Data.insertItem(item);
+        alert("Item added");
     }
 }

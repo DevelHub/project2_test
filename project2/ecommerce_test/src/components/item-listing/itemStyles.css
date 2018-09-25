@@ -28,8 +28,9 @@
 
 .itemImage{
     width: 100%;
-    height: auto;
+    height: 36em;
     margin-bottom: 1em;
+    overflow: hidden;
 }
 
 .image{

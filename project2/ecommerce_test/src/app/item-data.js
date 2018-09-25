@@ -52,6 +52,7 @@ export function fetchItems()
           item["gender"] = ci.gender;
           item["price"] = ci.price;
           item["status"] = ci.status;
+          item["type"] = type;
           formattedItems[type].push(item);
         }
       }
@@ -172,8 +173,13 @@ export function insertItem(item)
   .then(resp => {
     if(resp.status === 200)
     {
-      return;
+      return resp.json()
+      
     }
+    
     throw Error("Could not create new item");
+  })
+  .then(resp =>{
+    fetchItems();
   })
 }

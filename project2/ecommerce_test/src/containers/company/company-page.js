@@ -5,6 +5,7 @@ import { TotalSubscribers } from '../../components/charts/TotalSubscribers';
 import {Carousel,CarouselItem,CarouselControl, CarouselIndicators,CarouselCaption} from 'reactstrap';
 import './company.css';
 import {DoughnutChart} from '../../components/charts/DoughnutChart';
+import { DoughnutChartDemo } from '../../components/charts/DoughnutChartDemo';
   
 
 
@@ -111,6 +112,7 @@ const items = [
                     <TotalSubscribers />
                     <TotalItems />
                     <DoughnutChart/>
+                    <DoughnutChartDemo />
 
                 </Row>
 

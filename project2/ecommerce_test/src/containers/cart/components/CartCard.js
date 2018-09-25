@@ -79,7 +79,7 @@ console.log(year);
         })
             return resp;
       });//end fetch
-    }, 10);
+    }, 2000);
   }
 
   handlePurchase(event) {

@@ -78,7 +78,7 @@ let day = today.getDate();
     method: "POST"
   });//end fetch
 
-  console.log('added to zara')
+ 
 
 
 }

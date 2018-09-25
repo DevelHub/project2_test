@@ -54,7 +54,7 @@ handleSubscribe(event){
   });//end fetch
 
   console.log('added to uniqlo');
-  alert(`Success to subscribe UNIQLO`);
+  alert(`subscribe UNIQLO`);
 
 
 }

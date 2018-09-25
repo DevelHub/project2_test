@@ -2,6 +2,7 @@ import * as React from 'react';
 import './itemViewStyles.css';
 import {connect} from 'react-redux';
 import * as Data from '../../app/item-data';
+import {ItemImage} from '../../components/item-listing/itemImage';
 
 export class CompanyItemViewPage extends React.Component
 {
@@ -31,7 +32,7 @@ export class CompanyItemViewPage extends React.Component
         return (
             <div className="itemView">
                 <div className="viewImageDiv">
-                    <img className="viewImage" src="https://via.placeholder.com/350x150"/>
+                    <ItemImage gender={this.props.currentProduct.gender} type={this.props.currentProduct.type}/>
                 </div>
 
                 <div className="cols">

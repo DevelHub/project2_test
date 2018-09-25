@@ -1,6 +1,7 @@
 import * as React from 'react';
 import './itemViewStyles.css';
 import { connect } from 'react-redux';
+import {ItemImage} from '../../components/item-listing/itemImage';
 
 export class ItemViewPage extends React.Component {
     constructor(props) {
@@ -48,12 +49,18 @@ export class ItemViewPage extends React.Component {
     }
 
     render() {
+        let src = this.props.currentProduct.src;
+        if(!src)
+        {
+            //src = "https://placeholdit.imgix.net/~text?txtsize=33&txt=256%C3%97180&w=256&h=180";
+            src = "/img/itemImages/Forever21dress2.jpg";
+            console.log(process.env.PUBLIC_URL + "/img/itemImages/Forever21dress2.jpg");
+        }
         return (
             <div className="itemView">
                 <div className="viewImageDiv">
-                    <img className="viewImage" src="https://via.placeholder.com/350x150" />
+                    <ItemImage gender={this.props.currentProduct.gender} type={this.props.currentProduct.type}/>
                 </div>
-
                 <div className="itemInformation">
                     <div className="itemOptions">
                         <div className="inline">
