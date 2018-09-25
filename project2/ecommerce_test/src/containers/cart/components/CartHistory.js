@@ -41,7 +41,7 @@ function getData() {
       // fetch('http://localhost:3001/cart/get/2',{
       headers: {
         "Content-Type": "application/json"
-      },
+      }, 
       method: "GET"
     })
       .then(resp => resp.json())
