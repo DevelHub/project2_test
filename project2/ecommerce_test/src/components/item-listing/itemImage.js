@@ -21,12 +21,13 @@ export class ItemImage extends React.Component
         const numImages = 15;
         let src = this.props.src;
         const type = this.props.type;
+        const gender = this.props.gender;
 
         if(!src)
         {
             //src = "https://placeholdit.imgix.net/~text?txtsize=33&txt=256%C3%97180&w=256&h=180";
             let snum = this.randomNumber(numImages);
-            src = "/img/itemImages/"+type+"/image"+snum+".jpg";
+            src = "/img/itemImages/"+gender+"/"+type+"/image"+snum+".jpg";
             console.log(src);
         }
         return (

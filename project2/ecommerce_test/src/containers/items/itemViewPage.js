@@ -59,7 +59,7 @@ export class ItemViewPage extends React.Component {
         return (
             <div className="itemView">
                 <div className="viewImageDiv">
-                    <ItemImage src={src}/>
+                    <ItemImage gender={this.props.currentProduct.gender} type={this.props.currentProduct.type}/>
                 </div>
                 <div className="itemInformation">
                     <div className="itemOptions">
