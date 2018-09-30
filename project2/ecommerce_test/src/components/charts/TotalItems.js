@@ -5,7 +5,7 @@ import { BarChart, XAxis, YAxis, Bar, Cell, ResponsiveContainer, CartesianGrid, 
 
 let data = [];
 function getData() {
-    fetch(`http://ec2-54-200-103-68.us-west-2.compute.amazonaws.com:3001/item/total`, {
+    fetch(environment.context + 'item/total', {
         headers: {
             "Content-Type": "application/json"
         },

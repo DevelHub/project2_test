@@ -3,6 +3,7 @@ import {Card, CardBody, Col, ButtonToolbar} from 'reactstrap';
 import StarIcon from 'mdi-react/StarIcon';
 import StarOutlineIcon from 'mdi-react/StarOutlineIcon';
 import {Link} from 'react-router-dom';
+import { environment } from '../../../../environment';
 
 
 // function getData(){
@@ -70,7 +71,7 @@ let day = today.getDate();
   console.log(user.timeFrame);
  
 
-  fetch(`http://ec2-54-200-103-68.us-west-2.compute.amazonaws.com:3001/subscription/add`, {
+  fetch(environment.context + 'subscription/add', {
     headers: {
       "Content-Type": "application/json"
     },

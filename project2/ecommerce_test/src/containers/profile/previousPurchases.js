@@ -20,7 +20,7 @@ export class PreviousPurchases extends React.Component
         if(user && user[0].customer.id)
         {
             console.log("customer id:" + user[0].customer.id);
-            fetch(`http://ec2-54-200-103-68.us-west-2.compute.amazonaws.com:3001/purchase/${user[0].customer.id}` , {
+            fetch(environment.context + `purchase/${user[0].customer.id}` , {
                 headers:
                 {
                     "Content-Type":"application/json"

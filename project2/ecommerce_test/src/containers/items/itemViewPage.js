@@ -2,6 +2,7 @@ import * as React from 'react';
 import './itemViewStyles.css';
 import { connect } from 'react-redux';
 import {ItemImage} from '../../components/item-listing/itemImage';
+import { environment } from '../../../environment';
 
 export class ItemViewPage extends React.Component {
     constructor(props) {
@@ -34,7 +35,7 @@ export class ItemViewPage extends React.Component {
         cart.quantity=1;
 
 
-        fetch(`http://ec2-54-200-103-68.us-west-2.compute.amazonaws.com:3001/cart/add`, {
+        fetch(environment.context + 'cart/add', {
             headers: {
                 "Content-Type": "application/json"
             },

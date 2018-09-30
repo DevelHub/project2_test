@@ -1,5 +1,6 @@
 import store from './store';
 import * as pActions from '../redux/actions/productActions';
+import { environment } from '../../environment';
 
 function rawToFormatted(raw)
 {
@@ -18,7 +19,7 @@ function rawToFormatted(raw)
 
 export function fetchItems()
 {
-    fetch("http://ec2-54-200-103-68.us-west-2.compute.amazonaws.com:3001/item-type", {
+    fetch(environment.context + '/item-type', {
       headers: {
         "Content-Type":"application/json"
       },
@@ -67,7 +68,7 @@ export function updateItemStatus(itemId, status)
         id: itemId,
         status: status
     }
-    fetch("http://ec2-54-200-103-68.us-west-2.compute.amazonaws.com:3001/item/update-status", {
+    fetch(environment.context + 'item/update-status', {
         body: JSON.stringify(item),
         headers: {
             "Content-Type":"application/json"
@@ -92,7 +93,7 @@ export function updateItemPrice(itemId, price)
     id: itemId,
     price: price
   }
-  fetch("http://ec2-54-200-103-68.us-west-2.compute.amazonaws.com:3001/item/update-price", {
+  fetch(environment.context + 'item/update-price', {
     body: JSON.stringify(item),
     headers: {
       "Content-Type":"application/json"
@@ -117,7 +118,7 @@ export function updateItemDescription(itemId, description)
     id: itemId,
     description: description
   }
-  fetch("http://ec2-54-200-103-68.us-west-2.compute.amazonaws.com:3001/item/update-description", {
+  fetch(environment.context + 'item/update-description', {
     body: JSON.stringify(item),
     headers: {
       "Content-Type":"application/json"
@@ -142,7 +143,7 @@ export function updateItemName(itemId, name)
     id: itemId,
     name: name
   }
-  fetch("http://ec2-54-200-103-68.us-west-2.compute.amazonaws.com:3001/item/update-name", {
+  fetch(environment.context + 'item/update-name', {
     body: JSON.stringify(item),
     headers: {
       "Content-Type":"application/json"
@@ -163,7 +164,7 @@ export function updateItemName(itemId, name)
 
 export function insertItem(item)
 {
-  fetch("http://ec2-54-200-103-68.us-west-2.compute.amazonaws.com:3001/item/add", {
+  fetch(environment.context + 'item/add', {
     body: JSON.stringify(item),
     headers: {
       "Content-Type":"application/json"
